@@ -10,6 +10,13 @@ export interface ProjectDecision {
   description: string;
 }
 
+export interface MediaAsset {
+  src?: string;
+  alt: string;
+  caption?: string;
+  credit?: string;
+}
+
 export interface Project {
   number: string;
   slug: string;
@@ -27,6 +34,8 @@ export interface Project {
   stack: string[];
   links: ProjectLink[];
   variant: ProjectVariant;
+  cover: MediaAsset;
+  gallery: MediaAsset[];
 }
 
 export interface Achievement {
@@ -35,6 +44,7 @@ export interface Achievement {
   context: string;
   description: string;
   evidence?: string;
+  image: MediaAsset;
 }
 
 export interface SkillGroup {
@@ -98,6 +108,20 @@ export const projects: Project[] = [
       },
     ],
     variant: 'jwst',
+    cover: {
+      alt: 'Reserved cover image for the JWST Deep Space Explorer interface.',
+      caption: 'The tiled deep-space image explorer in use.',
+    },
+    gallery: [
+      {
+        alt: 'Reserved image for the JWST tiled viewer and citizen-science labelling workflow.',
+        caption: 'Browser-based tiled viewing and AI-assisted labelling.',
+      },
+      {
+        alt: 'Reserved image for the Python and Astropy scientific image processing workflow.',
+        caption: 'The scientific data pipeline from source imagery to browser-ready tiles.',
+      },
+    ],
   },
   {
     number: '02',
@@ -145,6 +169,20 @@ export const projects: Project[] = [
     stack: ['React', 'TypeScript', 'Vite', 'NASA data', 'Scientific modelling', 'Vercel'],
     links: [{ label: 'Open live site', href: 'https://astroverse-m8wl.vercel.app/' }],
     variant: 'astroverse',
+    cover: {
+      alt: 'Reserved cover image for the AstroVerse astronomy learning platform.',
+      caption: 'AstroVerse connecting observation, experimentation, recall, and reflection.',
+    },
+    gallery: [
+      {
+        alt: 'Reserved image for the AstroVerse interactive sky map.',
+        caption: 'The interactive sky map with guided observation journeys.',
+      },
+      {
+        alt: 'Reserved image for the AstroVerse habitable exoplanet laboratory.',
+        caption: 'The exoplanet laboratory with real-time physical feedback.',
+      },
+    ],
   },
   {
     number: '03',
@@ -192,6 +230,20 @@ export const projects: Project[] = [
     stack: ['Robotics', 'Rapid prototyping', 'Physics', 'System testing', 'Team leadership'],
     links: [{ label: 'Visit eSight', href: 'https://www.facebook.com/esightproject' }],
     variant: 'robotics',
+    cover: {
+      alt: 'Reserved cover image for eSight and student robotics practice.',
+      caption: 'A student-led robotics prototype during integration and testing.',
+    },
+    gallery: [
+      {
+        alt: 'Reserved image for robotics module testing and prototyping.',
+        caption: 'Testing one physical behaviour at a time before integration.',
+      },
+      {
+        alt: 'Reserved image for the Maze Runner robotics team and competition result.',
+        caption: 'Team engineering under competition constraints.',
+      },
+    ],
   },
 ];
 
@@ -201,6 +253,7 @@ export const achievements: Achievement[] = [
     title: 'Second Prize · RMIT Tech Camp',
     context: 'Team Lead',
     description: 'Led a team from problem framing to a competition-ready technical solution.',
+    image: { alt: 'Reserved image for the RMIT Tech Camp Second Prize achievement.' },
   },
   {
     year: '2025',
@@ -209,24 +262,28 @@ export const achievements: Achievement[] = [
     description: 'Selected among 1,290+ Global Nominees from more than 11,500 worldwide projects.',
     evidence:
       'https://lqddn.edu.vn/tin-tuc/hoc-sinh-nguyen-gia-bach-xuat-sac-lot-vao-danh-sach-de-cu-toan-cau-tai-cuoc-thi-nasa-space-apps-challenge-2025',
+    image: { alt: 'Reserved image for the NASA Space Apps Global Nominee recognition.' },
   },
   {
     year: '2024',
     title: 'Second Prize · Da Nang City Physics Competition',
     context: 'Physics',
     description: 'Recognised at city level in the Excellent Student Competition in Physics.',
+    image: { alt: 'Reserved image for the Da Nang City Physics Competition Second Prize.' },
   },
   {
     year: 'STEM',
     title: 'Third Prize · FAST Maze Runner',
     context: 'Robotics Team Lead',
     description: 'Led the team in a robotics challenge organised by FAST, University of Science and Technology – UD.',
+    image: { alt: 'Reserved image for the FAST Maze Runner Third Prize.' },
   },
   {
     year: '25–26',
     title: 'Third Prize · School Science & Engineering Fair',
     context: 'Research & Engineering',
     description: 'Developed and presented a technical project through the school-level research process.',
+    image: { alt: 'Reserved image for the School Science and Engineering Fair Third Prize.' },
   },
 ];
 

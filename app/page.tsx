@@ -1,5 +1,6 @@
 import Link from 'next/link';
-import ProjectVisual from './components/ProjectVisual';
+import MediaFrame from './components/MediaFrame';
+import RevealController from './components/RevealController';
 import SiteHeader from './components/SiteHeader';
 import { achievements, projects, skillGroups } from './content';
 
@@ -31,10 +32,11 @@ export default function Home() {
   return (
     <main id="top">
       <SiteHeader home />
+      <RevealController />
 
       <section className="hero" aria-labelledby="hero-title">
         <div className="hero-grid" aria-hidden="true" />
-        <div className="hero-copy">
+        <div className="hero-copy hero-enter">
           <p className="eyebrow">Student engineer · Da Nang, Vietnam</p>
           <h1 id="hero-title">
             I build where <span>physics</span>, software, and robotics meet.
@@ -52,7 +54,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="hero-observatory" aria-hidden="true">
+        <div className="hero-observatory hero-orbit-enter" aria-hidden="true">
           <div className="observatory-ring ring-one" />
           <div className="observatory-ring ring-two" />
           <div className="observatory-ring ring-three" />
@@ -71,14 +73,14 @@ export default function Home() {
         </dl>
       </section>
 
-      <section className="signal-strip" aria-label="Selected facts">
+      <section className="signal-strip" aria-label="Selected facts" data-reveal>
         <div><strong>1,290+</strong><span>NASA Global Nominees</span></div>
         <div><strong>48H</strong><span>Hackathon build</span></div>
         <div><strong>03</strong><span>PIRL cohorts</span></div>
         <div><strong>PHY</strong><span>First principles</span></div>
       </section>
 
-      <section className="section-shell" id="work" aria-labelledby="work-title">
+      <section className="section-shell" id="work" aria-labelledby="work-title" data-reveal>
         <header className="section-heading">
           <div><p className="section-index">01 / Selected work</p><h2 id="work-title">Systems made to be explored.</h2></div>
           <p>Three projects, each showing a different way I connect science, software, and physical engineering.</p>
@@ -86,15 +88,15 @@ export default function Home() {
 
         <div className="project-grid">
           {projects.map((project) => (
-            <article className={`project-card project-${project.variant}`} key={project.slug}>
-              <ProjectVisual variant={project.variant} number={project.number} />
+            <article className={`project-card project-${project.variant}`} key={project.slug} data-reveal>
+              <MediaFrame asset={project.cover} label={`Project / ${project.number}`} variant={project.variant} />
               <div className="project-card-body">
                 <div className="project-meta"><span>{project.number}</span><span>{project.role}</span></div>
                 <p className="kicker">{project.label}</p>
                 <h3>{project.title}</h3>
                 <p>{project.summary}</p>
                 <ul className="mini-stack" aria-label={`${project.title} technologies`}>
-                  {project.stack.slice(0, 3).map((item) => <li key={item}>{item}</li>)}
+                  {project.stack.slice(0, 2).map((item) => <li key={item}>{item}</li>)}
                 </ul>
                 <Link className="text-link" href={`/projects/${project.slug}`}>Open case study <span>↗</span></Link>
               </div>
@@ -103,14 +105,14 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section-shell capabilities" id="capabilities" aria-labelledby="capabilities-title">
+      <section className="section-shell capabilities" id="capabilities" aria-labelledby="capabilities-title" data-reveal>
         <header className="section-heading">
           <div><p className="section-index">02 / Capabilities</p><h2 id="capabilities-title">How I turn ideas into working systems.</h2></div>
           <p>Organised by what I can do—not by a wall of technology logos.</p>
         </header>
         <div className="capability-grid">
           {skillGroups.map((group) => (
-            <article className="capability-card" key={group.code}>
+            <article className="capability-card" key={group.code} data-reveal>
               <span className="capability-code">{group.code}</span>
               <h3>{group.title}</h3>
               <p>{group.summary}</p>
@@ -121,23 +123,27 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section-shell" id="achievements" aria-labelledby="achievements-title">
+      <section className="section-shell" id="achievements" aria-labelledby="achievements-title" data-reveal>
         <header className="section-heading">
           <div><p className="section-index">03 / Evidence</p><h2 id="achievements-title">Achievements built on the work.</h2></div>
           <p>A short record of competitions, nominations, and research experiences.</p>
         </header>
-        <ol className="achievement-timeline">
+        <ol className="achievement-grid">
           {achievements.map((achievement) => (
-            <li key={`${achievement.year}-${achievement.title}`}>
-              <span className="timeline-year">{achievement.year}</span>
-              <div className="timeline-copy"><p>{achievement.context}</p><h3>{achievement.title}</h3><span>{achievement.description}</span></div>
-              {achievement.evidence ? <a href={achievement.evidence} target="_blank" rel="noreferrer" aria-label={`Evidence for ${achievement.title}`}>Evidence ↗</a> : <i aria-hidden="true">—</i>}
+            <li className="achievement-card" key={`${achievement.year}-${achievement.title}`} data-reveal>
+              <MediaFrame asset={achievement.image} label={achievement.year} ratio="compact" />
+              <div className="achievement-card-copy">
+                <div className="achievement-meta"><span>{achievement.year}</span><span>{achievement.context}</span></div>
+                <h3>{achievement.title}</h3>
+                <p>{achievement.description}</p>
+                {achievement.evidence ? <a href={achievement.evidence} target="_blank" rel="noreferrer" aria-label={`Evidence for ${achievement.title}`}>Evidence ↗</a> : <span className="achievement-verified">Recorded achievement</span>}
+              </div>
             </li>
           ))}
         </ol>
       </section>
 
-      <section className="section-shell about" id="about" aria-labelledby="about-title">
+      <section className="section-shell about" id="about" aria-labelledby="about-title" data-reveal>
         <div className="about-main">
           <p className="section-index">04 / About</p>
           <h2 id="about-title">Curiosity is the starting point. Building is how I test it.</h2>
@@ -155,12 +161,12 @@ export default function Home() {
         </aside>
       </section>
 
-      <section className="section-shell leadership" aria-labelledby="leadership-title">
+      <section className="section-shell leadership" aria-labelledby="leadership-title" data-reveal>
         <header className="section-heading compact">
           <div><p className="section-index">05 / Leadership</p><h2 id="leadership-title">Engineering is a team sport.</h2></div>
         </header>
         <div className="leadership-grid">
-          {leadership.map((item) => <article key={item.number}><span>{item.number}</span><h3>{item.title}</h3><p>{item.copy}</p></article>)}
+          {leadership.map((item) => <article key={item.number} data-reveal><span>{item.number}</span><h3>{item.title}</h3><p>{item.copy}</p></article>)}
         </div>
         <div className="credentials">
           <p className="kicker">Programs & credentials</p>
@@ -168,7 +174,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="contact" id="contact" aria-labelledby="contact-title">
+      <section className="contact" id="contact" aria-labelledby="contact-title" data-reveal>
         <div>
           <p className="eyebrow">Open channel / 06</p>
           <h2 id="contact-title">Have a problem worth exploring?</h2>
