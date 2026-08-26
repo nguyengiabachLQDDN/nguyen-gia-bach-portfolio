@@ -71,8 +71,8 @@ interface HomeCopy {
 
 export const homeCopy: HomeCopy = {
   workIndex: '01 / Selected work',
-  workTitle: 'Selected projects.',
-  workDeck: 'Two selected projects in astronomy software and student-led robotics.',
+  workTitle: 'Projects.',
+  workDeck: 'Selected work in astronomy software and student-led robotics.',
   capabilitiesIndex: '02 / Capabilities',
   capabilitiesTitle: 'How I turn ideas into working systems.',
   capabilitiesDeck: 'Organised by what I can do—not by a wall of technology logos.',

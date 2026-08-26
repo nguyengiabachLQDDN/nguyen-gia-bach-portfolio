@@ -9,9 +9,11 @@ export interface Project {
   slug: string;
   title: string;
   label: string;
+  status: string;
   date: string;
   role: string;
   summary: string;
+  featuredHighlights: [string, string, string];
   challenge: string;
   approach: string;
   contributions: string[];
@@ -54,9 +56,11 @@ interface ProjectBase {
 interface ProjectCopy {
   title: string;
   label: string;
+  status: string;
   date: string;
   role: string;
   summary: string;
+  featuredHighlights: [string, string, string];
   challenge: string;
   approach: string;
   contributions: string[];
@@ -106,9 +110,15 @@ const projectCopy: ProjectCopyList = [
   {
     title: 'JWST Deep Space Explorer',
     label: 'NASA Space Apps 2025 · Global Nominee',
+    status: 'Completed',
     date: 'October 2025',
     role: 'Team Lead & Developer',
     summary: 'An interactive citizen-science platform that makes massive James Webb Space Telescope imagery explorable in an ordinary browser.',
+    featuredHighlights: [
+      'Tiled exploration for extremely large scientific images.',
+      'Python and Astropy processing for browser-ready observations.',
+      'AI-assisted labelling designed for citizen-science participation.',
+    ],
     challenge: 'NASA’s “Embiggen Your Eyes!” challenge asked teams to bring extremely large astronomical images closer to the public. The raw data can reach hundreds of gigabytes—far beyond what most learners can download or inspect comfortably.',
     approach: 'We treated each observation as both scientific data and a navigable place. A Python pipeline prepared the imagery, while a browser-based map interface let people zoom through the details and contribute structured observations.',
     contributions: [
@@ -139,9 +149,15 @@ const projectCopy: ProjectCopyList = [
   {
     title: 'AstroVerse',
     label: 'Astronomy learning platform',
+    status: 'Live',
     date: '2026',
     role: 'Product Developer',
     summary: 'An astronomy learning platform for observing the sky, exploring real space data, running experiments, and recording scientific learning.',
+    featuredHighlights: [
+      'Interactive sky map with time controls and cultural sky views.',
+      'NASA APOD and Mars imagery alongside verified astronomy content.',
+      'Exoplanet lab, spaced repetition, and a private science journal.',
+    ],
     challenge: 'Astronomy resources are often split between passive articles, specialist tools, and disconnected quizzes. The goal was to make exploration, experimentation, and reflection feel like one continuous learning journey.',
     approach: 'AstroVerse organises the experience into five modes: Observe through an interactive sky map, Explore verified astronomy content, Experiment in a habitable-exoplanet lab, Recall through spaced repetition, and Reflect in a private science journal.',
     contributions: [
@@ -172,9 +188,15 @@ const projectCopy: ProjectCopyList = [
   {
     title: 'eSight Project',
     label: 'Student robotics project',
+    status: 'Ongoing',
     date: 'Ongoing',
     role: 'Project Lead · Robotics Team Lead',
     summary: 'A student-led robotics project that turns physics ideas into working prototypes through iterative testing and team engineering.',
+    featuredHighlights: [
+      'Module-based prototyping that isolates one behaviour at a time.',
+      'Physics-driven testing, troubleshooting, and system integration.',
+      'Student-team coordination from problem definition through trials.',
+    ],
     challenge: 'Physical systems fail in ways software mock-ups do not: sensors drift, mechanisms interact, and every change affects the rest of the system. The work demanded both engineering judgement and a team process that could move quickly.',
     approach: 'Break the system into testable modules, define the behaviour each module must prove, then integrate only after the evidence is clear. Competition constraints made iteration speed and communication as important as the final mechanism.',
     contributions: [

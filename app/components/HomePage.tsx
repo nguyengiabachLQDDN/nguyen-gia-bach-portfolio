@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import MediaFrame from './MediaFrame';
+import ProjectRail from './ProjectRail';
 import RevealController from './RevealController';
 import SiteHeader from './SiteHeader';
 import { getAchievements, getFeaturedProjects, getSkillGroups } from '../content';
@@ -55,36 +56,7 @@ export default function HomePage() {
           <p>{copy.workDeck}</p>
         </header>
 
-        <div className="project-grid">
-          {projects.map((project) => {
-            const primaryLink = project.links[0];
-            return (
-              <article className={`project-card project-${project.variant}`} key={project.slug} data-reveal>
-                <MediaFrame asset={project.cover} label={project.title} variant={project.variant} />
-                <div className="project-card-body">
-                  <div className="project-meta"><span>{project.date}</span><span>{project.role}</span></div>
-                  <p className="kicker">{project.label}</p>
-                  <h3>{project.title}</h3>
-                  <p>{project.summary}</p>
-                  <ul className="mini-stack" aria-label={`${project.title} ${copy.projectTechnologies}`}>
-                    {project.stack.slice(0, 2).map((item) => <li key={item}>{item}</li>)}
-                  </ul>
-                  {primaryLink ? (
-                    <a
-                      className="project-external-link"
-                      href={primaryLink.href}
-                      target="_blank"
-                      rel="noreferrer"
-                      aria-label={`${primaryLink.label}: ${project.title}`}
-                    >
-                      <span>{primaryLink.label}</span><span aria-hidden="true">↗</span>
-                    </a>
-                  ) : null}
-                </div>
-              </article>
-            );
-          })}
-        </div>
+        <ProjectRail projects={projects} />
       </section>
 
       <section className="section-shell capabilities" id="capabilities" aria-labelledby="capabilities-title" data-reveal>
