@@ -10,36 +10,48 @@ export const navigation = {
   contact: { en: 'Contact', vi: 'Liên hệ' },
 } satisfies Record<string, LocalizedString>;
 
+// TODO(profile): Add the final project-working portrait, current grade / expected
+// graduation year, a professional email, and a more specific intended field once confirmed.
+const heroImageSrc: string | undefined = undefined;
+
 export const homeIntro = {
   en: {
-    eyebrow: 'Student engineer · Da Nang, Vietnam',
-    titleBefore: 'I build where',
-    titlePhysics: 'physics',
-    titleAfter: ', software, and robotics meet.',
-    deck: 'I turn scientific ideas into useful, interactive systems—from exploring deep-space imagery to building astronomy tools and physical prototypes.',
-    work: 'View my work',
+    eyebrow: 'Student profile',
+    name: 'Nguyen Gia Bach',
+    role: 'Student engineer · Physics, software & robotics',
+    summary: 'I build astronomy tools, scientific software, and robotics prototypes.',
+    facts: [
+      ['School', 'Le Quy Don High School for the Gifted'],
+      ['Location', 'Da Nang, Vietnam'],
+      ['Focus', 'Physics · Software · Robotics'],
+    ],
+    image: {
+      src: heroImageSrc,
+      alt: 'Nguyen Gia Bach working on a student engineering project',
+    },
+    imageLabel: 'Project portrait',
+    work: 'View projects',
     contact: 'Contact',
     socialLabel: 'Social profiles',
-    telemetry: [
-      ['Field', 'STEM'],
-      ['Mode', 'Build'],
-      ['Status', 'Curious'],
-    ],
   },
   vi: {
-    eyebrow: 'Học sinh kỹ thuật · Đà Nẵng, Việt Nam',
-    titleBefore: 'Tôi kiến tạo tại nơi',
-    titlePhysics: 'vật lý',
-    titleAfter: ', phần mềm và robotics giao nhau.',
-    deck: 'Tôi biến những ý tưởng khoa học thành các hệ thống hữu ích và giàu tính tương tác—từ khám phá ảnh không gian sâu đến xây dựng công cụ thiên văn và nguyên mẫu vật lý.',
+    eyebrow: 'Hồ sơ cá nhân',
+    name: 'Nguyễn Gia Bách',
+    role: 'Học sinh kỹ thuật · Vật lý, phần mềm & robotics',
+    summary: 'Tôi xây dựng công cụ thiên văn, phần mềm khoa học và các nguyên mẫu robotics.',
+    facts: [
+      ['Trường', 'THPT Chuyên Lê Quý Đôn'],
+      ['Địa điểm', 'Đà Nẵng, Việt Nam'],
+      ['Lĩnh vực', 'Vật lý · Phần mềm · Robotics'],
+    ],
+    image: {
+      src: heroImageSrc,
+      alt: 'Nguyễn Gia Bách đang thực hiện một dự án kỹ thuật học sinh',
+    },
+    imageLabel: 'Ảnh dự án',
     work: 'Xem dự án',
     contact: 'Liên hệ',
     socialLabel: 'Hồ sơ trực tuyến',
-    telemetry: [
-      ['Lĩnh vực', 'STEM'],
-      ['Chế độ', 'Kiến tạo'],
-      ['Trạng thái', 'Tò mò'],
-    ],
   },
 } as const;
 
@@ -103,7 +115,7 @@ interface HomeCopy {
 export const homeCopy: Record<Locale, HomeCopy> = {
   en: {
     signalLabel: 'Selected facts',
-    signalItems: [['1,290+', 'NASA Global Nominees'], ['48H', 'Hackathon build'], ['03', 'PIRL cohorts'], ['PHY', 'First principles']],
+    signalItems: [['NASA 2025', 'Global Nominee'], ['48H', 'JWST build'], ['03', 'PIRL cohorts']],
     workIndex: '01 / Selected work',
     workTitle: 'Systems made to be explored.',
     workDeck: 'Three projects, each showing a different way I connect science, software, and physical engineering.',
@@ -148,7 +160,7 @@ export const homeCopy: Record<Locale, HomeCopy> = {
   },
   vi: {
     signalLabel: 'Một vài dấu mốc',
-    signalItems: [['1.290+', 'Đề cử Toàn cầu NASA'], ['48H', 'Hoàn thiện tại hackathon'], ['03', 'Nhiệm kỳ PIRL'], ['PHY', 'Tư duy từ nguyên lý gốc']],
+    signalItems: [['NASA 2025', 'Đề cử Toàn cầu'], ['48H', 'Xây dựng JWST'], ['03', 'Nhiệm kỳ PIRL']],
     workIndex: '01 / Dự án tiêu biểu',
     workTitle: 'Những hệ thống được tạo ra để khám phá.',
     workDeck: 'Ba dự án thể hiện ba cách khác nhau để tôi kết nối khoa học, phần mềm và kỹ thuật vật lý.',

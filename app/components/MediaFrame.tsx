@@ -3,7 +3,7 @@ import type { MediaAsset, ProjectVariant } from '../content';
 import type { Locale } from '../i18n';
 import { mediaComingSoon } from '../i18n';
 
-type MediaRatio = 'cover' | 'gallery' | 'compact';
+type MediaRatio = 'cover' | 'gallery' | 'compact' | 'portrait';
 
 export default function MediaFrame({
   asset,
@@ -26,6 +26,8 @@ export default function MediaFrame({
     ? { width: 1600, height: 1000 }
     : ratio === 'gallery'
       ? { width: 1200, height: 900 }
+      : ratio === 'portrait'
+        ? { width: 1200, height: 1500 }
       : { width: 800, height: 600 };
 
   return (
@@ -37,8 +39,9 @@ export default function MediaFrame({
             alt={asset.alt}
             width={dimensions.width}
             height={dimensions.height}
-            loading={eager ? 'eager' : 'lazy'}
-            sizes={ratio === 'compact' ? '120px' : ratio === 'gallery' ? '(max-width: 760px) 100vw, 50vw' : '(max-width: 1023px) 100vw, 34vw'}
+            preload={eager}
+            loading={eager ? undefined : 'lazy'}
+            sizes={ratio === 'compact' ? '120px' : ratio === 'portrait' ? '(max-width: 760px) calc(100vw - 72px), 340px' : ratio === 'gallery' ? '(max-width: 760px) 100vw, 50vw' : '(max-width: 1023px) 100vw, 34vw'}
           />
         ) : (
           <div className="media-placeholder" role="img" aria-label={asset.alt}>

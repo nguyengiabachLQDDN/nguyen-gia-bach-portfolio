@@ -22,39 +22,33 @@ export default function HomePage({ locale = 'en' }: { locale?: Locale }) {
         <div className="hero-grid" aria-hidden="true" />
         <div className="hero-copy hero-enter">
           <p className="eyebrow">{intro.eyebrow}</p>
-          <h1 id="hero-title">
-            {intro.titleBefore} <span>{intro.titlePhysics}</span>{intro.titleAfter}
-          </h1>
-          <p className="hero-deck">
-            {intro.deck}
-          </p>
+          <h1 id="hero-title">{intro.name}</h1>
+          <p className="hero-role">{intro.role}</p>
+          <p className="hero-deck">{intro.summary}</p>
+          <dl className="hero-facts">
+            {intro.facts.map(([label, value]) => (
+              <div key={label}><dt>{label}</dt><dd>{value}</dd></div>
+            ))}
+          </dl>
           <div className="hero-actions">
             <Link className="button button-primary" href="#work">{intro.work} <span>↘</span></Link>
-            <Link className="button button-secondary" href="#contact">{intro.contact} <span>↘</span></Link>
-          </div>
-          <div className="hero-links" aria-label={intro.socialLabel}>
-            <a href="https://github.com/nguyengiabachLQDDN" target="_blank" rel="noreferrer">GitHub <span>↗</span></a>
-            <a href="https://www.linkedin.com/in/nguyen-gia-bach-996333386" target="_blank" rel="noreferrer">LinkedIn <span>↗</span></a>
+            <div className="hero-links" aria-label={intro.socialLabel}>
+              <Link href="#contact">{intro.contact} <span>↓</span></Link>
+              <a href="https://github.com/nguyengiabachLQDDN" target="_blank" rel="noreferrer">GitHub <span>↗</span></a>
+              <a href="https://www.linkedin.com/in/nguyen-gia-bach-996333386" target="_blank" rel="noreferrer">LinkedIn <span>↗</span></a>
+            </div>
           </div>
         </div>
 
-        <div className="hero-observatory hero-orbit-enter" aria-hidden="true">
-          <div className="observatory-ring ring-one" />
-          <div className="observatory-ring ring-two" />
-          <div className="observatory-ring ring-three" />
-          <div className="observatory-axis axis-x" />
-          <div className="observatory-axis axis-y" />
-          <div className="observatory-core"><span>GB</span></div>
-          <span className="coordinate coordinate-a">16.0544° N</span>
-          <span className="coordinate coordinate-b">108.2022° E</span>
-          <span className="coordinate coordinate-c">OBS / 2026</span>
+        <div className="hero-portrait hero-orbit-enter">
+          <MediaFrame
+            asset={intro.image}
+            label={intro.imageLabel}
+            ratio="portrait"
+            eager
+            locale={locale}
+          />
         </div>
-
-        <dl className="hero-telemetry">
-          {intro.telemetry.map(([label, value], index) => (
-            <div key={label}><dt>{label}</dt><dd>{index === 2 ? <i /> : null}{value}</dd></div>
-          ))}
-        </dl>
       </section>
 
       <section className="signal-strip" aria-label={copy.signalLabel} data-reveal>
