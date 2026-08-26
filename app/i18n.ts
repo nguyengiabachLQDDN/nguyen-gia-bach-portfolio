@@ -76,7 +76,6 @@ interface HomeCopy {
   workIndex: string;
   workTitle: string;
   workDeck: string;
-  openCaseStudy: string;
   capabilitiesIndex: string;
   capabilitiesTitle: string;
   capabilitiesDeck: string;
@@ -117,9 +116,8 @@ export const homeCopy: Record<Locale, HomeCopy> = {
     signalLabel: 'Selected facts',
     signalItems: [['NASA 2025', 'Global Nominee'], ['48H', 'JWST build'], ['03', 'PIRL cohorts']],
     workIndex: '01 / Selected work',
-    workTitle: 'Systems made to be explored.',
-    workDeck: 'Three projects, each showing a different way I connect science, software, and physical engineering.',
-    openCaseStudy: 'Open case study',
+    workTitle: 'Selected projects.',
+    workDeck: 'Two selected projects in astronomy software and student-led robotics.',
     capabilitiesIndex: '02 / Capabilities',
     capabilitiesTitle: 'How I turn ideas into working systems.',
     capabilitiesDeck: 'Organised by what I can do—not by a wall of technology logos.',
@@ -162,9 +160,8 @@ export const homeCopy: Record<Locale, HomeCopy> = {
     signalLabel: 'Một vài dấu mốc',
     signalItems: [['NASA 2025', 'Đề cử Toàn cầu'], ['48H', 'Xây dựng JWST'], ['03', 'Nhiệm kỳ PIRL']],
     workIndex: '01 / Dự án tiêu biểu',
-    workTitle: 'Những hệ thống được tạo ra để khám phá.',
-    workDeck: 'Ba dự án thể hiện ba cách khác nhau để tôi kết nối khoa học, phần mềm và kỹ thuật vật lý.',
-    openCaseStudy: 'Xem case study',
+    workTitle: 'Dự án tiêu biểu.',
+    workDeck: 'Hai dự án tiêu biểu về phần mềm thiên văn và robotics do học sinh dẫn dắt.',
     capabilitiesIndex: '02 / Năng lực',
     capabilitiesTitle: 'Cách tôi biến ý tưởng thành hệ thống hoạt động được.',
     capabilitiesDeck: 'Được tổ chức theo năng lực thực tế—không phải một bức tường logo công nghệ.',

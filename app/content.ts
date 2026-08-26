@@ -102,6 +102,8 @@ const projectBases: [ProjectBase, ProjectBase, ProjectBase] = [
   },
 ];
 
+const featuredProjectSlugs = ['astroverse', 'esight-or-robotics'] as const;
+
 const projectCopy: Record<Locale, ProjectCopyList> = {
   en: [
     {
@@ -139,10 +141,10 @@ const projectCopy: Record<Locale, ProjectCopyList> = {
     },
     {
       title: 'AstroVerse',
-      label: 'Astronomy learning platform · Live',
+      label: 'Astronomy learning platform',
       date: '2026',
       role: 'Product Developer',
-      summary: 'A digital observatory where learners can observe the sky, experiment with physical models, build recall, and record evidence of learning.',
+      summary: 'An astronomy learning platform for observing the sky, exploring real space data, running experiments, and recording scientific learning.',
       challenge: 'Astronomy resources are often split between passive articles, specialist tools, and disconnected quizzes. The goal was to make exploration, experimentation, and reflection feel like one continuous learning journey.',
       approach: 'AstroVerse organises the experience into five modes: Observe through an interactive sky map, Explore verified astronomy content, Experiment in a habitable-exoplanet lab, Recall through spaced repetition, and Reflect in a private science journal.',
       contributions: [
@@ -171,11 +173,11 @@ const projectCopy: Record<Locale, ProjectCopyList> = {
       ],
     },
     {
-      title: 'eSight & Robotics Practice',
-      label: 'Hardware · Leadership · Iteration',
+      title: 'eSight Project',
+      label: 'Student robotics project',
       date: 'Ongoing',
-      role: 'Project Lead / Robotics Team Lead',
-      summary: 'Student-led engineering work that turns physics into reliable physical behaviour through prototyping, testing, and team coordination.',
+      role: 'Project Lead · Robotics Team Lead',
+      summary: 'A student-led robotics project that turns physics ideas into working prototypes through iterative testing and team engineering.',
       challenge: 'Physical systems fail in ways software mock-ups do not: sensors drift, mechanisms interact, and every change affects the rest of the system. The work demanded both engineering judgement and a team process that could move quickly.',
       approach: 'Break the system into testable modules, define the behaviour each module must prove, then integrate only after the evidence is clear. Competition constraints made iteration speed and communication as important as the final mechanism.',
       contributions: [
@@ -240,10 +242,10 @@ const projectCopy: Record<Locale, ProjectCopyList> = {
     },
     {
       title: 'AstroVerse',
-      label: 'Nền tảng học thiên văn · Đang hoạt động',
+      label: 'Nền tảng học thiên văn',
       date: '2026',
       role: 'Nhà phát triển sản phẩm',
-      summary: 'Một đài quan sát số, nơi người học có thể quan sát bầu trời, thử nghiệm mô hình vật lý, củng cố ghi nhớ và lưu lại bằng chứng học tập.',
+      summary: 'Nền tảng học thiên văn để quan sát bầu trời, khám phá dữ liệu không gian, thực hiện thí nghiệm và ghi lại quá trình học khoa học.',
       challenge: 'Tài nguyên thiên văn thường bị chia tách giữa bài đọc thụ động, công cụ chuyên biệt và các bài kiểm tra rời rạc. Mục tiêu là kết nối khám phá, thử nghiệm và phản tư thành một hành trình học tập liên tục.',
       approach: 'AstroVerse tổ chức trải nghiệm thành năm chế độ: Quan sát qua bản đồ bầu trời tương tác, Khám phá nội dung thiên văn đã kiểm chứng, Thử nghiệm trong phòng lab ngoại hành tinh có thể ở được, Ghi nhớ bằng lặp lại ngắt quãng và Phản tư trong nhật ký khoa học riêng tư.',
       contributions: [
@@ -272,11 +274,11 @@ const projectCopy: Record<Locale, ProjectCopyList> = {
       ],
     },
     {
-      title: 'eSight & Thực hành Robotics',
-      label: 'Phần cứng · Lãnh đạo · Tinh chỉnh lặp',
+      title: 'Dự án eSight',
+      label: 'Dự án robotics học sinh',
       date: 'Đang phát triển',
-      role: 'Trưởng dự án / Trưởng nhóm Robotics',
-      summary: 'Hoạt động kỹ thuật do học sinh dẫn dắt, biến vật lý thành hành vi đáng tin cậy của hệ thống thông qua tạo mẫu, kiểm thử và phối hợp đội nhóm.',
+      role: 'Trưởng dự án · Trưởng nhóm Robotics',
+      summary: 'Dự án robotics do học sinh dẫn dắt, biến ý tưởng vật lý thành nguyên mẫu hoạt động qua thử nghiệm lặp và phối hợp kỹ thuật.',
       challenge: 'Hệ thống vật lý gặp những lỗi mà mô hình phần mềm không thể hiện: cảm biến bị trôi, các cơ cấu tác động lẫn nhau và mỗi thay đổi đều ảnh hưởng đến phần còn lại. Công việc đòi hỏi cả phán đoán kỹ thuật lẫn một quy trình đội nhóm có thể tiến nhanh.',
       approach: 'Chia hệ thống thành các mô-đun có thể kiểm thử, xác định hành vi mỗi mô-đun cần chứng minh, rồi chỉ tích hợp khi bằng chứng đã rõ ràng. Giới hạn của cuộc thi khiến tốc độ lặp thử và giao tiếp quan trọng không kém cơ cấu cuối cùng.',
       contributions: [
@@ -351,6 +353,15 @@ export function getProjects(locale: Locale): Project[] {
       cover: { ...copy.cover, src: base.coverSrc },
       gallery: copy.gallery.map((asset, galleryIndex) => ({ ...asset, src: base.gallerySrc[galleryIndex] })),
     };
+  });
+}
+
+export function getFeaturedProjects(locale: Locale): Project[] {
+  const projects = getProjects(locale);
+  return featuredProjectSlugs.map((slug) => {
+    const project = projects.find((item) => item.slug === slug);
+    if (!project) throw new Error(`Missing featured project: ${slug}`);
+    return project;
   });
 }
 

@@ -2,14 +2,14 @@ import Link from 'next/link';
 import MediaFrame from './MediaFrame';
 import RevealController from './RevealController';
 import SiteHeader from './SiteHeader';
-import { getAchievements, getProjects, getSkillGroups } from '../content';
+import { getAchievements, getFeaturedProjects, getSkillGroups } from '../content';
 import type { Locale } from '../i18n';
-import { homeCopy, homeIntro, projectPath } from '../i18n';
+import { homeCopy, homeIntro } from '../i18n';
 
 export default function HomePage({ locale = 'en' }: { locale?: Locale }) {
   const intro = homeIntro[locale];
   const copy = homeCopy[locale];
-  const projects = getProjects(locale);
+  const projects = getFeaturedProjects(locale);
   const achievements = getAchievements(locale);
   const skillGroups = getSkillGroups(locale);
 
@@ -62,21 +62,34 @@ export default function HomePage({ locale = 'en' }: { locale?: Locale }) {
         </header>
 
         <div className="project-grid">
-          {projects.map((project) => (
-            <article className={`project-card project-${project.variant}`} key={project.slug} data-reveal>
-              <MediaFrame asset={project.cover} label={`${locale === 'vi' ? 'Dự án' : 'Project'} / ${project.number}`} variant={project.variant} locale={locale} />
-              <div className="project-card-body">
-                <div className="project-meta"><span>{project.number}</span><span>{project.role}</span></div>
-                <p className="kicker">{project.label}</p>
-                <h3>{project.title}</h3>
-                <p>{project.summary}</p>
-                <ul className="mini-stack" aria-label={`${project.title} ${copy.projectTechnologies}`}>
-                  {project.stack.slice(0, 2).map((item) => <li key={item}>{item}</li>)}
-                </ul>
-                <Link className="text-link" href={projectPath(locale, project.slug)}>{copy.openCaseStudy} <span>↗</span></Link>
-              </div>
-            </article>
-          ))}
+          {projects.map((project) => {
+            const primaryLink = project.links[0];
+            return (
+              <article className={`project-card project-${project.variant}`} key={project.slug} data-reveal>
+                <MediaFrame asset={project.cover} label={project.title} variant={project.variant} locale={locale} />
+                <div className="project-card-body">
+                  <div className="project-meta"><span>{project.date}</span><span>{project.role}</span></div>
+                  <p className="kicker">{project.label}</p>
+                  <h3>{project.title}</h3>
+                  <p>{project.summary}</p>
+                  <ul className="mini-stack" aria-label={`${project.title} ${copy.projectTechnologies}`}>
+                    {project.stack.slice(0, 2).map((item) => <li key={item}>{item}</li>)}
+                  </ul>
+                  {primaryLink ? (
+                    <a
+                      className="project-external-link"
+                      href={primaryLink.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label={`${primaryLink.label}: ${project.title}`}
+                    >
+                      <span>{primaryLink.label}</span><span aria-hidden="true">↗</span>
+                    </a>
+                  ) : null}
+                </div>
+              </article>
+            );
+          })}
         </div>
       </section>
 
