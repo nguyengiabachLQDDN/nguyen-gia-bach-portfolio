@@ -1,8 +1,9 @@
 import type { MetadataRoute } from 'next';
 import { projectSlugs } from './content';
+import { SITE_ORIGIN } from './metadata';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const base = 'https://nguyen-gia-bach-portfolio.gbachnguyen.chatgpt.site';
+  const base = SITE_ORIGIN;
   const homeLanguages = { en: base, vi: `${base}/vi` };
   const homes: MetadataRoute.Sitemap = [
     { url: base, priority: 1, alternates: { languages: homeLanguages } },

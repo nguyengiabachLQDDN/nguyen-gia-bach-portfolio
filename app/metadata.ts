@@ -3,7 +3,20 @@ import type { Project } from './content';
 import type { Locale } from './i18n';
 import { metadataCopy, projectPath } from './i18n';
 
-export const SITE_ORIGIN = 'https://nguyen-gia-bach-portfolio.gbachnguyen.chatgpt.site';
+function normalizeOrigin(origin: string) {
+  return origin.replace(/\/+$/, '');
+}
+
+export function getSiteOrigin() {
+  const configuredOrigin = process.env.NEXT_PUBLIC_SITE_URL;
+  const vercelProductionHost = process.env.VERCEL_PROJECT_PRODUCTION_URL;
+
+  if (configuredOrigin) return normalizeOrigin(configuredOrigin);
+  if (vercelProductionHost) return `https://${normalizeOrigin(vercelProductionHost)}`;
+  return 'http://localhost:3000';
+}
+
+export const SITE_ORIGIN = getSiteOrigin();
 
 function localizedAlternates(locale: Locale, englishPath: string) {
   const vietnamesePath = englishPath === '/' ? '/vi' : `/vi${englishPath}`;
@@ -64,6 +77,7 @@ export function getPersonJsonLd(locale: Locale) {
     '@context': 'https://schema.org',
     '@type': 'Person',
     name: 'Nguyen Gia Bach',
+    url: `${SITE_ORIGIN}${locale === 'vi' ? '/vi' : ''}`,
     description: copy.personDescription,
     inLanguage: locale,
     affiliation: { '@type': 'EducationalOrganization', name: copy.school },
