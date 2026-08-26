@@ -6,8 +6,8 @@ import { navigation as navigationCopy } from '../i18n';
 
 const navigation = [
   { id: 'work', label: navigationCopy.work },
-  { id: 'capabilities', label: navigationCopy.capabilities },
   { id: 'achievements', label: navigationCopy.achievements },
+  { id: 'capabilities', label: navigationCopy.capabilities },
   { id: 'about', label: navigationCopy.about },
   { id: 'contact', label: navigationCopy.contact },
 ];

@@ -59,24 +59,6 @@ export default function HomePage() {
         <ProjectRail projects={projects} />
       </section>
 
-      <section className="section-shell capabilities" id="capabilities" aria-labelledby="capabilities-title" data-reveal>
-        <header className="section-heading">
-          <div><p className="section-index">{copy.capabilitiesIndex}</p><h2 id="capabilities-title">{copy.capabilitiesTitle}</h2></div>
-          <p>{copy.capabilitiesDeck}</p>
-        </header>
-        <div className="capability-grid">
-          {skillGroups.map((group) => (
-            <article className="capability-card" key={group.code} data-reveal>
-              <span className="capability-code">{group.code}</span>
-              <h3>{group.title}</h3>
-              <p>{group.summary}</p>
-              <div className="capability-list"><h4>{copy.usedInProjects}</h4><ul>{group.used.map((item) => <li key={item}>{item}</li>)}</ul></div>
-              <div className="capability-list learning"><h4>{copy.exploringNext}</h4><ul>{group.exploring.map((item) => <li key={item}>{item}</li>)}</ul></div>
-            </article>
-          ))}
-        </div>
-      </section>
-
       <section className="section-shell" id="achievements" aria-labelledby="achievements-title" data-reveal>
         <header className="section-heading">
           <div><p className="section-index">{copy.achievementsIndex}</p><h2 id="achievements-title">{copy.achievementsTitle}</h2></div>
@@ -95,6 +77,24 @@ export default function HomePage() {
             </li>
           ))}
         </ol>
+      </section>
+
+      <section className="section-shell capabilities" id="capabilities" aria-labelledby="capabilities-title" data-reveal>
+        <header className="section-heading">
+          <div><p className="section-index">{copy.capabilitiesIndex}</p><h2 id="capabilities-title">{copy.capabilitiesTitle}</h2></div>
+          <p>{copy.capabilitiesDeck}</p>
+        </header>
+        <div className="capability-grid">
+          {skillGroups.map((group) => (
+            <article className="capability-card" key={group.code} data-reveal>
+              <span className="capability-code">{group.code}</span>
+              <h3>{group.title}</h3>
+              <p>{group.summary}</p>
+              <div className="capability-list"><h4>{copy.usedInProjects}</h4><ul>{group.used.map((item) => <li key={item}>{item}</li>)}</ul></div>
+              <div className="capability-list learning"><h4>{copy.exploringNext}</h4><ul>{group.exploring.map((item) => <li key={item}>{item}</li>)}</ul></div>
+            </article>
+          ))}
+        </div>
       </section>
 
       <section className="section-shell about" id="about" aria-labelledby="about-title" data-reveal>
