@@ -3,19 +3,18 @@ import MediaFrame from './MediaFrame';
 import RevealController from './RevealController';
 import SiteHeader from './SiteHeader';
 import type { Project } from '../content';
-import type { Locale } from '../i18n';
-import { caseCopy, localeHome, projectPath } from '../i18n';
+import { caseCopy, projectPath } from '../i18n';
 
-export default function ProjectCaseStudy({ project, nextProject, locale }: { project: Project; nextProject: Project; locale: Locale }) {
-  const copy = caseCopy[locale];
+export default function ProjectCaseStudy({ project, nextProject }: { project: Project; nextProject: Project }) {
+  const copy = caseCopy;
 
   return (
     <main>
-      <SiteHeader locale={locale} />
+      <SiteHeader />
       <RevealController />
       <article className="case-study">
         <header className="case-hero hero-enter">
-          <div className="case-breadcrumb"><Link href={`${localeHome(locale)}#work`}>{copy.selectedWork}</Link><span>/</span><span>{project.number}</span></div>
+          <div className="case-breadcrumb"><Link href="/#work">{copy.selectedWork}</Link><span>/</span><span>{project.number}</span></div>
           <p className="eyebrow">{project.label}</p>
           <h1>{project.title}</h1>
           <p className="case-deck">{project.summary}</p>
@@ -27,7 +26,7 @@ export default function ProjectCaseStudy({ project, nextProject, locale }: { pro
         </header>
 
         <div className="case-cover-wrap" data-reveal>
-          <MediaFrame asset={project.cover} label={`${locale === 'vi' ? 'Dự án' : 'Project'} / ${project.number}`} variant={project.variant} ratio="cover" eager showCaption locale={locale} />
+          <MediaFrame asset={project.cover} label={`Project / ${project.number}`} variant={project.variant} ratio="cover" eager showCaption />
         </div>
 
         <section className="case-section case-intro" data-reveal>
@@ -74,7 +73,6 @@ export default function ProjectCaseStudy({ project, nextProject, locale }: { pro
                 variant={project.variant}
                 ratio="gallery"
                 showCaption
-                locale={locale}
               />
             ))}
           </div>
@@ -91,7 +89,7 @@ export default function ProjectCaseStudy({ project, nextProject, locale }: { pro
           <div className="case-actions">{project.links.map((link) => <a className="button button-primary" key={link.href} href={link.href} target="_blank" rel="noreferrer">{link.label}<span>↗</span></a>)}</div>
         </section>
 
-        <Link className="next-project" href={projectPath(locale, nextProject.slug)}>
+        <Link className="next-project" href={projectPath(nextProject.slug)}>
           <span>{copy.nextSystem} / {nextProject.number}</span><strong>{nextProject.title}</strong><i>↗</i>
         </Link>
       </article>

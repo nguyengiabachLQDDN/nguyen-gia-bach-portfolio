@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import '../globals.css';
 import { getPersonJsonLd, getRootMetadata } from '../metadata';
 
-export const metadata: Metadata = getRootMetadata('en');
+export const metadata: Metadata = getRootMetadata();
 
 export default function RootLayout({
   children,
@@ -17,7 +17,7 @@ export default function RootLayout({
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
-              ...getPersonJsonLd('en'),
+              ...getPersonJsonLd(),
             }),
           }}
         />

@@ -2,9 +2,7 @@
 
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import type { Locale } from '../i18n';
-import { localeHome, navigation as navigationCopy } from '../i18n';
-import LanguageSwitcher from './LanguageSwitcher';
+import { navigation as navigationCopy } from '../i18n';
 
 const navigation = [
   { id: 'work', label: navigationCopy.work },
@@ -14,7 +12,7 @@ const navigation = [
   { id: 'contact', label: navigationCopy.contact },
 ];
 
-export default function SiteHeader({ home = false, locale = 'en' }: { home?: boolean; locale?: Locale }) {
+export default function SiteHeader({ home = false }: { home?: boolean }) {
   const [active, setActive] = useState(home ? 'work' : '');
 
   useEffect(() => {
@@ -37,24 +35,23 @@ export default function SiteHeader({ home = false, locale = 'en' }: { home?: boo
 
   return (
     <header className="site-header">
-      <Link className="wordmark" href={`${localeHome(locale)}#top`} aria-label={locale === 'vi' ? 'Trang chủ Nguyen Gia Bach' : 'Nguyen Gia Bach home'}>
+      <Link className="wordmark" href="/#top" aria-label="Nguyen Gia Bach home">
         <span className="wordmark-mark">GB</span>
         <span className="wordmark-name">Nguyen Gia Bach</span>
       </Link>
       <div className="site-header-actions">
-        <nav aria-label={locale === 'vi' ? 'Điều hướng chính' : 'Primary navigation'}>
+        <nav aria-label="Primary navigation">
           {navigation.map((item) => (
             <Link
               key={item.id}
-              href={`${localeHome(locale)}#${item.id}`}
+              href={`/#${item.id}`}
               className={home && active === item.id ? 'active' : ''}
               aria-current={home && active === item.id ? 'location' : undefined}
             >
-              {item.label[locale]}
+              {item.label}
             </Link>
           ))}
         </nav>
-        <LanguageSwitcher locale={locale} />
       </div>
     </header>
   );

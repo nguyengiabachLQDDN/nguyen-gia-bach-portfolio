@@ -2,26 +2,26 @@
 
 ![Nguyen Gia Bach portfolio social preview](public/og.png)
 
-A bilingual English–Vietnamese portfolio for Nguyen Gia Bach, a student engineer working at the intersection of physics, software, and robotics.
+An English-language portfolio for Nguyen Gia Bach, a student engineer working at the intersection of physics, software, and robotics.
 
 **Live website:** [nguyen-gia-bach-portfolio.vercel.app](https://nguyen-gia-bach-portfolio.vercel.app)
 
 ## Highlights
 
-- English and Vietnamese content with route-aware language switching
-- Three detailed project case studies: JWST Deep Space Explorer, AstroVerse, and eSight & Robotics Practice
-- Localized metadata, canonical URLs, Open Graph content, JSON-LD, robots, and sitemap
+- English-only content with focused, direct navigation
+- Three detailed project case studies: JWST Deep Space Explorer, AstroVerse, and eSight Project
+- English metadata, canonical URLs, Open Graph content, JSON-LD, robots, and sitemap
 - Responsive, keyboard-accessible interface with reduced-motion support
 - Purposeful image placeholders that can be replaced without changing the layout
 
 ## Routes
 
-| English | Vietnamese |
+| Route | Content |
 | --- | --- |
-| `/` | `/vi` |
-| `/projects/jwst-deep-space-explorer` | `/vi/projects/jwst-deep-space-explorer` |
-| `/projects/astroverse` | `/vi/projects/astroverse` |
-| `/projects/esight-or-robotics` | `/vi/projects/esight-or-robotics` |
+| `/` | Portfolio homepage |
+| `/projects/jwst-deep-space-explorer` | JWST Deep Space Explorer case study |
+| `/projects/astroverse` | AstroVerse case study |
+| `/projects/esight-or-robotics` | eSight and robotics case study |
 
 ## Technology
 
@@ -49,7 +49,7 @@ pnpm lint
 pnpm build
 ```
 
-The production build prerenders both homepages, all six localized project routes, `robots.txt`, and `sitemap.xml`.
+The production build prerenders the homepage, all three project routes, `robots.txt`, and `sitemap.xml`.
 
 ## Deployment
 

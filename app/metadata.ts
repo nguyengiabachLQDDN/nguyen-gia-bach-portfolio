@@ -1,6 +1,5 @@
 import type { Metadata } from 'next';
 import type { Project } from './content';
-import type { Locale } from './i18n';
 import { metadataCopy, projectPath } from './i18n';
 
 function normalizeOrigin(origin: string) {
@@ -18,50 +17,39 @@ export function getSiteOrigin() {
 
 export const SITE_ORIGIN = getSiteOrigin();
 
-function localizedAlternates(locale: Locale, englishPath: string) {
-  const vietnamesePath = englishPath === '/' ? '/vi' : `/vi${englishPath}`;
-  return {
-    canonical: locale === 'vi' ? vietnamesePath : englishPath,
-    languages: { en: englishPath, vi: vietnamesePath, 'x-default': englishPath },
-  };
-}
-
-export function getRootMetadata(locale: Locale): Metadata {
-  const copy = metadataCopy[locale];
-  const path = locale === 'vi' ? '/vi' : '/';
+export function getRootMetadata(): Metadata {
   return {
     metadataBase: new URL(SITE_ORIGIN),
-    title: { default: copy.title, template: '%s' },
-    description: copy.description,
+    title: { default: metadataCopy.title, template: '%s' },
+    description: metadataCopy.description,
     keywords: ['Nguyen Gia Bach', 'student engineer', 'physics', 'software', 'robotics', 'astronomy'],
     authors: [{ name: 'Nguyen Gia Bach' }],
     creator: 'Nguyen Gia Bach',
-    alternates: localizedAlternates(locale, '/'),
+    alternates: { canonical: '/' },
     openGraph: {
       type: 'website',
-      locale: locale === 'vi' ? 'vi_VN' : 'en_US',
-      url: `${SITE_ORIGIN}${path === '/' ? '' : path}`,
-      title: copy.title,
-      description: copy.shortDescription,
-      images: [{ url: `${SITE_ORIGIN}/og.png`, width: 1200, height: 630, alt: copy.imageAlt }],
+      locale: 'en_US',
+      url: SITE_ORIGIN,
+      title: metadataCopy.title,
+      description: metadataCopy.shortDescription,
+      images: [{ url: `${SITE_ORIGIN}/og.png`, width: 1200, height: 630, alt: metadataCopy.imageAlt }],
     },
-    twitter: { card: 'summary_large_image', title: copy.title, description: copy.shortDescription, images: [`${SITE_ORIGIN}/og.png`] },
+    twitter: { card: 'summary_large_image', title: metadataCopy.title, description: metadataCopy.shortDescription, images: [`${SITE_ORIGIN}/og.png`] },
   };
 }
 
-export function getProjectMetadata(project: Project, locale: Locale): Metadata {
+export function getProjectMetadata(project: Project): Metadata {
   const title = `${project.title} — Nguyen Gia Bach`;
-  const englishPath = `/projects/${project.slug}`;
-  const path = projectPath(locale, project.slug);
+  const path = projectPath(project.slug);
   const image = project.cover.src ? `${SITE_ORIGIN}${project.cover.src}` : undefined;
   return {
     metadataBase: new URL(SITE_ORIGIN),
     title,
     description: project.summary,
-    alternates: localizedAlternates(locale, englishPath),
+    alternates: { canonical: path },
     openGraph: {
       type: 'article',
-      locale: locale === 'vi' ? 'vi_VN' : 'en_US',
+      locale: 'en_US',
       url: `${SITE_ORIGIN}${path}`,
       title,
       description: project.summary,
@@ -71,16 +59,15 @@ export function getProjectMetadata(project: Project, locale: Locale): Metadata {
   };
 }
 
-export function getPersonJsonLd(locale: Locale) {
-  const copy = metadataCopy[locale];
+export function getPersonJsonLd() {
   return {
     '@context': 'https://schema.org',
     '@type': 'Person',
     name: 'Nguyen Gia Bach',
-    url: `${SITE_ORIGIN}${locale === 'vi' ? '/vi' : ''}`,
-    description: copy.personDescription,
-    inLanguage: locale,
-    affiliation: { '@type': 'EducationalOrganization', name: copy.school },
+    url: SITE_ORIGIN,
+    description: metadataCopy.personDescription,
+    inLanguage: 'en',
+    affiliation: { '@type': 'EducationalOrganization', name: metadataCopy.school },
     sameAs: [
       'https://github.com/nguyengiabachLQDDN',
       'https://www.linkedin.com/in/nguyen-gia-bach-996333386',

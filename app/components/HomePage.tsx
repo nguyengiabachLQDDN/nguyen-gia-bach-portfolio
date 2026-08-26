@@ -3,19 +3,18 @@ import MediaFrame from './MediaFrame';
 import RevealController from './RevealController';
 import SiteHeader from './SiteHeader';
 import { getAchievements, getFeaturedProjects, getSkillGroups } from '../content';
-import type { Locale } from '../i18n';
 import { homeCopy, homeIntro } from '../i18n';
 
-export default function HomePage({ locale = 'en' }: { locale?: Locale }) {
-  const intro = homeIntro[locale];
-  const copy = homeCopy[locale];
-  const projects = getFeaturedProjects(locale);
-  const achievements = getAchievements(locale);
-  const skillGroups = getSkillGroups(locale);
+export default function HomePage() {
+  const intro = homeIntro;
+  const copy = homeCopy;
+  const projects = getFeaturedProjects();
+  const achievements = getAchievements();
+  const skillGroups = getSkillGroups();
 
   return (
     <main id="top">
-      <SiteHeader home locale={locale} />
+      <SiteHeader home />
       <RevealController />
 
       <section className="hero" aria-labelledby="hero-title">
@@ -46,13 +45,8 @@ export default function HomePage({ locale = 'en' }: { locale?: Locale }) {
             label={intro.imageLabel}
             ratio="portrait"
             eager
-            locale={locale}
           />
         </div>
-      </section>
-
-      <section className="signal-strip" aria-label={copy.signalLabel} data-reveal>
-        {copy.signalItems.map(([value, label]) => <div key={label}><strong>{value}</strong><span>{label}</span></div>)}
       </section>
 
       <section className="section-shell" id="work" aria-labelledby="work-title" data-reveal>
@@ -66,7 +60,7 @@ export default function HomePage({ locale = 'en' }: { locale?: Locale }) {
             const primaryLink = project.links[0];
             return (
               <article className={`project-card project-${project.variant}`} key={project.slug} data-reveal>
-                <MediaFrame asset={project.cover} label={project.title} variant={project.variant} locale={locale} />
+                <MediaFrame asset={project.cover} label={project.title} variant={project.variant} />
                 <div className="project-card-body">
                   <div className="project-meta"><span>{project.date}</span><span>{project.role}</span></div>
                   <p className="kicker">{project.label}</p>
@@ -119,7 +113,7 @@ export default function HomePage({ locale = 'en' }: { locale?: Locale }) {
         <ol className="achievement-grid">
           {achievements.map((achievement) => (
             <li className="achievement-card" key={`${achievement.year}-${achievement.title}`} data-reveal>
-              <MediaFrame asset={achievement.image} label={achievement.year} ratio="compact" locale={locale} />
+              <MediaFrame asset={achievement.image} label={achievement.year} ratio="compact" />
               <div className="achievement-card-copy">
                 <div className="achievement-meta"><span>{achievement.year}</span><span>{achievement.context}</span></div>
                 <h3>{achievement.title}</h3>
