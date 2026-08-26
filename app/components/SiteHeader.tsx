@@ -35,24 +35,18 @@ export default function SiteHeader({ home = false }: { home?: boolean }) {
 
   return (
     <header className="site-header">
-      <Link className="wordmark" href="/#top" aria-label="Nguyen Gia Bach home">
-        <span className="wordmark-mark">GB</span>
-        <span className="wordmark-name">Nguyen Gia Bach</span>
-      </Link>
-      <div className="site-header-actions">
-        <nav aria-label="Primary navigation">
-          {navigation.map((item) => (
-            <Link
-              key={item.id}
-              href={`/#${item.id}`}
-              className={home && active === item.id ? 'active' : ''}
-              aria-current={home && active === item.id ? 'location' : undefined}
-            >
-              {item.label}
-            </Link>
-          ))}
-        </nav>
-      </div>
+      <nav aria-label="Primary navigation">
+        {navigation.map((item) => (
+          <Link
+            key={item.id}
+            href={`/#${item.id}`}
+            className={home && active === item.id ? 'active' : ''}
+            aria-current={home && active === item.id ? 'location' : undefined}
+          >
+            {item.label}
+          </Link>
+        ))}
+      </nav>
     </header>
   );
 }
