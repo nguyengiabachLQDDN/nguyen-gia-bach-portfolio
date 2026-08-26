@@ -1,5 +1,7 @@
 import Image from 'next/image';
 import type { MediaAsset, ProjectVariant } from '../content';
+import type { Locale } from '../i18n';
+import { mediaComingSoon } from '../i18n';
 
 type MediaRatio = 'cover' | 'gallery' | 'compact';
 
@@ -10,6 +12,7 @@ export default function MediaFrame({
   ratio = 'cover',
   eager = false,
   showCaption = false,
+  locale = 'en',
 }: {
   asset: MediaAsset;
   label: string;
@@ -17,6 +20,7 @@ export default function MediaFrame({
   ratio?: MediaRatio;
   eager?: boolean;
   showCaption?: boolean;
+  locale?: Locale;
 }) {
   const dimensions = ratio === 'cover'
     ? { width: 1600, height: 1000 }
@@ -39,7 +43,7 @@ export default function MediaFrame({
         ) : (
           <div className="media-placeholder" role="img" aria-label={asset.alt}>
             <span className="media-code">{label}</span>
-            <span className="media-status"><i /> Image coming soon</span>
+            <span className="media-status"><i /> {mediaComingSoon[locale]}</span>
           </div>
         )}
       </div>

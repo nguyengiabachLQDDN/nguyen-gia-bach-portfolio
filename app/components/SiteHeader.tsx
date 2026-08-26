@@ -2,16 +2,19 @@
 
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import type { Locale } from '../i18n';
+import { localeHome, navigation as navigationCopy } from '../i18n';
+import LanguageSwitcher from './LanguageSwitcher';
 
 const navigation = [
-  { id: 'work', label: 'Work' },
-  { id: 'capabilities', label: 'Capabilities' },
-  { id: 'achievements', label: 'Achievements' },
-  { id: 'about', label: 'About' },
-  { id: 'contact', label: 'Contact' },
+  { id: 'work', label: navigationCopy.work },
+  { id: 'capabilities', label: navigationCopy.capabilities },
+  { id: 'achievements', label: navigationCopy.achievements },
+  { id: 'about', label: navigationCopy.about },
+  { id: 'contact', label: navigationCopy.contact },
 ];
 
-export default function SiteHeader({ home = false }: { home?: boolean }) {
+export default function SiteHeader({ home = false, locale = 'en' }: { home?: boolean; locale?: Locale }) {
   const [active, setActive] = useState(home ? 'work' : '');
 
   useEffect(() => {
@@ -34,22 +37,25 @@ export default function SiteHeader({ home = false }: { home?: boolean }) {
 
   return (
     <header className="site-header">
-      <Link className="wordmark" href="/#top" aria-label="Nguyen Gia Bach home">
+      <Link className="wordmark" href={`${localeHome(locale)}#top`} aria-label={locale === 'vi' ? 'Trang chủ Nguyen Gia Bach' : 'Nguyen Gia Bach home'}>
         <span className="wordmark-mark">GB</span>
         <span className="wordmark-name">Nguyen Gia Bach</span>
       </Link>
-      <nav aria-label="Primary navigation">
-        {navigation.map((item) => (
-          <Link
-            key={item.id}
-            href={`/#${item.id}`}
-            className={home && active === item.id ? 'active' : ''}
-            aria-current={home && active === item.id ? 'location' : undefined}
-          >
-            {item.label}
-          </Link>
-        ))}
-      </nav>
+      <div className="site-header-actions">
+        <nav aria-label={locale === 'vi' ? 'Điều hướng chính' : 'Primary navigation'}>
+          {navigation.map((item) => (
+            <Link
+              key={item.id}
+              href={`${localeHome(locale)}#${item.id}`}
+              className={home && active === item.id ? 'active' : ''}
+              aria-current={home && active === item.id ? 'location' : undefined}
+            >
+              {item.label[locale]}
+            </Link>
+          ))}
+        </nav>
+        <LanguageSwitcher locale={locale} />
+      </div>
     </header>
   );
 }
