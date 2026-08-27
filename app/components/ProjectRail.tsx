@@ -23,11 +23,11 @@ function ProjectMediaPreview({ project }: { project: Project }) {
   return (
     <div className={`project-preview project-preview-with-media${secondary ? ' has-gallery' : ''}`}>
       <div className="project-preview-primary">
-        <Image src={primary.src} alt={primary.alt} fill sizes="(max-width: 760px) 88vw, 620px" />
+        <Image src={primary.src} alt={primary.alt} fill sizes="(max-width: 760px) 88vw, 540px" />
       </div>
       {secondary ? (
         <div className="project-preview-more">
-          <Image src={secondary.src} alt={secondary.alt} fill sizes="180px" />
+          <Image src={secondary.src} alt={secondary.alt} fill sizes="100px" />
           <span>+{availableMedia.length - 1} more</span>
         </div>
       ) : null}
@@ -46,15 +46,21 @@ export default function ProjectRail({ projects }: { projects: Project[] }) {
     if (!rail) return;
 
     const cards = Array.from(rail.querySelectorAll<HTMLElement>('[data-project-card]'));
-    const closestIndex = cards.reduce((closest, card, index) => (
-      Math.abs(card.offsetLeft - rail.scrollLeft) < Math.abs(cards[closest].offsetLeft - rail.scrollLeft)
-        ? index
-        : closest
-    ), 0);
+    const maxScroll = Math.max(0, rail.scrollWidth - rail.clientWidth);
+    const atEnd = maxScroll > 2 && maxScroll - rail.scrollLeft <= 2;
+    const firstCardOffset = cards[0]?.offsetLeft ?? 0;
+    const closestIndex = atEnd
+      ? cards.length - 1
+      : cards.reduce((closest, card, index) => (
+          Math.abs(card.offsetLeft - firstCardOffset - rail.scrollLeft)
+            < Math.abs(cards[closest].offsetLeft - firstCardOffset - rail.scrollLeft)
+            ? index
+            : closest
+        ), 0);
 
     setActiveIndex(closestIndex);
     setCanPrevious(rail.scrollLeft > 2);
-    setCanNext(rail.scrollWidth - rail.clientWidth - rail.scrollLeft > 2);
+    setCanNext(maxScroll - rail.scrollLeft > 2);
   }, []);
 
   useEffect(() => {
@@ -74,7 +80,8 @@ export default function ProjectRail({ projects }: { projects: Project[] }) {
     if (!rail || !target) return;
 
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    rail.scrollTo({ left: target.offsetLeft, behavior: reduceMotion ? 'auto' : 'smooth' });
+    const firstCardOffset = cards[0]?.offsetLeft ?? 0;
+    rail.scrollTo({ left: target.offsetLeft - firstCardOffset, behavior: reduceMotion ? 'auto' : 'smooth' });
   };
 
   const handleRailKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
