@@ -1,6 +1,10 @@
 export type ProjectVariant = 'jwst' | 'astroverse' | 'robotics';
 
-export interface ProjectLink { label: string; href: string; }
+export interface ProjectLink {
+  label: string;
+  href: string;
+  cardRole?: 'primary' | 'secondary';
+}
 export interface ProjectDecision { title: string; description: string; }
 export interface MediaAsset {
   src?: string;
@@ -54,7 +58,7 @@ interface ProjectBase {
   number: string;
   slug: string;
   variant: ProjectVariant;
-  linkHrefs: string[];
+  linkTargets: Array<Omit<ProjectLink, 'label'>>;
   coverSrc?: string;
   gallerySrc: Array<string | undefined>;
 }
@@ -88,17 +92,20 @@ const projectBases: [ProjectBase, ProjectBase, ProjectBase] = [
     number: '01',
     slug: 'jwst-deep-space-explorer',
     variant: 'jwst',
-    linkHrefs: [
-      'https://github.com/nguyengiabachLQDDN/Final-Backend-JWST-project',
-      'https://lqddn.edu.vn/tin-tuc/hoc-sinh-nguyen-gia-bach-xuat-sac-lot-vao-danh-sach-de-cu-toan-cau-tai-cuoc-thi-nasa-space-apps-challenge-2025',
+    linkTargets: [
+      { href: 'https://finale-frontend-jwst-project.vercel.app', cardRole: 'primary' },
+      { href: 'https://huggingface.co/spaces/gbachnguyen/jwst-backend-processor/tree/main', cardRole: 'secondary' },
+      { href: 'https://github.com/nguyengiabachLQDDN/finale-frontend-jwst-project', cardRole: 'secondary' },
+      { href: 'https://lqddn.edu.vn/tin-tuc/hoc-sinh-nguyen-gia-bach-xuat-sac-lot-vao-danh-sach-de-cu-toan-cau-tai-cuoc-thi-nasa-space-apps-challenge-2025' },
     ],
+    coverSrc: '/images/projects/jwst/overview.webp',
     gallerySrc: [undefined, undefined],
   },
   {
     number: '02',
     slug: 'astroverse',
     variant: 'astroverse',
-    linkHrefs: ['https://astroverse-m8wl.vercel.app/'],
+    linkTargets: [{ href: 'https://astroverse-m8wl.vercel.app/', cardRole: 'primary' }],
     coverSrc: '/images/projects/astroverse/overview.webp',
     gallerySrc: [
       '/images/projects/astroverse/sky-map.webp',
@@ -112,38 +119,38 @@ const projectBases: [ProjectBase, ProjectBase, ProjectBase] = [
     number: '03',
     slug: 'esight-or-robotics',
     variant: 'robotics',
-    linkHrefs: ['https://www.facebook.com/esightproject'],
+    linkTargets: [{ href: 'https://www.facebook.com/esightproject', cardRole: 'primary' }],
     gallerySrc: [undefined, undefined],
   },
 ];
 
-const featuredProjectSlugs = ['astroverse', 'esight-or-robotics'] as const;
+const featuredProjectSlugs = ['jwst-deep-space-explorer', 'astroverse', 'esight-or-robotics'] as const;
 
 const projectCopy: ProjectCopyList = [
   {
-    title: 'JWST Deep Space Explorer',
+    title: 'JWST Space Explorer',
     label: 'NASA Space Apps 2025 · Global Nominee',
-    status: 'Completed',
+    status: 'Live',
     date: 'October 2025',
-    role: 'Team Lead & Developer',
-    summary: 'An interactive citizen-science platform that makes massive James Webb Space Telescope imagery explorable in an ordinary browser.',
+    role: 'Team Lead · Developer',
+    summary: 'A full-stack explorer that retrieves public JWST observations from NASA MAST, processes FITS data into Deep Zoom imagery, and lets users inspect the results with an AI assistant.',
     featuredHighlights: [
-      'Tiled exploration for extremely large scientific images.',
-      'Python and Astropy processing for browser-ready observations.',
-      'AI-assisted labelling designed for citizen-science participation.',
+      'Search astronomical targets and retrieve public JWST observations from NASA MAST.',
+      'Process FITS imagery with Astroquery, Astropy, and pyvips into browser-ready Deep Zoom tiles.',
+      'Inspect large observations with OpenSeadragon and a Gemini-powered assistant.',
     ],
-    challenge: 'NASA’s “Embiggen Your Eyes!” challenge asked teams to bring extremely large astronomical images closer to the public. The raw data can reach hundreds of gigabytes—far beyond what most learners can download or inspect comfortably.',
-    approach: 'We treated each observation as both scientific data and a navigable place. A Python pipeline prepared the imagery, while a browser-based map interface let people zoom through the details and contribute structured observations.',
+    challenge: 'NASA’s “Embiggen Your Eyes!” challenge asked teams to make extremely large astronomical images accessible to the public. Raw FITS observations are difficult to retrieve, process, and inspect in an ordinary browser without specialist software.',
+    approach: 'The application separates a React exploration interface from a FastAPI processing service. A user searches for a target, the backend retrieves public observations from NASA MAST, converts FITS data into Deep Zoom tiles, and the browser presents the result through OpenSeadragon with an AI assistant for guided inspection.',
     contributions: [
       'Led the team’s scope, priorities, and delivery through a 48-hour hackathon.',
-      'Developed the scientific processing workflow with Python and Astropy.',
-      'Designed a tiled Leaflet.js viewer for smooth exploration of ultra-large images.',
-      'Integrated an AI-assisted labelling workflow to support citizen-science participation.',
+      'Developed a Python and FastAPI workflow for querying NASA MAST and processing FITS observations.',
+      'Prepared browser-ready Deep Zoom tiles with Astroquery, Astropy, and pyvips.',
+      'Integrated OpenSeadragon for smooth inspection of large images and Gemini for guided analysis.',
     ],
     decisions: [
-      { title: 'Tile, don’t download', description: 'Serve only the detail needed at the current zoom level instead of forcing users to load a full-resolution scientific file.' },
-      { title: 'Separate science from interface', description: 'Keep data preparation in a Python pipeline and the exploration experience in the browser so each layer stays focused.' },
-      { title: 'Make looking participatory', description: 'Turn passive viewing into observation and labelling, creating a path from public curiosity to citizen science.' },
+      { title: 'Tile, don’t download', description: 'Convert large FITS observations into Deep Zoom tiles so the browser loads only the detail required at the current zoom level.' },
+      { title: 'Separate processing from viewing', description: 'Keep NASA retrieval and scientific image processing in FastAPI while React and OpenSeadragon remain focused on exploration.' },
+      { title: 'Assist the investigation', description: 'Use Gemini as a contextual assistant beside the scientific viewer instead of replacing the underlying observation data.' },
     ],
     outcomes: [
       'Selected among 1,290+ Global Nominees from 11,500+ worldwide submissions.',
@@ -151,12 +158,16 @@ const projectCopy: ProjectCopyList = [
       'Recognised by Le Quy Don High School for the Gifted as a notable student achievement.',
     ],
     lessons: 'The strongest technical shortcut was not reducing the science—it was changing how the data reached the browser. Clear architecture made an ambitious idea possible under severe time and connectivity constraints.',
-    stack: ['Python', 'Astropy', 'Leaflet.js', 'JavaScript', 'AI-assisted labelling', 'Scientific imaging'],
-    linkLabels: ['View source', 'Read evidence'],
-    cover: { alt: 'Reserved cover image for the JWST Deep Space Explorer interface.', caption: 'The tiled deep-space image explorer in use.' },
+    stack: ['React', 'Python', 'TypeScript', 'FastAPI', 'NASA MAST', 'Astroquery', 'Astropy', 'pyvips', 'Deep Zoom', 'OpenSeadragon', 'Gemini'],
+    linkLabels: ['Open live app', 'Backend', 'Source', 'Read evidence'],
+    cover: {
+      alt: 'JWST Space Explorer landing page with a deep-space background and astronomical target search.',
+      caption: 'Search a target before retrieving and processing public JWST observations.',
+      objectPosition: 'center 48%',
+    },
     gallery: [
-      { alt: 'Reserved image for the JWST tiled viewer and citizen-science labelling workflow.', caption: 'Browser-based tiled viewing and AI-assisted labelling.' },
-      { alt: 'Reserved image for the Python and Astropy scientific image processing workflow.', caption: 'The scientific data pipeline from source imagery to browser-ready tiles.' },
+      { alt: 'Reserved image for the JWST OpenSeadragon viewer and Gemini assistant.', caption: 'Deep Zoom exploration and AI-assisted inspection in the browser.' },
+      { alt: 'Reserved image for the NASA MAST, FITS, and FastAPI processing workflow.', caption: 'The processing path from public observation to browser-ready tiles.' },
     ],
   },
   {
@@ -268,7 +279,7 @@ const projectCopy: ProjectCopyList = [
 
 const achievements: AchievementList = [
   { year: '2026', title: 'Second Prize · RMIT Tech Camp', context: 'Team Lead', description: 'Led a team from problem framing to a competition-ready technical solution.', image: { alt: 'Reserved image for the RMIT Tech Camp Second Prize achievement.' } },
-  { year: '2025', title: 'Global Nominee · NASA Space Apps Challenge', context: 'JWST Deep Space Explorer', description: 'Selected among 1,290+ Global Nominees from more than 11,500 worldwide projects.', evidence: 'https://lqddn.edu.vn/tin-tuc/hoc-sinh-nguyen-gia-bach-xuat-sac-lot-vao-danh-sach-de-cu-toan-cau-tai-cuoc-thi-nasa-space-apps-challenge-2025', image: { alt: 'Reserved image for the NASA Space Apps Global Nominee recognition.' } },
+  { year: '2025', title: 'Global Nominee · NASA Space Apps Challenge', context: 'JWST Space Explorer', description: 'Selected among 1,290+ Global Nominees from more than 11,500 worldwide projects.', evidence: 'https://lqddn.edu.vn/tin-tuc/hoc-sinh-nguyen-gia-bach-xuat-sac-lot-vao-danh-sach-de-cu-toan-cau-tai-cuoc-thi-nasa-space-apps-challenge-2025', image: { alt: 'Reserved image for the NASA Space Apps Global Nominee recognition.' } },
   { year: '2024', title: 'Second Prize · Da Nang City Physics Competition', context: 'Physics', description: 'Recognised at city level in the Excellent Student Competition in Physics.', image: { alt: 'Reserved image for the Da Nang City Physics Competition Second Prize.' } },
   { year: 'STEM', title: 'Third Prize · FAST Maze Runner', context: 'Robotics Team Lead', description: 'Led the team in a robotics challenge organised by FAST, University of Science and Technology – UD.', image: { alt: 'Reserved image for the FAST Maze Runner Third Prize.' } },
   { year: '25–26', title: 'Third Prize · School Science & Engineering Fair', context: 'Research & Engineering', description: 'Developed and presented a technical project through the school-level research process.', image: { alt: 'Reserved image for the School Science and Engineering Fair Third Prize.' } },
@@ -276,7 +287,7 @@ const achievements: AchievementList = [
 
 const skillGroups: SkillGroupList = [
   { code: 'A01', title: 'Software engineering', summary: 'Building clear, interactive products from first interface to deployment.', used: ['Python', 'JavaScript', 'TypeScript', 'HTML', 'CSS', 'React', 'Vite'], exploring: ['Deeper testing', 'System design'] },
-  { code: 'A02', title: 'Scientific computing & data', summary: 'Turning scientific sources and models into tools people can question and explore.', used: ['Astropy', 'NASA data', 'Leaflet.js', 'APIs', 'Scientific imaging'], exploring: ['Scientific ML', 'Data visualisation'] },
+  { code: 'A02', title: 'Scientific computing & data', summary: 'Turning scientific sources and models into tools people can question and explore.', used: ['Astropy', 'NASA data', 'OpenSeadragon', 'APIs', 'Scientific imaging'], exploring: ['Scientific ML', 'Data visualisation'] },
   { code: 'A03', title: 'Robotics & prototyping', summary: 'Connecting physical reasoning, iterative testing, and reliable system behaviour.', used: ['Robotics', 'Rapid prototyping', 'System testing', 'Team integration'], exploring: ['Embedded systems', 'Computer vision'] },
   { code: 'A04', title: 'Tools & delivery', summary: 'Making work reproducible, reviewable, and available beyond my own laptop.', used: ['Git', 'GitHub', 'Vercel', 'Technical documentation'], exploring: ['CI workflows', 'Open-source practice'] },
 ];
@@ -289,7 +300,7 @@ export function getProjects(): Project[] {
       number: base.number,
       slug: base.slug,
       variant: base.variant,
-      links: base.linkHrefs.map((href, linkIndex) => ({ href, label: copy.linkLabels[linkIndex] })),
+      links: base.linkTargets.map((target, linkIndex) => ({ ...target, label: copy.linkLabels[linkIndex] })),
       cover: { ...copy.cover, src: base.coverSrc },
       gallery: copy.gallery.map((asset, galleryIndex) => ({ ...asset, src: base.gallerySrc[galleryIndex] })),
     };

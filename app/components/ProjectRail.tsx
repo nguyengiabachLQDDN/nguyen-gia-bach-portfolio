@@ -68,10 +68,10 @@ function ProjectMediaPreview({ project }: { project: Project }) {
           src={activeAsset.src}
           alt={activeAsset.alt}
           fill
-          preload={activeImage === 0 && project.slug === 'astroverse'}
-          loading={activeImage === 0 && project.slug === 'astroverse' ? undefined : 'lazy'}
+          preload={activeImage === 0 && project.slug === 'jwst-deep-space-explorer'}
+          loading={activeImage === 0 && project.slug === 'jwst-deep-space-explorer' ? undefined : 'lazy'}
           draggable={false}
-          sizes="(max-width: 760px) calc(100vw - 64px), 560px"
+          sizes="(max-width: 760px) calc(100vw - 40px), 448px"
           style={activeAsset.objectPosition ? { objectPosition: activeAsset.objectPosition } : undefined}
         />
         {activeAsset.caption ? <p className="project-media-caption">{activeAsset.caption}</p> : null}
@@ -165,7 +165,8 @@ export default function ProjectRail({ projects }: { projects: Project[] }) {
         onScroll={syncPosition}
       >
         {projects.map((project) => {
-          const primaryLink = project.links[0];
+          const primaryLink = project.links.find((link) => link.cardRole === 'primary');
+          const secondaryLinks = project.links.filter((link) => link.cardRole === 'secondary').slice(0, 2);
           return (
             <article className={`project-card project-${project.variant}`} key={project.slug} data-project-card>
               <ProjectMediaPreview project={project} />
@@ -177,31 +178,40 @@ export default function ProjectRail({ projects }: { projects: Project[] }) {
                 <p className="kicker">{project.label}</p>
                 <h3>{project.title}</h3>
                 <p>{project.summary}</p>
-                <div className="project-card-details">
-                  <div>
-                    <h4>Highlights</h4>
-                    <ul className="project-highlights">
-                      {project.featuredHighlights.map((highlight) => <li key={highlight}>{highlight}</li>)}
-                    </ul>
-                  </div>
-                  <div>
-                    <h4>Built with</h4>
-                    <ul className="mini-stack" aria-label={`${project.title} technologies`}>
-                      {project.stack.slice(0, 4).map((item) => <li key={item}>{item}</li>)}
-                    </ul>
-                  </div>
+                <div className="project-card-tools">
+                  <h4>Built with</h4>
+                  <ul className="mini-stack" aria-label={`${project.title} technologies`}>
+                    {project.stack.slice(0, 2).map((item) => <li key={item}>{item}</li>)}
+                  </ul>
                 </div>
                 {primaryLink ? (
-                  <a
-                    className="project-external-link"
-                    href={primaryLink.href}
-                    target="_blank"
-                    rel="noreferrer"
-                    aria-label={`${primaryLink.label}: ${project.title}`}
-                  >
-                    <span>{project.slug === 'esight-or-robotics' ? 'Visit eSight on Facebook' : 'Visit AstroVerse'}</span>
-                    <span aria-hidden="true">↗</span>
-                  </a>
+                  <div className="project-card-links">
+                    <a
+                      className="project-external-link"
+                      href={primaryLink.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label={`${primaryLink.label}: ${project.title}`}
+                    >
+                      <span>{primaryLink.label}</span>
+                      <span aria-hidden="true">↗</span>
+                    </a>
+                    {secondaryLinks.length ? (
+                      <div className="project-secondary-links" aria-label={`${project.title} resources`}>
+                        {secondaryLinks.map((link) => (
+                          <a
+                            key={link.href}
+                            href={link.href}
+                            target="_blank"
+                            rel="noreferrer"
+                            aria-label={`${link.label}: ${project.title}`}
+                          >
+                            {link.label}<span aria-hidden="true">↗</span>
+                          </a>
+                        ))}
+                      </div>
+                    ) : null}
+                  </div>
                 ) : null}
               </div>
             </article>

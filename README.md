@@ -9,7 +9,7 @@ An English-language portfolio for Nguyen Gia Bach, a student engineer working at
 ## Highlights
 
 - English-only content with focused, direct navigation
-- Three detailed project case studies: JWST Deep Space Explorer, AstroVerse, and eSight Project
+- Three detailed project case studies: JWST Space Explorer, AstroVerse, and eSight Project
 - English metadata, canonical URLs, Open Graph content, JSON-LD, robots, and sitemap
 - Responsive, keyboard-accessible interface with reduced-motion support
 - Purposeful image placeholders that can be replaced without changing the layout
@@ -19,7 +19,7 @@ An English-language portfolio for Nguyen Gia Bach, a student engineer working at
 | Route | Content |
 | --- | --- |
 | `/` | Portfolio homepage |
-| `/projects/jwst-deep-space-explorer` | JWST Deep Space Explorer case study |
+| `/projects/jwst-deep-space-explorer` | JWST Space Explorer case study |
 | `/projects/astroverse` | AstroVerse case study |
 | `/projects/esight-or-robotics` | eSight and robotics case study |
 
