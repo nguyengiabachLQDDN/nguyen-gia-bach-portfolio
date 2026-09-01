@@ -6,9 +6,9 @@ export const navigation = {
   contact: 'Contact',
 } as const;
 
-// TODO(profile): Add the final project-working portrait, current grade / expected
-// graduation year, a professional email, and a more specific intended field once confirmed.
-const heroImageSrc: string | undefined = undefined;
+// TODO(profile): Add the current grade / expected graduation year, a professional
+// email, and a more specific intended field once confirmed.
+const heroImageSrc = '/images/profile/nguyen-gia-bach.webp';
 
 export const homeIntro = {
   eyebrow: 'Student profile',
@@ -22,7 +22,7 @@ export const homeIntro = {
   ],
   image: {
     src: heroImageSrc,
-    alt: 'Nguyen Gia Bach working on a student engineering project',
+    alt: 'Portrait of Nguyen Gia Bach in a white shirt against a light background.',
   },
   imageLabel: 'Project portrait',
   work: 'View projects',
