@@ -8,6 +8,8 @@ function ProjectMediaPreview({ project }: { project: Project }) {
   const availableMedia = [project.cover, ...project.gallery].filter(
     (asset): asset is MediaAsset & { src: string } => Boolean(asset.src),
   );
+  const [activeImage, setActiveImage] = useState(0);
+  const pointerStart = useRef<{ x: number; y: number } | null>(null);
 
   if (!availableMedia.length) {
     return (
@@ -18,17 +20,67 @@ function ProjectMediaPreview({ project }: { project: Project }) {
     );
   }
 
-  const [primary, secondary] = availableMedia;
+  const moveImage = (direction: -1 | 1) => {
+    setActiveImage((current) => (current + direction + availableMedia.length) % availableMedia.length);
+  };
+
+  const handleImageKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+    event.preventDefault();
+    event.stopPropagation();
+    moveImage(event.key === 'ArrowLeft' ? -1 : 1);
+  };
+
+  const handlePointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
+    pointerStart.current = { x: event.clientX, y: event.clientY };
+    event.currentTarget.setPointerCapture(event.pointerId);
+  };
+
+  const handlePointerUp = (event: React.PointerEvent<HTMLDivElement>) => {
+    const start = pointerStart.current;
+    pointerStart.current = null;
+    if (!start) return;
+
+    const distanceX = event.clientX - start.x;
+    const distanceY = event.clientY - start.y;
+    if (Math.abs(distanceX) < 36 || Math.abs(distanceX) <= Math.abs(distanceY)) return;
+    moveImage(distanceX < 0 ? 1 : -1);
+  };
+
+  const activeAsset = availableMedia[activeImage] ?? availableMedia[0];
+  const hasGallery = availableMedia.length > 1;
 
   return (
-    <div className={`project-preview project-preview-with-media${secondary ? ' has-gallery' : ''}`}>
-      <div className="project-preview-primary">
-        <Image src={primary.src} alt={primary.alt} fill sizes="(max-width: 760px) 88vw, 540px" />
+    <div
+      className="project-preview project-media-carousel"
+      role="region"
+      aria-roledescription="carousel"
+      aria-label={`${project.title} image gallery`}
+      tabIndex={0}
+      onKeyDown={handleImageKeyDown}
+      onPointerDown={handlePointerDown}
+      onPointerUp={handlePointerUp}
+      onPointerCancel={() => { pointerStart.current = null; }}
+    >
+      <div className="project-media-slide" aria-live="polite">
+        <Image
+          key={activeAsset.src}
+          src={activeAsset.src}
+          alt={activeAsset.alt}
+          fill
+          preload={activeImage === 0 && project.slug === 'astroverse'}
+          loading={activeImage === 0 && project.slug === 'astroverse' ? undefined : 'lazy'}
+          draggable={false}
+          sizes="(max-width: 760px) calc(100vw - 64px), 560px"
+          style={activeAsset.objectPosition ? { objectPosition: activeAsset.objectPosition } : undefined}
+        />
+        {activeAsset.caption ? <p className="project-media-caption">{activeAsset.caption}</p> : null}
       </div>
-      {secondary ? (
-        <div className="project-preview-more">
-          <Image src={secondary.src} alt={secondary.alt} fill sizes="100px" />
-          <span>+{availableMedia.length - 1} more</span>
+      {hasGallery ? (
+        <div className="project-media-controls" aria-label="Image navigation">
+          <button type="button" onClick={() => moveImage(-1)} aria-label={`Previous ${project.title} image`}>←</button>
+          <span aria-live="polite">{String(activeImage + 1).padStart(2, '0')} / {String(availableMedia.length).padStart(2, '0')}</span>
+          <button type="button" onClick={() => moveImage(1)} aria-label={`Next ${project.title} image`}>→</button>
         </div>
       ) : null}
     </div>

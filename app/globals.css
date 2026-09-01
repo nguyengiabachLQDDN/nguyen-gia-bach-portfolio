@@ -207,7 +207,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--cyan); outline-
 .project-rail-shell { max-width: 960px; margin: 0 auto; }
 .project-rail-controls { display: flex; align-items: center; justify-content: flex-end; gap: 8px; margin: 0 0 14px; }
 .project-rail-controls > span { min-width: 62px; margin-right: 6px; color: var(--amber); font: 600 10px var(--font-mono); letter-spacing: .1em; }
-.project-rail-controls button { width: 38px; height: 38px; border: 1px solid var(--line); border-radius: 10px; background: rgba(9,26,34,.78); color: var(--text); font: 600 15px var(--font-mono); cursor: pointer; transition: color .2s ease, border-color .2s ease, background .2s ease; }
+.project-rail-controls button { width: 38px; height: 38px; border: 1px solid var(--line); border-radius: 4px; background: rgba(9,26,34,.78); color: var(--text); font: 600 15px var(--font-mono); cursor: pointer; transition: color .2s ease, border-color .2s ease, background .2s ease; }
 .project-rail-controls button:hover:not(:disabled) { border-color: var(--amber); background: rgba(244,199,104,.08); color: var(--amber); }
 .project-rail-controls button:disabled { cursor: default; opacity: .3; }
 .project-rail { display: grid; grid-auto-flow: column; grid-auto-columns: min(560px, calc(100vw - 96px)); gap: 14px; padding: 0 max(0px, calc(100% - 560px)) 14px 0; overflow-x: auto; overflow-y: hidden; overscroll-behavior-inline: contain; scroll-snap-type: inline mandatory; scroll-padding-inline: 0; scrollbar-width: thin; scrollbar-color: var(--amber) rgba(154,195,190,.12); }
@@ -215,9 +215,9 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--cyan); outline-
 .project-rail::-webkit-scrollbar-track { border-radius: 999px; background: rgba(154,195,190,.12); }
 .project-rail::-webkit-scrollbar-thumb { border-radius: 999px; background: linear-gradient(90deg,var(--amber),var(--cyan)); }
 .project-rail:focus-visible { outline-offset: 6px; }
-.project-rail .project-card { scroll-snap-align: start; min-width: 0; overflow: hidden; border: 1px solid rgba(154,195,190,.2); border-radius: 20px; background: linear-gradient(155deg,rgba(14,37,45,.97),rgba(8,23,29,.96)); box-shadow: 0 24px 70px rgba(0,0,0,.22), inset 0 1px 0 rgba(244,223,161,.05); transition: border-color .22s ease, box-shadow .22s ease; }
+.project-rail .project-card { scroll-snap-align: start; min-width: 0; overflow: hidden; border: 1px solid rgba(154,195,190,.24); border-radius: 6px; background: linear-gradient(155deg,rgba(14,37,45,.97),rgba(8,23,29,.96)); box-shadow: 0 24px 70px rgba(0,0,0,.22), inset 0 1px 0 rgba(244,223,161,.05); transition: border-color .22s ease, box-shadow .22s ease; }
 .project-rail .project-card:hover { border-color: rgba(244,199,104,.42); box-shadow: 0 26px 74px rgba(0,0,0,.26), inset 0 1px 0 rgba(244,223,161,.08); }
-.project-preview { position: relative; min-height: 130px; padding: 14px; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; border-bottom: 1px solid var(--line); background: radial-gradient(circle at 76% 24%,rgba(103,217,209,.2),transparent 27%), radial-gradient(circle at 16% 88%,rgba(244,199,104,.16),transparent 32%), #0a1a21; }
+.project-preview { position: relative; height: 230px; min-height: 230px; padding: 14px; display: flex; flex-direction: column; justify-content: space-between; overflow: hidden; border-bottom: 1px solid var(--line); background: radial-gradient(circle at 76% 24%,rgba(103,217,209,.2),transparent 27%), radial-gradient(circle at 16% 88%,rgba(244,199,104,.16),transparent 32%), #0a1a21; }
 .project-preview::before, .project-preview::after { content: ""; position: absolute; border: 1px solid rgba(154,195,190,.18); border-radius: 50%; }
 .project-preview::before { width: 164px; height: 164px; right: -38px; top: -96px; }
 .project-preview::after { width: 96px; height: 96px; left: 34%; bottom: -64px; border-color: rgba(244,199,104,.2); }
@@ -226,14 +226,17 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--cyan); outline-
 .project-preview > strong { max-width: 240px; color: #d2ddd8; font: 600 9px var(--font-mono); letter-spacing: .08em; text-transform: uppercase; }
 .project-preview-astroverse { background: radial-gradient(circle at 76% 22%,rgba(103,217,209,.23),transparent 27%), radial-gradient(circle at 15% 88%,rgba(244,199,104,.14),transparent 31%), linear-gradient(145deg,#0e2b34,#08171d); }
 .project-preview-robotics { background: radial-gradient(circle at 78% 20%,rgba(244,199,104,.19),transparent 26%), radial-gradient(circle at 18% 84%,rgba(103,217,209,.17),transparent 32%), linear-gradient(145deg,#132830,#08171d); }
-.project-preview-with-media { display: grid; grid-template-columns: 1fr; padding: 0; background: #07151b; }
-.project-preview-with-media.has-gallery { grid-template-columns: minmax(0,2.35fr) minmax(100px,.65fr); }
-.project-preview-with-media::before, .project-preview-with-media::after { display: none; }
-.project-preview-primary, .project-preview-more { position: relative; min-height: 130px; overflow: hidden; }
-.project-preview-more { border-left: 1px solid var(--line); }
-.project-preview-primary img, .project-preview-more img { object-fit: cover; }
-.project-preview-more::after { content: ""; position: absolute; inset: 0; background: rgba(4,13,17,.62); }
-.project-preview-more span { position: absolute; z-index: 1; inset: 0; display: grid; place-items: center; color: var(--text); font: 650 13px var(--font-mono); }
+.project-media-carousel { display: block; padding: 0; background: #02090d; touch-action: pan-y pinch-zoom; }
+.project-media-carousel::before, .project-media-carousel::after { display: none; }
+.project-media-carousel:focus-visible { outline-offset: -3px; }
+.project-media-slide { position: absolute; inset: 0; overflow: hidden; background: #02090d; }
+.project-media-slide img { object-fit: cover; animation: project-media-appear .28s ease both; }
+.project-media-caption { position: absolute; z-index: 2; inset: auto 0 0; min-height: 50px; display: flex; align-items: flex-end; margin: 0; padding: 18px 138px 9px 12px; background: linear-gradient(180deg,transparent,rgba(2,9,13,.94)); color: #d8e2de; font: 600 8px/1.35 var(--font-mono); letter-spacing: .025em; }
+.project-media-controls { position: absolute; z-index: 3; right: 8px; bottom: 7px; display: flex; align-items: center; gap: 4px; }
+.project-media-controls button, .project-media-controls > span { height: 30px; border: 1px solid rgba(154,195,190,.34); border-radius: 3px; background: rgba(2,9,13,.9); color: var(--text); font: 650 10px var(--font-mono); }
+.project-media-controls button { width: 30px; padding: 0; cursor: pointer; transition: color .18s ease,border-color .18s ease,background .18s ease; }
+.project-media-controls button:hover { border-color: var(--amber); background: rgba(244,199,104,.12); color: var(--amber); }
+.project-media-controls > span { min-width: 52px; display: grid; place-items: center; color: var(--amber); letter-spacing: .06em; }
 .project-rail .project-card-body { padding: 14px; }
 .project-card-topline { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 8px; color: #839995; font: 600 8px var(--font-mono); letter-spacing: .07em; text-transform: uppercase; }
 .project-card-topline > span:last-child { overflow: hidden; text-align: right; text-overflow: ellipsis; white-space: nowrap; }
@@ -241,7 +244,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--cyan); outline-
 .project-status::before { content: ""; width: 5px; height: 5px; border-radius: 50%; background: currentColor; box-shadow: 0 0 10px rgba(244,199,104,.5); }
 .project-rail .project-card .kicker { margin: 0 0 4px; font-size: 8px; line-height: 1.35; color: var(--cyan); }
 .project-rail .project-card h3 { font-size: clamp(26px,2.35vw,30px); line-height: 1; }
-.project-rail .project-card-body > p:not(.kicker) { display: -webkit-box; min-height: 32px; max-width: 520px; margin: 7px 0 10px; overflow: hidden; color: #b7c6c1; font-size: 11.5px; line-height: 1.4; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
+.project-rail .project-card-body > p:not(.kicker) { display: -webkit-box; min-height: 48px; max-width: 520px; margin: 7px 0 10px; overflow: hidden; color: #b7c6c1; font-size: 11.5px; line-height: 1.4; -webkit-box-orient: vertical; -webkit-line-clamp: 3; }
 .project-card-details { display: grid; grid-template-columns: minmax(0,1.45fr) minmax(150px,.55fr); gap: 14px; margin-top: 0; padding-top: 9px; border-top: 1px solid var(--line); }
 .project-card-details h4 { margin: 0 0 6px; color: var(--text); font-size: 10.5px; font-weight: 650; letter-spacing: .01em; }
 .project-highlights { display: grid; gap: 3px; padding: 0; margin: 0; list-style: none; }
@@ -318,6 +321,10 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--cyan); outline-
   from { opacity: 0; transform: scale(.97); }
   to { opacity: 1; transform: scale(1); }
 }
+@keyframes project-media-appear {
+  from { opacity: .42; }
+  to { opacity: 1; }
+}
 
 @media (max-width: 1023px) {
   .hero { min-height: 520px; padding-right: 30px; padding-left: 30px; grid-template-columns: minmax(0,1.3fr) minmax(260px,.7fr); gap: 30px; }
@@ -356,8 +363,12 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--cyan); outline-
   .project-rail-controls { margin-bottom: 12px; }
   .project-rail-controls button { width: 38px; height: 38px; }
   .project-rail { grid-auto-columns: calc(100vw - 64px); gap: 12px; padding: 0 max(0px, calc(100% - 100vw + 64px)) 14px 0; }
-  .project-preview, .project-preview-primary, .project-preview-more { min-height: 118px; }
-  .project-preview-with-media.has-gallery { grid-template-columns: minmax(0,1fr) 72px; }
+  .project-preview { height: 190px; min-height: 190px; }
+  .project-media-caption { min-height: 46px; padding: 16px 126px 8px 10px; font-size: 7.5px; }
+  .project-media-controls { right: 7px; bottom: 6px; }
+  .project-media-controls button, .project-media-controls > span { height: 28px; }
+  .project-media-controls button { width: 28px; }
+  .project-media-controls > span { min-width: 48px; font-size: 9px; }
   .project-rail .project-card-body { padding: 14px; }
   .project-card-topline { align-items: flex-start; margin-bottom: 8px; }
   .project-card-topline > span:last-child { max-width: 68%; white-space: normal; }

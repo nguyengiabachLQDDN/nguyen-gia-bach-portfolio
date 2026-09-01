@@ -2,7 +2,13 @@ export type ProjectVariant = 'jwst' | 'astroverse' | 'robotics';
 
 export interface ProjectLink { label: string; href: string; }
 export interface ProjectDecision { title: string; description: string; }
-export interface MediaAsset { src?: string; alt: string; caption?: string; credit?: string; }
+export interface MediaAsset {
+  src?: string;
+  alt: string;
+  caption?: string;
+  credit?: string;
+  objectPosition?: string;
+}
 
 export interface Project {
   number: string;
@@ -93,7 +99,14 @@ const projectBases: [ProjectBase, ProjectBase, ProjectBase] = [
     slug: 'astroverse',
     variant: 'astroverse',
     linkHrefs: ['https://astroverse-m8wl.vercel.app/'],
-    gallerySrc: [undefined, undefined],
+    coverSrc: '/images/projects/astroverse/overview.webp',
+    gallerySrc: [
+      '/images/projects/astroverse/sky-map.webp',
+      '/images/projects/astroverse/encyclopedia.webp',
+      '/images/projects/astroverse/space-news.webp',
+      '/images/projects/astroverse/exoplanet-lab.webp',
+      '/images/projects/astroverse/learning-portfolio.webp',
+    ],
   },
   {
     number: '03',
@@ -152,19 +165,19 @@ const projectCopy: ProjectCopyList = [
     status: 'Live',
     date: '2026',
     role: 'Product Developer',
-    summary: 'An astronomy learning platform for observing the sky, exploring real space data, running experiments, and recording scientific learning.',
+    summary: 'A browser-based astronomy learning environment that connects sky observation, verified space data, physical modelling, active recall, and scientific reflection in one continuous learning loop.',
     featuredHighlights: [
-      'Interactive sky map with time controls and cultural sky views.',
-      'NASA APOD and Mars imagery alongside verified astronomy content.',
-      'Exoplanet lab, spaced repetition, and a private science journal.',
+      'Explore an interactive sky map with time controls, cultural sky views, narrated journeys, and observation tools.',
+      'Browse astronomy objects, space news, launch schedules, NASA imagery, and near-Earth object data with visible sources.',
+      'Test exoplanet habitability, review concepts through spaced repetition, and record evidence in a private learning portfolio.',
     ],
     challenge: 'Astronomy resources are often split between passive articles, specialist tools, and disconnected quizzes. The goal was to make exploration, experimentation, and reflection feel like one continuous learning journey.',
     approach: 'AstroVerse organises the experience into five modes: Observe through an interactive sky map, Explore verified astronomy content, Experiment in a habitable-exoplanet lab, Recall through spaced repetition, and Reflect in a private science journal.',
     contributions: [
       'Developed an interactive sky map with time controls, guided journeys, and seven cultural sky views.',
-      'Connected NASA APOD and Mars imagery with visible source attribution.',
+      'Connected a searchable astronomy encyclopedia, space news, launch schedules, and NASA data with visible source attribution.',
       'Built an exoplanet laboratory with real-time physical feedback and mission scoring.',
-      'Designed spaced-repetition review and a journal that scores scientific methodology rather than right-or-wrong answers.',
+      'Designed spaced-repetition review and a private learning portfolio that records evidence and scientific methodology.',
     ],
     decisions: [
       { title: 'One learning loop', description: 'Connect observation, explanation, experimentation, recall, and reflection instead of treating them as unrelated pages.' },
@@ -179,10 +192,37 @@ const projectCopy: ProjectCopyList = [
     lessons: 'A feature becomes more useful when it hands the learner naturally to the next action. The project taught me to design systems around a learning loop, not a checklist of screens.',
     stack: ['React', 'TypeScript', 'Vite', 'NASA data', 'Scientific modelling', 'Vercel'],
     linkLabels: ['Open live site'],
-    cover: { alt: 'Reserved cover image for the AstroVerse astronomy learning platform.', caption: 'AstroVerse connecting observation, experimentation, recall, and reflection.' },
+    cover: {
+      alt: 'AstroVerse homepage introducing the astronomy learning environment with an illustrated planet and night-sky background.',
+      caption: 'Product overview — a digital observatory for exploring the sky and recording scientific learning.',
+      objectPosition: 'center 48%',
+    },
     gallery: [
-      { alt: 'Reserved image for the AstroVerse interactive sky map.', caption: 'The interactive sky map with guided observation journeys.' },
-      { alt: 'Reserved image for the AstroVerse habitable exoplanet laboratory.', caption: 'The exoplanet laboratory with real-time physical feedback.' },
+      {
+        alt: 'AstroVerse interactive sky map showing constellations, observation controls, cultural views, and guided journeys.',
+        caption: 'Interactive Sky Map — time controls, cultural sky views, narrated journeys, and observation tools.',
+        objectPosition: 'center 51%',
+      },
+      {
+        alt: 'AstroVerse astronomy encyclopedia with search, object filters, and celestial-body reference cards.',
+        caption: 'Astronomy Encyclopedia — searchable, filterable reference content for celestial objects.',
+        objectPosition: 'center 44%',
+      },
+      {
+        alt: 'AstroVerse observatory and news page showing source status, space news search, and a SpaceX launch schedule.',
+        caption: 'Space News & Data — source-aware news, launch schedules, and NASA near-Earth object data.',
+        objectPosition: 'center 42%',
+      },
+      {
+        alt: 'AstroVerse habitable exoplanet laboratory with experimental controls and a real-time physical model.',
+        caption: 'Exoplanet Laboratory — test habitability hypotheses with a responsive physical model.',
+        objectPosition: 'center 47%',
+      },
+      {
+        alt: 'AstroVerse learning portfolio with observation progress, methodology scores, and a private science journal.',
+        caption: 'Learning Portfolio — private evidence, methodology feedback, active recall, and science journaling.',
+        objectPosition: 'center 45%',
+      },
     ],
   },
   {
