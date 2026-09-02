@@ -8,25 +8,23 @@ export const navigation = {
 
 // TODO(profile): Add the current grade / expected graduation year, a professional
 // email, and a more specific intended field once confirmed.
-const heroImageSrc = '/images/profile/nguyen-gia-bach.webp';
+const heroImageSrc = '/images/profile/nguyen-gia-bach-formal.webp';
 
 export const homeIntro = {
   eyebrow: 'Student profile',
   name: 'Nguyen Gia Bach',
-  role: 'Student engineer · Physics, software & robotics',
-  summary: 'I build astronomy tools, scientific software, and robotics prototypes.',
+  role: 'Engineering student, experienced in Physics and robotics',
   facts: [
     ['School', 'Le Quy Don High School for the Gifted'],
     ['Location', 'Da Nang, Vietnam'],
-    ['Focus', 'Physics · Software · Robotics'],
+    ['Focus', 'Aerospace Engineering · Electrical Engineering'],
   ],
   image: {
     src: heroImageSrc,
-    alt: 'Portrait of Nguyen Gia Bach in a white shirt against a light background.',
+    alt: 'Portrait of Nguyen Gia Bach wearing a dark suit and blue tie against a blue background.',
   },
   imageLabel: 'Project portrait',
   work: 'View projects',
-  contact: 'Contact',
   socialLabel: 'Social profiles',
 } as const;
 
@@ -153,11 +151,11 @@ export const notFoundCopy = {
 } as const;
 
 export const metadataCopy = {
-  title: 'Nguyen Gia Bach — Student Engineer',
-  description: 'Portfolio of Nguyen Gia Bach, a student engineer working across physics, scientific software, astronomy, and robotics.',
-  shortDescription: 'Physics · Software · Robotics',
-  imageAlt: 'Nguyen Gia Bach — Physics, Software, Robotics',
-  personDescription: 'Student engineer working across physics, software, and robotics.',
+  title: 'Nguyen Gia Bach — Engineering Student',
+  description: 'Portfolio of Nguyen Gia Bach, an engineering student experienced in physics and robotics, with interests in aerospace and electrical engineering.',
+  shortDescription: 'Aerospace Engineering · Electrical Engineering',
+  imageAlt: 'Nguyen Gia Bach — Aerospace and Electrical Engineering',
+  personDescription: 'Engineering student experienced in physics and robotics, with interests in aerospace and electrical engineering.',
   school: 'Le Quy Don High School for the Gifted, Da Nang',
 } as const;
 

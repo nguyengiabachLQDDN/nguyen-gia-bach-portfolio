@@ -25,7 +25,6 @@ export default function HomePage() {
           <p className="eyebrow">{intro.eyebrow}</p>
           <h1 id="hero-title">{intro.name}</h1>
           <p className="hero-role">{intro.role}</p>
-          <p className="hero-deck">{intro.summary}</p>
           <dl className="hero-facts">
             {intro.facts.map(([label, value]) => (
               <div key={label}><dt>{label}</dt><dd>{value}</dd></div>
@@ -34,9 +33,9 @@ export default function HomePage() {
           <div className="hero-actions">
             <Link className="button button-primary" href="#work">{intro.work} <span>↘</span></Link>
             <div className="hero-links" aria-label={intro.socialLabel}>
-              <Link href="#contact">{intro.contact} <span>↓</span></Link>
               <a href="https://github.com/nguyengiabachLQDDN" target="_blank" rel="noreferrer">GitHub <span>↗</span></a>
               <a href="https://www.linkedin.com/in/nguyen-gia-bach-996333386" target="_blank" rel="noreferrer">LinkedIn <span>↗</span></a>
+              <a href="https://www.facebook.com/gbachnguyen/" target="_blank" rel="noreferrer">Facebook <span>↗</span></a>
             </div>
           </div>
         </div>
