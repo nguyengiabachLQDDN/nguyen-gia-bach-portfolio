@@ -4,7 +4,8 @@ import MediaFrame from './MediaFrame';
 import ProjectRail from './ProjectRail';
 import RevealController from './RevealController';
 import SiteHeader from './SiteHeader';
-import { getAchievements, getFeaturedProjects, getSkillGroups } from '../content';
+import Toolkit from './Toolkit';
+import { getAchievements, getFeaturedProjects, getLearningFocus, getSkillGroups } from '../content';
 import { homeCopy, homeIntro } from '../i18n';
 
 export default function HomePage() {
@@ -13,6 +14,7 @@ export default function HomePage() {
   const projects = getFeaturedProjects();
   const achievements = getAchievements();
   const skillGroups = getSkillGroups();
+  const learningFocus = getLearningFocus();
 
   return (
     <main id="top">
@@ -70,21 +72,10 @@ export default function HomePage() {
       </section>
 
       <section className="section-shell capabilities" id="capabilities" aria-labelledby="capabilities-title" data-reveal>
-        <header className="section-heading">
+        <header className="section-heading compact">
           <div><p className="section-index">{copy.capabilitiesIndex}</p><h2 id="capabilities-title">{copy.capabilitiesTitle}</h2></div>
-          <p>{copy.capabilitiesDeck}</p>
         </header>
-        <div className="capability-grid">
-          {skillGroups.map((group) => (
-            <article className="capability-card" key={group.code} data-reveal>
-              <span className="capability-code">{group.code}</span>
-              <h3>{group.title}</h3>
-              <p>{group.summary}</p>
-              <div className="capability-list"><h4>{copy.usedInProjects}</h4><ul>{group.used.map((item) => <li key={item}>{item}</li>)}</ul></div>
-              <div className="capability-list learning"><h4>{copy.exploringNext}</h4><ul>{group.exploring.map((item) => <li key={item}>{item}</li>)}</ul></div>
-            </article>
-          ))}
-        </div>
+        <Toolkit groups={skillGroups} learning={learningFocus} learningLabel={copy.currentlyLearning} />
       </section>
 
       <section className="section-shell about" id="about" aria-labelledby="about-title" data-reveal>

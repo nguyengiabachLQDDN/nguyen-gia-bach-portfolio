@@ -34,9 +34,7 @@ interface HomeCopy {
   workDeck: string;
   capabilitiesIndex: string;
   capabilitiesTitle: string;
-  capabilitiesDeck: string;
-  usedInProjects: string;
-  exploringNext: string;
+  currentlyLearning: string;
   achievementsIndex: string;
   achievementsTitle: string;
   achievementsDeck: string;
@@ -72,10 +70,8 @@ export const homeCopy: HomeCopy = {
   workTitle: 'Projects.',
   workDeck: 'Selected work in astronomy software and student-led robotics.',
   capabilitiesIndex: '03 / Capabilities',
-  capabilitiesTitle: 'How I turn ideas into working systems.',
-  capabilitiesDeck: 'Organised by what I can do—not by a wall of technology logos.',
-  usedInProjects: 'Used in projects',
-  exploringNext: 'Exploring next',
+  capabilitiesTitle: 'Technical toolkit.',
+  currentlyLearning: 'Currently learning',
   achievementsIndex: '02 / Evidence',
   achievementsTitle: 'Achievements built on the work.',
   achievementsDeck: 'Selected competition results, academic recognition, and evidence behind the work.',

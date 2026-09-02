@@ -53,12 +53,35 @@ export interface Achievement {
   media: [MediaAsset, ...MediaAsset[]];
 }
 
+export type SkillIconKey =
+  | 'python'
+  | 'javascript'
+  | 'typescript'
+  | 'html'
+  | 'css'
+  | 'react'
+  | 'nextjs'
+  | 'vite'
+  | 'tailwind'
+  | 'astropy'
+  | 'nasa'
+  | 'arduino'
+  | 'vision'
+  | 'embedded'
+  | 'git'
+  | 'github'
+  | 'vercel'
+  | 'sandbox'
+  | 'openseadragon';
+
+export interface SkillItem {
+  name: string;
+  icon: SkillIconKey;
+}
+
 export interface SkillGroup {
-  code: string;
   title: string;
-  summary: string;
-  used: string[];
-  exploring: string[];
+  items: SkillItem[];
 }
 
 interface ProjectBase {
@@ -528,11 +551,48 @@ const achievements: Achievement[] = [
 ];
 
 const skillGroups: SkillGroupList = [
-  { code: 'A01', title: 'Software engineering', summary: 'Building clear, interactive products from first interface to deployment.', used: ['Python', 'JavaScript', 'TypeScript', 'HTML', 'CSS', 'React', 'Vite'], exploring: ['Deeper testing', 'System design'] },
-  { code: 'A02', title: 'Scientific computing & data', summary: 'Turning scientific sources and models into tools people can question and explore.', used: ['Astropy', 'NASA data', 'OpenSeadragon', 'APIs', 'Scientific imaging'], exploring: ['Scientific ML', 'Data visualisation'] },
-  { code: 'A03', title: 'Robotics & prototyping', summary: 'Connecting physical reasoning, iterative testing, and reliable system behaviour.', used: ['Arduino', 'Computer vision', 'Ultrasonic sensing', 'Embedded systems', 'System testing'], exploring: ['Sensor fusion', 'Accessibility testing'] },
-  { code: 'A04', title: 'Tools & delivery', summary: 'Making work reproducible, reviewable, and available beyond my own laptop.', used: ['Git', 'GitHub', 'Vercel', 'Technical documentation'], exploring: ['CI workflows', 'Open-source practice'] },
+  {
+    title: 'Languages',
+    items: [
+      { name: 'Python', icon: 'python' },
+      { name: 'JavaScript', icon: 'javascript' },
+      { name: 'TypeScript', icon: 'typescript' },
+      { name: 'HTML', icon: 'html' },
+      { name: 'CSS', icon: 'css' },
+    ],
+  },
+  {
+    title: 'Web & frameworks',
+    items: [
+      { name: 'React', icon: 'react' },
+      { name: 'Next.js', icon: 'nextjs' },
+      { name: 'Vite', icon: 'vite' },
+      { name: 'Tailwind CSS', icon: 'tailwind' },
+    ],
+  },
+  {
+    title: 'Science & robotics',
+    items: [
+      { name: 'Astropy', icon: 'astropy' },
+      { name: 'NASA Data', icon: 'nasa' },
+      { name: 'Arduino', icon: 'arduino' },
+      { name: 'Computer Vision', icon: 'vision' },
+      { name: 'Embedded Systems', icon: 'embedded' },
+    ],
+  },
+  {
+    title: 'Tools & delivery',
+    items: [
+      { name: 'Git', icon: 'git' },
+      { name: 'GitHub', icon: 'github' },
+      { name: 'Vercel', icon: 'vercel' },
+      { name: 'Vercel Sandbox', icon: 'sandbox' },
+      { name: 'OpenSeadragon', icon: 'openseadragon' },
+    ],
+  },
 ];
+
+const learningFocus = ['System design', 'Scientific ML', 'Sensor fusion', 'CI workflows'];
 
 export function getProjects(): Project[] {
   return projectBases.map((base, index) => {
@@ -568,6 +628,10 @@ export function getAchievements(): Achievement[] {
 
 export function getSkillGroups(): SkillGroup[] {
   return skillGroups;
+}
+
+export function getLearningFocus(): string[] {
+  return learningFocus;
 }
 
 export const projectSlugs = projectBases.map((project) => project.slug);
