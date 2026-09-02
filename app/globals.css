@@ -273,11 +273,21 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--cyan); outline-
 .achievement-media-carousel:focus-visible { box-shadow: inset 0 0 0 2px var(--cyan); }
 .achievement-media-stage { position: relative; height: clamp(220px,20vw,286px); overflow: hidden; background: #02090d; }
 .achievement-media-stage img { display: block; object-fit: cover; animation: project-media-appear .28s ease both; }
+.achievement-press-profile { display: grid; grid-template-columns: 42% 58%; }
+.achievement-press-image { position: relative; min-width: 0; height: 100%; overflow: hidden; border-right: 1px solid rgba(244,199,104,.22); background: #f7f7f5; }
+.achievement-press-copy { min-width: 0; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; padding: 24px; background: radial-gradient(circle at 100% 0,rgba(244,199,104,.12),transparent 38%),linear-gradient(145deg,#0c222a,#061217); }
+.achievement-press-copy > span { color: var(--amber); font: 650 8px var(--font-mono); letter-spacing: .13em; text-transform: uppercase; }
+.achievement-press-copy > strong { margin-top: 15px; color: var(--text); font-size: clamp(20px,2vw,27px); line-height: 1.04; font-weight: 590; letter-spacing: -.035em; }
+.achievement-press-copy > p { margin: 7px 0 0; color: var(--cyan); font: 600 10px/1.4 var(--font-mono); letter-spacing: .045em; text-transform: uppercase; }
+.achievement-press-copy > small { margin-top: 18px; color: #809491; font: 600 7px var(--font-mono); letter-spacing: .07em; text-transform: uppercase; }
+.achievement-press-copy > a { margin-top: 9px; padding-bottom: 3px; border-bottom: 1px solid rgba(103,217,209,.3); color: var(--cyan); font: 650 8px var(--font-mono); letter-spacing: .07em; text-transform: uppercase; }
+.achievement-press-copy > a:hover { border-color: var(--amber); color: var(--amber); }
 .achievement-media-placeholder { min-height: clamp(220px,20vw,286px); display: flex; flex-direction: column; justify-content: space-between; padding: 18px; color: var(--text); background: radial-gradient(circle at 76% 20%,rgba(244,199,104,.13),transparent 27%),radial-gradient(circle at 17% 89%,rgba(103,217,209,.13),transparent 31%),linear-gradient(145deg,#10252c,#050f13); }
 .achievement-media-placeholder span { color: var(--cyan); font: 600 9px var(--font-mono); letter-spacing: .11em; text-transform: uppercase; }
 .achievement-media-placeholder strong { max-width: 230px; color: #c6d3d0; font: 600 10px var(--font-mono); letter-spacing: .08em; text-transform: uppercase; }
 .achievement-media-footer { min-height: 56px; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 8px 10px; border-top: 1px solid rgba(103,217,209,.1); background: rgba(3,13,17,.94); }
 .achievement-media-footer-empty { display: block; }
+.achievement-media-footer-press { justify-content: flex-end; }
 .achievement-media-copy { min-width: 0; display: grid; gap: 2px; }
 .achievement-media-copy span { display: -webkit-box; overflow: hidden; color: #b9c8c4; font: 500 8px/1.35 var(--font-mono); letter-spacing: .025em; -webkit-box-orient: vertical; -webkit-line-clamp: 1; }
 .achievement-media-copy small, .achievement-media-copy a { overflow: hidden; color: #6f8582; font: 600 7px/1.25 var(--font-mono); letter-spacing: .06em; text-overflow: ellipsis; text-transform: uppercase; white-space: nowrap; }
@@ -365,6 +375,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--cyan); outline-
 @media (max-width: 899px) {
   .achievement-grid { grid-template-columns: 1fr; max-width: 680px; }
   .achievement-media-stage, .achievement-media-placeholder { height: clamp(210px,48vw,280px); min-height: clamp(210px,48vw,280px); }
+  .achievement-press-profile { grid-template-columns: 44% 56%; }
 }
 
 @media (max-width: 760px) {
@@ -407,8 +418,15 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--cyan); outline-
   .project-secondary-links a { padding: 0 5px; font-size: 6.5px; }
   .achievement-media-stage, .achievement-media-placeholder { height: clamp(190px,55vw,240px); min-height: clamp(190px,55vw,240px); }
   .achievement-media-footer { align-items: flex-start; flex-direction: column; gap: 7px; }
+  .achievement-media-footer-press { align-items: flex-end; }
   .achievement-media-copy { width: 100%; }
   .achievement-media-actions { width: 100%; justify-content: space-between; }
+  .achievement-press-copy { padding: 14px; }
+  .achievement-press-copy > span { font-size: 7px; }
+  .achievement-press-copy > strong { margin-top: 10px; font-size: clamp(17px,5.2vw,22px); }
+  .achievement-press-copy > p { margin-top: 5px; font-size: 8px; }
+  .achievement-press-copy > small { margin-top: 12px; font-size: 6.5px; }
+  .achievement-press-copy > a { margin-top: 7px; font-size: 7px; }
   .achievement-card-copy { padding: 15px 16px 17px; }
   .capability-grid { gap: 12px; }
   .capability-card { padding: 24px; }

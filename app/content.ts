@@ -11,6 +11,8 @@ export interface MediaAsset {
   alt: string;
   caption?: string;
   credit?: string;
+  presentation?: 'standard' | 'press-profile';
+  meta?: string;
   objectPosition?: string;
   objectFit?: 'cover' | 'contain';
   sourceHref?: string;
@@ -334,13 +336,15 @@ const achievements: Achievement[] = [
     priority: 'primary',
     media: [
       {
-        src: '/images/achievements/nasa-space-apps-2025.webp',
-        alt: 'Participants collaborating around laptops during a NASA Space Apps Challenge event.',
-        caption: 'NASA Space Apps brings teams together to build with open space data.',
-        credit: 'NASA',
-        sourceHref: 'https://www.nasa.gov/earth/registration-opens-for-2025-international-space-apps-challenge/',
+        src: '/images/achievements/nguyen-gia-bach-press-feature.webp',
+        alt: 'Portrait of Nguyen Gia Bach featured in an ASEAN News article about JWST Space Explorer.',
+        caption: 'Nguyen Gia Bach',
+        credit: 'ASEAN News · 09 Nov 2025',
+        presentation: 'press-profile',
+        meta: 'JWST Space Explorer',
+        sourceHref: 'https://tapchidongnama.vn/hoc-sinh-chuyen-le-quy-don-da-nang-hoan-thanh-thu-thach-ung-dung-khong-gian-nasa-space-apps-challenge-2025/',
         objectFit: 'cover',
-        objectPosition: 'center 54%',
+        objectPosition: 'center 35%',
       },
       {
         src: '/images/projects/jwst/overview.webp',

@@ -81,6 +81,7 @@ export default function MediaCarousel({
 
   const activeAsset = availableMedia[activeImage] ?? availableMedia[0];
   const hasGallery = availableMedia.length > 1;
+  const isPressProfile = mode === 'achievement' && activeAsset.presentation === 'press-profile';
   const image = (
     <Image
       key={activeAsset.src}
@@ -90,7 +91,7 @@ export default function MediaCarousel({
       preload={preloadFirst && activeImage === 0}
       loading={preloadFirst && activeImage === 0 ? undefined : 'lazy'}
       draggable={false}
-      sizes={sizes}
+      sizes={isPressProfile ? '(max-width: 899px) 44vw, 230px' : sizes}
       style={{
         objectPosition: activeAsset.objectPosition,
         objectFit: activeAsset.objectFit,
@@ -120,16 +121,33 @@ export default function MediaCarousel({
   if (mode === 'achievement') {
     return (
       <div className="achievement-media achievement-media-carousel" {...interactionProps}>
-        <div className="achievement-media-stage" aria-live="polite">{image}</div>
-        <div className="achievement-media-footer">
-          <div className="achievement-media-copy">
-            {activeAsset.caption ? <span>{activeAsset.caption}</span> : null}
-            {activeAsset.credit ? (
-              activeAsset.sourceHref ? (
-                <a href={activeAsset.sourceHref} target="_blank" rel="noreferrer">{activeAsset.credit} ↗</a>
-              ) : <small>{activeAsset.credit}</small>
-            ) : null}
-          </div>
+        <div className={`achievement-media-stage${isPressProfile ? ' achievement-press-profile' : ''}`} aria-live="polite">
+          {isPressProfile ? (
+            <>
+              <div className="achievement-press-image">{image}</div>
+              <div className="achievement-press-copy">
+                <span>Press feature</span>
+                {activeAsset.caption ? <strong>{activeAsset.caption}</strong> : null}
+                {activeAsset.meta ? <p>{activeAsset.meta}</p> : null}
+                {activeAsset.credit ? <small>{activeAsset.credit}</small> : null}
+                {activeAsset.sourceHref ? (
+                  <a href={activeAsset.sourceHref} target="_blank" rel="noreferrer" aria-label={`Read article about ${title}`}>Read article ↗</a>
+                ) : null}
+              </div>
+            </>
+          ) : image}
+        </div>
+        <div className={`achievement-media-footer${isPressProfile ? ' achievement-media-footer-press' : ''}`}>
+          {!isPressProfile ? (
+            <div className="achievement-media-copy">
+              {activeAsset.caption ? <span>{activeAsset.caption}</span> : null}
+              {activeAsset.credit ? (
+                activeAsset.sourceHref ? (
+                  <a href={activeAsset.sourceHref} target="_blank" rel="noreferrer">{activeAsset.credit} ↗</a>
+                ) : <small>{activeAsset.credit}</small>
+              ) : null}
+            </div>
+          ) : null}
           <div className="achievement-media-actions">
             <a href={activeAsset.src} target="_blank" rel="noreferrer" aria-label={`View full image for ${title}`}>View full image ↗</a>
             {controls('achievement-media-controls')}
