@@ -230,6 +230,7 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--cyan); outline-
 .project-preview > strong { max-width: 240px; color: #d2ddd8; font: 600 9px var(--font-mono); letter-spacing: .08em; text-transform: uppercase; }
 .project-preview-astroverse { background: radial-gradient(circle at 76% 22%,rgba(103,217,209,.23),transparent 27%), radial-gradient(circle at 15% 88%,rgba(244,199,104,.14),transparent 31%), linear-gradient(145deg,#0e2b34,#08171d); }
 .project-preview-robotics { background: radial-gradient(circle at 78% 20%,rgba(244,199,104,.19),transparent 26%), radial-gradient(circle at 18% 84%,rgba(103,217,209,.17),transparent 32%), linear-gradient(145deg,#132830,#08171d); }
+.project-preview-vibe { background: radial-gradient(circle at 76% 22%,rgba(244,199,104,.18),transparent 28%), radial-gradient(circle at 18% 86%,rgba(103,217,209,.2),transparent 33%), linear-gradient(145deg,#10252d,#050e13); }
 .project-media-carousel { display: block; padding: 0; background: #02090d; touch-action: pan-y pinch-zoom; }
 .project-media-carousel::before, .project-media-carousel::after { display: none; }
 .project-media-carousel:focus-visible { outline-offset: -3px; }

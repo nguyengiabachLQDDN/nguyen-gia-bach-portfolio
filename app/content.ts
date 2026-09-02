@@ -1,4 +1,4 @@
-export type ProjectVariant = 'jwst' | 'astroverse' | 'robotics';
+export type ProjectVariant = 'jwst' | 'astroverse' | 'robotics' | 'vibe';
 
 export interface ProjectLink {
   label: string;
@@ -90,10 +90,10 @@ interface ProjectCopy {
   gallery: Array<Omit<MediaAsset, 'src'>>;
 }
 
-type ProjectCopyList = [ProjectCopy, ProjectCopy, ProjectCopy];
+type ProjectCopyList = [ProjectCopy, ProjectCopy, ProjectCopy, ProjectCopy];
 type SkillGroupList = [SkillGroup, SkillGroup, SkillGroup, SkillGroup];
 
-const projectBases: [ProjectBase, ProjectBase, ProjectBase] = [
+const projectBases: [ProjectBase, ProjectBase, ProjectBase, ProjectBase] = [
   {
     number: '01',
     slug: 'jwst-deep-space-explorer',
@@ -135,9 +135,26 @@ const projectBases: [ProjectBase, ProjectBase, ProjectBase] = [
       '/images/projects/esight/arduino-controller.webp',
     ],
   },
+  {
+    number: '04',
+    slug: 'vibe-coding-platform',
+    variant: 'vibe',
+    linkTargets: [
+      { href: 'https://vibe-coding-platform-zeta-two-50.vercel.app/', cardRole: 'primary' },
+      { href: 'https://github.com/nguyengiabachLQDDN/vibe-coding-platform', cardRole: 'secondary' },
+    ],
+    // TODO: Capture these four safe, non-API UI states once browser capture is available.
+    coverSrc: undefined,
+    gallerySrc: [undefined, undefined, undefined],
+  },
 ];
 
-const featuredProjectSlugs = ['jwst-deep-space-explorer', 'astroverse', 'esight-or-robotics'] as const;
+const featuredProjectSlugs = [
+  'jwst-deep-space-explorer',
+  'astroverse',
+  'esight-or-robotics',
+  'vibe-coding-platform',
+] as const;
 
 const projectCopy: ProjectCopyList = [
   {
@@ -319,6 +336,66 @@ const projectCopy: ProjectCopyList = [
         caption: 'Arduino coordinates sensing, decision logic, and user feedback.',
         credit: 'eSight Project / Facebook',
         objectFit: 'contain',
+      },
+    ],
+  },
+  {
+    title: 'Vibe Coding Platform',
+    label: 'AI application builder · Sandboxed execution',
+    status: 'Prototype',
+    date: '2026',
+    role: 'Developer · OSS Adaptation',
+    summary: 'An adapted open-source coding workspace designed to turn natural-language prompts into full-stack projects with sandboxed execution, live preview, file browsing, and command logs.',
+    featuredHighlights: [
+      'Supports Claude, GPT, and Grok models through Vercel AI Gateway.',
+      'Runs generated code inside Vercel Sandbox and presents the result through a real-time preview.',
+      'Brings chat, file exploration, command logs, error monitoring, and deployment controls into one workspace.',
+    ],
+    challenge: 'AI-assisted application building involves more than returning source code. The interface must coordinate model selection, generated files, command execution, runtime feedback, and a preview while keeping untrusted code isolated from the main application.',
+    approach: 'I adapted and deployed an open-source workspace that organises the workflow into four connected areas: an AI chat, a live preview, a sandbox file explorer, and command logs. Vercel AI Gateway provides a common model layer, while Vercel Sandbox defines the intended boundary for generated code execution.',
+    contributions: [
+      'Adapted the open-source application structure for a public portfolio prototype.',
+      'Prepared a multi-model workflow for Claude, GPT, and Grok through Vercel AI Gateway.',
+      'Organised the interface around chat, preview, remote files, command output, and error-recovery settings.',
+      'Deployed the prototype and published its source while documenting that the public AI flow requires service credentials.',
+    ],
+    decisions: [
+      { title: 'Keep execution isolated', description: 'Use Vercel Sandbox as the intended runtime boundary instead of executing generated code inside the portfolio or main application process.' },
+      { title: 'Show the whole workflow', description: 'Keep conversation, preview, files, and logs visible together so users can follow how an application changes.' },
+      { title: 'Label the limitation', description: 'Present the deployment as a prototype because the public interface does not currently expose the credentials required for AI generation.' },
+    ],
+    outcomes: [
+      'Deployed a public prototype of the adapted coding workspace.',
+      'Published the source code with the platform structure and required service configuration visible for review.',
+      'Established a foundation for later API configuration, sandbox execution, and end-to-end validation.',
+    ],
+    lessons: 'Adapting an AI coding interface made the orchestration layer more visible: a useful product must communicate model state, execution state, files, errors, and preview results—not just provide a prompt box. It also reinforced the importance of separating a deployed interface from a production-ready service.',
+    stack: ['Next.js', 'Vercel Sandbox', 'TypeScript', 'AI SDK v6', 'Vercel AI Gateway', 'Tailwind CSS', 'shadcn/ui'],
+    linkLabels: ['Open prototype', 'Source'],
+    cover: {
+      alt: 'Reserved screenshot of the Vibe Coding Platform workspace with chat, live preview, remote files, and command logs.',
+      caption: 'Workspace overview — chat, preview, sandbox files, and command output in one interface.',
+      objectFit: 'cover',
+      objectPosition: 'center 50%',
+    },
+    gallery: [
+      {
+        alt: 'Reserved screenshot of the OSS Vibe Coding Platform product overview dialog.',
+        caption: 'Product overview — the platform explains its AI Gateway, Sandbox, Next.js, and AI SDK architecture.',
+        objectFit: 'cover',
+        objectPosition: 'center 50%',
+      },
+      {
+        alt: 'Reserved screenshot of the Vibe Coding Platform model selector listing supported Claude, GPT, and Grok models.',
+        caption: 'Model selection — one interface for supported models provided through Vercel AI Gateway.',
+        objectFit: 'cover',
+        objectPosition: 'center 56%',
+      },
+      {
+        alt: 'Reserved screenshot of Vibe Coding Platform generation settings for automatic error repair and reasoning effort.',
+        caption: 'Generation settings — controls for automatic error repair and model reasoning effort.',
+        objectFit: 'cover',
+        objectPosition: 'center 54%',
       },
     ],
   },

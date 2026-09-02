@@ -9,7 +9,7 @@ An English-language portfolio for Nguyen Gia Bach, a student engineer working at
 ## Highlights
 
 - English-only content with focused, direct navigation
-- Three detailed project case studies: JWST Space Explorer, AstroVerse, and eSight Project
+- Four detailed project case studies: JWST Space Explorer, AstroVerse, eSight Project, and Vibe Coding Platform
 - English metadata, canonical URLs, Open Graph content, JSON-LD, robots, and sitemap
 - Responsive, keyboard-accessible interface with reduced-motion support
 - Purposeful image placeholders that can be replaced without changing the layout
@@ -22,6 +22,7 @@ An English-language portfolio for Nguyen Gia Bach, a student engineer working at
 | `/projects/jwst-deep-space-explorer` | JWST Space Explorer case study |
 | `/projects/astroverse` | AstroVerse case study |
 | `/projects/esight-or-robotics` | eSight and robotics case study |
+| `/projects/vibe-coding-platform` | Vibe Coding Platform case study |
 
 ## Technology
 
@@ -49,7 +50,7 @@ pnpm lint
 pnpm build
 ```
 
-The production build prerenders the homepage, all three project routes, `robots.txt`, and `sitemap.xml`.
+The production build prerenders the homepage, all four project routes, `robots.txt`, and `sitemap.xml`.
 
 ## Deployment
 
