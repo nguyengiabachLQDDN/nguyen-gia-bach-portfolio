@@ -143,9 +143,11 @@ const projectBases: [ProjectBase, ProjectBase, ProjectBase, ProjectBase] = [
       { href: 'https://vibe-coding-platform-zeta-two-50.vercel.app/', cardRole: 'primary' },
       { href: 'https://github.com/nguyengiabachLQDDN/vibe-coding-platform', cardRole: 'secondary' },
     ],
-    // TODO: Capture these four safe, non-API UI states once browser capture is available.
-    coverSrc: undefined,
-    gallerySrc: [undefined, undefined, undefined],
+    coverSrc: '/images/projects/vibe-coding-platform/product-overview.webp',
+    gallerySrc: [
+      '/images/projects/vibe-coding-platform/model-selector.webp',
+      '/images/projects/vibe-coding-platform/sandbox-workspace.webp',
+    ],
   },
 ];
 
@@ -373,29 +375,23 @@ const projectCopy: ProjectCopyList = [
     stack: ['Next.js', 'Vercel Sandbox', 'TypeScript', 'AI SDK v6', 'Vercel AI Gateway', 'Tailwind CSS', 'shadcn/ui'],
     linkLabels: ['Open prototype', 'Source'],
     cover: {
-      alt: 'Reserved screenshot of the Vibe Coding Platform workspace with chat, live preview, remote files, and command logs.',
-      caption: 'Workspace overview — chat, preview, sandbox files, and command output in one interface.',
+      alt: 'Vibe Coding Platform product overview explaining its full-stack generation workflow and Vercel AI services.',
+      caption: 'Product overview — an AI coding workflow built around Gateway, Sandbox, Next.js, and the AI SDK.',
       objectFit: 'cover',
       objectPosition: 'center 50%',
     },
     gallery: [
       {
-        alt: 'Reserved screenshot of the OSS Vibe Coding Platform product overview dialog.',
-        caption: 'Product overview — the platform explains its AI Gateway, Sandbox, Next.js, and AI SDK architecture.',
+        alt: 'Vibe Coding Platform chat workspace with example prompts and an open selector listing Claude, GPT, and Grok models.',
+        caption: 'Model selection — Claude, GPT, and Grok are available from the same prompt workspace.',
         objectFit: 'cover',
         objectPosition: 'center 50%',
       },
       {
-        alt: 'Reserved screenshot of the Vibe Coding Platform model selector listing supported Claude, GPT, and Grok models.',
-        caption: 'Model selection — one interface for supported models provided through Vercel AI Gateway.',
+        alt: 'Vibe Coding Platform panels for live preview, the sandbox remote filesystem, and sandbox command output.',
+        caption: 'Sandbox workspace — preview, generated files, and command output remain visible in separate panels.',
         objectFit: 'cover',
-        objectPosition: 'center 56%',
-      },
-      {
-        alt: 'Reserved screenshot of Vibe Coding Platform generation settings for automatic error repair and reasoning effort.',
-        caption: 'Generation settings — controls for automatic error repair and model reasoning effort.',
-        objectFit: 'cover',
-        objectPosition: 'center 54%',
+        objectPosition: 'center 50%',
       },
     ],
   },
