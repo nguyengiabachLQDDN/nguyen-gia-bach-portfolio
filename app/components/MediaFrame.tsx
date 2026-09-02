@@ -38,7 +38,10 @@ export default function MediaFrame({
             height={dimensions.height}
             preload={eager}
             loading={eager ? undefined : 'lazy'}
-            style={asset.objectPosition ? { objectPosition: asset.objectPosition } : undefined}
+            style={{
+              objectPosition: asset.objectPosition,
+              objectFit: asset.objectFit,
+            }}
             sizes={ratio === 'compact' ? '120px' : ratio === 'portrait' ? '(max-width: 760px) calc(100vw - 72px), 340px' : ratio === 'gallery' ? '(max-width: 760px) 100vw, 50vw' : '(max-width: 1023px) 100vw, 34vw'}
           />
         ) : (

@@ -12,6 +12,7 @@ export interface MediaAsset {
   caption?: string;
   credit?: string;
   objectPosition?: string;
+  objectFit?: 'cover' | 'contain';
 }
 
 export interface Project {
@@ -120,7 +121,14 @@ const projectBases: [ProjectBase, ProjectBase, ProjectBase] = [
     slug: 'esight-or-robotics',
     variant: 'robotics',
     linkTargets: [{ href: 'https://www.facebook.com/esightproject', cardRole: 'primary' }],
-    gallerySrc: [undefined, undefined],
+    coverSrc: '/images/projects/esight/buzzer-alert-system.webp',
+    gallerySrc: [
+      '/images/projects/esight/prototype-to-product.webp',
+      '/images/projects/esight/iteration-and-award.webp',
+      '/images/projects/esight/signal-pipeline.webp',
+      '/images/projects/esight/computer-vision.webp',
+      '/images/projects/esight/arduino-controller.webp',
+    ],
   },
 ];
 
@@ -238,41 +246,75 @@ const projectCopy: ProjectCopyList = [
   },
   {
     title: 'eSight Project',
-    label: 'Student robotics project',
+    label: 'Assistive technology · Smart cane',
     status: 'Ongoing',
     date: 'Ongoing',
-    role: 'Project Lead · Robotics Team Lead',
-    summary: 'A student-led robotics project that turns physics ideas into working prototypes through iterative testing and team engineering.',
+    role: 'Project Lead',
+    summary: 'A student-led smart cane using ultrasonic sensing, computer vision, and graduated audio feedback to support safer navigation for people with visual impairments.',
     featuredHighlights: [
-      'Module-based prototyping that isolates one behaviour at a time.',
-      'Physics-driven testing, troubleshooting, and system integration.',
-      'Student-team coordination from problem definition through trials.',
+      'Combines ultrasonic sensing and computer vision to detect nearby obstacles.',
+      'Translates distance and risk into graduated buzzer patterns, from slow alerts to continuous warnings.',
+      'Developed through repeated prototyping, testing, and redesign; awarded Third Prize at the school Science & Engineering Fair.',
     ],
-    challenge: 'Physical systems fail in ways software mock-ups do not: sensors drift, mechanisms interact, and every change affects the rest of the system. The work demanded both engineering judgement and a team process that could move quickly.',
-    approach: 'Break the system into testable modules, define the behaviour each module must prove, then integrate only after the evidence is clear. Competition constraints made iteration speed and communication as important as the final mechanism.',
+    challenge: 'For people with visual impairments, navigating an unfamiliar space means detecting obstacles early without adding confusing or intrusive feedback. A useful smart cane must sense the environment reliably and translate changing distance into signals the user can understand immediately.',
+    approach: 'eSight combines ultrasonic sensing and computer vision with an Arduino-based controller. Sensor data is interpreted as levels of risk, then communicated through graduated buzzer patterns: silence in a safe path, slow alerts at distance, faster pulses as an obstacle approaches, and a continuous warning in the danger zone.',
     contributions: [
-      'Led the eSight student project and coordinated technical direction across the team.',
-      'Led a team to Third Prize in the Maze Runner competition organised by FAST, University of Science and Technology – The University of Danang.',
-      'Applied physics reasoning to prototype behaviour, testing, and troubleshooting.',
-      'Created a repeatable rhythm for dividing work, reviewing failures, and integrating changes.',
+      'Led the project from problem framing through prototyping, testing, and presentation.',
+      'Coordinated the integration of sensing, Arduino control logic, and user feedback.',
+      'Applied physics reasoning to translate distance measurements into graduated warning behaviour.',
+      'Documented the engineering process and presented the working smart cane at the school Science & Engineering Fair.',
     ],
     decisions: [
-      { title: 'Test modules first', description: 'Prove one behaviour at a time before integration so a failure has a smaller and more understandable search space.' },
-      { title: 'Treat failures as data', description: 'Record what changed, what the system did, and what the next test should isolate rather than making untracked adjustments.' },
-      { title: 'Design for the team', description: 'Use clear ownership and interfaces so mechanical, electrical, and software work can progress without blocking one another.' },
+      { title: 'Layer the warning', description: 'Use graduated audio patterns instead of a single alarm so urgency increases with proximity.' },
+      { title: 'Combine sensing methods', description: 'Pair ultrasonic distance sensing with computer vision to extend awareness beyond one source of environmental data.' },
+      { title: 'Design around the user', description: 'Keep the system quiet in safe conditions and make alerts clear without drawing unnecessary attention.' },
     ],
     outcomes: [
-      'Third Prize at the FAST Maze Runner competition.',
-      'Three consecutive cohorts serving on PIRL Physics Club’s Technical Committee.',
-      'A growing engineering practice spanning software, physics, and physical systems.',
+      'Built and demonstrated a working student-designed smart cane.',
+      'Awarded Third Prize at the Le Quy Don High School for the Gifted Science & Engineering Fair.',
+      'Created an assistive-technology platform that can continue through further testing and refinement.',
     ],
-    lessons: 'Robotics made uncertainty visible. Progress came from making smaller claims, testing them quickly, and giving every teammate enough context to make the next decision well.',
-    stack: ['Robotics', 'Rapid prototyping', 'Physics', 'System testing', 'Team leadership'],
-    linkLabels: ['Visit eSight'],
-    cover: { alt: 'Reserved cover image for eSight and student robotics practice.', caption: 'A student-led robotics prototype during integration and testing.' },
+    lessons: 'Assistive technology is strongest when every technical choice begins with the user. eSight taught me to connect sensing, physical behaviour, and feedback into one understandable system—and to treat every prototype as evidence for the next iteration.',
+    stack: ['Arduino', 'Computer vision', 'Ultrasonic sensing', 'Buzzer feedback', 'Embedded systems', 'Assistive technology'],
+    linkLabels: ['Visit eSight on Facebook'],
+    cover: {
+      alt: 'eSight smart cane graphic illustrating graduated buzzer and vibration feedback.',
+      caption: 'Graduated audio feedback communicates obstacle distance without overwhelming the user.',
+      credit: 'eSight Project / Facebook',
+      objectPosition: 'center 50%',
+      objectFit: 'cover',
+    },
     gallery: [
-      { alt: 'Reserved image for robotics module testing and prototyping.', caption: 'Testing one physical behaviour at a time before integration.' },
-      { alt: 'Reserved image for the Maze Runner robotics team and competition result.', caption: 'Team engineering under competition constraints.' },
+      {
+        alt: 'eSight project journey showing the smart cane demonstration and hands-on electronics prototyping.',
+        caption: 'From early experiments to a working smart cane presented at the school Science & Engineering Fair.',
+        credit: 'eSight Project / Facebook',
+        objectFit: 'contain',
+      },
+      {
+        alt: 'eSight development poster showing circuit prototyping and the project’s Third Prize recognition.',
+        caption: 'Repeated research, testing, and redesign led to Third Prize at the school fair.',
+        credit: 'eSight Project / Facebook',
+        objectFit: 'contain',
+      },
+      {
+        alt: 'eSight infographic showing sensor waves flowing through Arduino control to buzzer feedback.',
+        caption: 'Sensor measurements become control decisions before the buzzer communicates risk.',
+        credit: 'eSight Project / Facebook',
+        objectFit: 'contain',
+      },
+      {
+        alt: 'eSight computer-vision graphic showing a smart cane sensing obstacles through sound and visual processing.',
+        caption: 'Computer vision extends environmental awareness beyond distance sensing alone.',
+        credit: 'eSight Project / Facebook',
+        objectFit: 'contain',
+      },
+      {
+        alt: 'eSight Arduino graphic showing the controller used to coordinate sensing and feedback.',
+        caption: 'Arduino coordinates sensing, decision logic, and user feedback.',
+        credit: 'eSight Project / Facebook',
+        objectFit: 'contain',
+      },
     ],
   },
 ];
@@ -282,13 +324,13 @@ const achievements: AchievementList = [
   { year: '2025', title: 'Global Nominee · NASA Space Apps Challenge', context: 'JWST Space Explorer', description: 'Selected among 1,290+ Global Nominees from more than 11,500 worldwide projects.', evidence: 'https://lqddn.edu.vn/tin-tuc/hoc-sinh-nguyen-gia-bach-xuat-sac-lot-vao-danh-sach-de-cu-toan-cau-tai-cuoc-thi-nasa-space-apps-challenge-2025', image: { alt: 'Reserved image for the NASA Space Apps Global Nominee recognition.' } },
   { year: '2024', title: 'Second Prize · Da Nang City Physics Competition', context: 'Physics', description: 'Recognised at city level in the Excellent Student Competition in Physics.', image: { alt: 'Reserved image for the Da Nang City Physics Competition Second Prize.' } },
   { year: 'STEM', title: 'Third Prize · FAST Maze Runner', context: 'Robotics Team Lead', description: 'Led the team in a robotics challenge organised by FAST, University of Science and Technology – UD.', image: { alt: 'Reserved image for the FAST Maze Runner Third Prize.' } },
-  { year: '25–26', title: 'Third Prize · School Science & Engineering Fair', context: 'Research & Engineering', description: 'Developed and presented a technical project through the school-level research process.', image: { alt: 'Reserved image for the School Science and Engineering Fair Third Prize.' } },
+  { year: '25–26', title: 'Third Prize · School Science & Engineering Fair', context: 'eSight · Assistive Technology', description: 'Developed and presented the eSight smart cane through an iterative school-level research process.', image: { alt: 'Reserved image for the School Science and Engineering Fair Third Prize.' } },
 ];
 
 const skillGroups: SkillGroupList = [
   { code: 'A01', title: 'Software engineering', summary: 'Building clear, interactive products from first interface to deployment.', used: ['Python', 'JavaScript', 'TypeScript', 'HTML', 'CSS', 'React', 'Vite'], exploring: ['Deeper testing', 'System design'] },
   { code: 'A02', title: 'Scientific computing & data', summary: 'Turning scientific sources and models into tools people can question and explore.', used: ['Astropy', 'NASA data', 'OpenSeadragon', 'APIs', 'Scientific imaging'], exploring: ['Scientific ML', 'Data visualisation'] },
-  { code: 'A03', title: 'Robotics & prototyping', summary: 'Connecting physical reasoning, iterative testing, and reliable system behaviour.', used: ['Robotics', 'Rapid prototyping', 'System testing', 'Team integration'], exploring: ['Embedded systems', 'Computer vision'] },
+  { code: 'A03', title: 'Robotics & prototyping', summary: 'Connecting physical reasoning, iterative testing, and reliable system behaviour.', used: ['Arduino', 'Computer vision', 'Ultrasonic sensing', 'Embedded systems', 'System testing'], exploring: ['Sensor fusion', 'Accessibility testing'] },
   { code: 'A04', title: 'Tools & delivery', summary: 'Making work reproducible, reviewable, and available beyond my own laptop.', used: ['Git', 'GitHub', 'Vercel', 'Technical documentation'], exploring: ['CI workflows', 'Open-source practice'] },
 ];
 

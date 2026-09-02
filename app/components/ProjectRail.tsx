@@ -72,7 +72,10 @@ function ProjectMediaPreview({ project }: { project: Project }) {
           loading={activeImage === 0 && project.slug === 'jwst-deep-space-explorer' ? undefined : 'lazy'}
           draggable={false}
           sizes="(max-width: 760px) calc(100vw - 40px), 448px"
-          style={activeAsset.objectPosition ? { objectPosition: activeAsset.objectPosition } : undefined}
+          style={{
+            objectPosition: activeAsset.objectPosition,
+            objectFit: activeAsset.objectFit,
+          }}
         />
         {activeAsset.caption ? <p className="project-media-caption">{activeAsset.caption}</p> : null}
       </div>
