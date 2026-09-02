@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import AchievementCard from './AchievementCard';
 import MediaFrame from './MediaFrame';
 import ProjectRail from './ProjectRail';
 import RevealController from './RevealController';
@@ -65,17 +66,7 @@ export default function HomePage() {
           <p>{copy.achievementsDeck}</p>
         </header>
         <ol className="achievement-grid">
-          {achievements.map((achievement) => (
-            <li className="achievement-card" key={`${achievement.year}-${achievement.title}`} data-reveal>
-              <MediaFrame asset={achievement.image} label={achievement.year} ratio="compact" />
-              <div className="achievement-card-copy">
-                <div className="achievement-meta"><span>{achievement.year}</span><span>{achievement.context}</span></div>
-                <h3>{achievement.title}</h3>
-                <p>{achievement.description}</p>
-                {achievement.evidence ? <a href={achievement.evidence} target="_blank" rel="noreferrer" aria-label={`${copy.evidenceFor} ${achievement.title}`}>{copy.evidence}</a> : <span className="achievement-verified">{copy.recordedAchievement}</span>}
-              </div>
-            </li>
-          ))}
+          {achievements.map((achievement) => <AchievementCard achievement={achievement} key={achievement.id} />)}
         </ol>
       </section>
 

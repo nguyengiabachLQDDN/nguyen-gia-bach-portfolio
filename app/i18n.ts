@@ -80,7 +80,7 @@ export const homeCopy: HomeCopy = {
   exploringNext: 'Exploring next',
   achievementsIndex: '02 / Evidence',
   achievementsTitle: 'Achievements built on the work.',
-  achievementsDeck: 'A short record of competitions, nominations, and research experiences.',
+  achievementsDeck: 'Selected competition results, academic recognition, and evidence behind the work.',
   evidence: 'Evidence ↗',
   evidenceFor: 'Evidence for',
   recordedAchievement: 'Recorded achievement',

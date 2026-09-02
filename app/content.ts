@@ -13,6 +13,7 @@ export interface MediaAsset {
   credit?: string;
   objectPosition?: string;
   objectFit?: 'cover' | 'contain';
+  sourceHref?: string;
 }
 
 export interface Project {
@@ -39,12 +40,15 @@ export interface Project {
 }
 
 export interface Achievement {
+  id: string;
   year: string;
   title: string;
   context: string;
   description: string;
   evidence?: string;
-  image: MediaAsset;
+  evidenceLabel?: string;
+  priority: 'primary' | 'supporting';
+  media: [MediaAsset, ...MediaAsset[]];
 }
 
 export interface SkillGroup {
@@ -85,7 +89,6 @@ interface ProjectCopy {
 }
 
 type ProjectCopyList = [ProjectCopy, ProjectCopy, ProjectCopy];
-type AchievementList = [Achievement, Achievement, Achievement, Achievement, Achievement];
 type SkillGroupList = [SkillGroup, SkillGroup, SkillGroup, SkillGroup];
 
 const projectBases: [ProjectBase, ProjectBase, ProjectBase] = [
@@ -97,7 +100,7 @@ const projectBases: [ProjectBase, ProjectBase, ProjectBase] = [
       { href: 'https://finale-frontend-jwst-project.vercel.app', cardRole: 'primary' },
       { href: 'https://huggingface.co/spaces/gbachnguyen/jwst-backend-processor/tree/main', cardRole: 'secondary' },
       { href: 'https://github.com/nguyengiabachLQDDN/finale-frontend-jwst-project', cardRole: 'secondary' },
-      { href: 'https://lqddn.edu.vn/tin-tuc/hoc-sinh-nguyen-gia-bach-xuat-sac-lot-vao-danh-sach-de-cu-toan-cau-tai-cuoc-thi-nasa-space-apps-challenge-2025' },
+      { href: 'https://www.spaceappschallenge.org/2025/awards/' },
     ],
     coverSrc: '/images/projects/jwst/overview.webp',
     gallerySrc: [undefined, undefined],
@@ -254,7 +257,7 @@ const projectCopy: ProjectCopyList = [
     featuredHighlights: [
       'Combines ultrasonic sensing and computer vision to detect nearby obstacles.',
       'Translates distance and risk into graduated buzzer patterns, from slow alerts to continuous warnings.',
-      'Developed through repeated prototyping, testing, and redesign; awarded Third Prize at the school Science & Engineering Fair.',
+      'Developed through repeated prototyping, testing, and redesign; awarded Third Prize at the school Science & Engineering Competition.',
     ],
     challenge: 'For people with visual impairments, navigating an unfamiliar space means detecting obstacles early without adding confusing or intrusive feedback. A useful smart cane must sense the environment reliably and translate changing distance into signals the user can understand immediately.',
     approach: 'eSight combines ultrasonic sensing and computer vision with an Arduino-based controller. Sensor data is interpreted as levels of risk, then communicated through graduated buzzer patterns: silence in a safe path, slow alerts at distance, faster pulses as an obstacle approaches, and a continuous warning in the danger zone.',
@@ -262,7 +265,7 @@ const projectCopy: ProjectCopyList = [
       'Led the project from problem framing through prototyping, testing, and presentation.',
       'Coordinated the integration of sensing, Arduino control logic, and user feedback.',
       'Applied physics reasoning to translate distance measurements into graduated warning behaviour.',
-      'Documented the engineering process and presented the working smart cane at the school Science & Engineering Fair.',
+      'Documented the engineering process and presented the working smart cane at the school Science & Engineering Competition.',
     ],
     decisions: [
       { title: 'Layer the warning', description: 'Use graduated audio patterns instead of a single alarm so urgency increases with proximity.' },
@@ -271,7 +274,7 @@ const projectCopy: ProjectCopyList = [
     ],
     outcomes: [
       'Built and demonstrated a working student-designed smart cane.',
-      'Awarded Third Prize at the Le Quy Don High School for the Gifted Science & Engineering Fair.',
+      'Awarded Third Prize at the Le Quy Don High School for the Gifted Science & Engineering Competition.',
       'Created an assistive-technology platform that can continue through further testing and refinement.',
     ],
     lessons: 'Assistive technology is strongest when every technical choice begins with the user. eSight taught me to connect sensing, physical behaviour, and feedback into one understandable system—and to treat every prototype as evidence for the next iteration.',
@@ -287,7 +290,7 @@ const projectCopy: ProjectCopyList = [
     gallery: [
       {
         alt: 'eSight project journey showing the smart cane demonstration and hands-on electronics prototyping.',
-        caption: 'From early experiments to a working smart cane presented at the school Science & Engineering Fair.',
+        caption: 'From early experiments to a working smart cane presented at the school Science & Engineering Competition.',
         credit: 'eSight Project / Facebook',
         objectFit: 'contain',
       },
@@ -319,12 +322,126 @@ const projectCopy: ProjectCopyList = [
   },
 ];
 
-const achievements: AchievementList = [
-  { year: '2026', title: 'Second Prize · RMIT Tech Camp', context: 'Team Lead', description: 'Led a team from problem framing to a competition-ready technical solution.', image: { alt: 'Reserved image for the RMIT Tech Camp Second Prize achievement.' } },
-  { year: '2025', title: 'Global Nominee · NASA Space Apps Challenge', context: 'JWST Space Explorer', description: 'Selected among 1,290+ Global Nominees from more than 11,500 worldwide projects.', evidence: 'https://lqddn.edu.vn/tin-tuc/hoc-sinh-nguyen-gia-bach-xuat-sac-lot-vao-danh-sach-de-cu-toan-cau-tai-cuoc-thi-nasa-space-apps-challenge-2025', image: { alt: 'Reserved image for the NASA Space Apps Global Nominee recognition.' } },
-  { year: '2024', title: 'Second Prize · Da Nang City Physics Competition', context: 'Physics', description: 'Recognised at city level in the Excellent Student Competition in Physics.', image: { alt: 'Reserved image for the Da Nang City Physics Competition Second Prize.' } },
-  { year: 'STEM', title: 'Third Prize · FAST Maze Runner', context: 'Robotics Team Lead', description: 'Led the team in a robotics challenge organised by FAST, University of Science and Technology – UD.', image: { alt: 'Reserved image for the FAST Maze Runner Third Prize.' } },
-  { year: '25–26', title: 'Third Prize · School Science & Engineering Fair', context: 'eSight · Assistive Technology', description: 'Developed and presented the eSight smart cane through an iterative school-level research process.', image: { alt: 'Reserved image for the School Science and Engineering Fair Third Prize.' } },
+const achievements: Achievement[] = [
+  {
+    id: 'nasa-space-apps-global-nominee',
+    year: '2025',
+    title: 'Global Nominee · NASA Space Apps Challenge',
+    context: 'JWST Space Explorer',
+    description: 'Advanced from local judging to the Global Judging stage of the 2025 NASA Space Apps Challenge.',
+    evidence: 'https://www.spaceappschallenge.org/2025/awards/',
+    evidenceLabel: 'NASA selection process',
+    priority: 'primary',
+    media: [
+      {
+        src: '/images/achievements/nasa-space-apps-2025.webp',
+        alt: 'Participants collaborating around laptops during a NASA Space Apps Challenge event.',
+        caption: 'NASA Space Apps brings teams together to build with open space data.',
+        credit: 'NASA',
+        sourceHref: 'https://www.nasa.gov/earth/registration-opens-for-2025-international-space-apps-challenge/',
+        objectFit: 'cover',
+        objectPosition: 'center 54%',
+      },
+      {
+        src: '/images/projects/jwst/overview.webp',
+        alt: 'JWST Space Explorer interface with a deep-space background and astronomical target search.',
+        caption: 'The Global Nominee project built during the 48-hour challenge.',
+        credit: 'JWST Space Explorer',
+        objectFit: 'cover',
+        objectPosition: 'center 48%',
+      },
+    ],
+  },
+  {
+    id: 'da-nang-city-physics-second-prize',
+    year: '2024',
+    title: 'Second Prize · Da Nang City Physics Competition',
+    context: 'Physics · City level',
+    description: 'Recognised at city level in the Excellent Student Competition in Physics.',
+    priority: 'primary',
+    media: [{ alt: 'Reserved image for the Da Nang City Physics Competition Second Prize.' }],
+  },
+  {
+    id: 'rmit-tech-camp-second-prize',
+    year: '2026',
+    title: 'Second Prize · RMIT Tech Camp',
+    context: 'Team Lead',
+    description: 'Led a team from problem framing to a competition-ready technical solution.',
+    priority: 'primary',
+    media: [{ alt: 'Reserved image for the RMIT Tech Camp Second Prize achievement.' }],
+  },
+  {
+    id: 'school-science-engineering-third-prize',
+    year: '25–26',
+    title: 'Third Prize · School Science & Engineering Competition',
+    context: 'eSight · Assistive Technology',
+    description: 'Developed and presented the eSight smart cane through an iterative school-level research process.',
+    priority: 'primary',
+    media: [
+      {
+        src: '/images/achievements/science-engineering-third-prize.webp',
+        alt: 'Certificate awarding Nguyen Gia Bach Third Prize in the engineering category of the school Science and Engineering Competition.',
+        caption: 'Third Prize in the engineering category, academic year 2025–2026.',
+        credit: 'Le Quy Don High School for the Gifted',
+        objectFit: 'contain',
+      },
+      {
+        src: '/images/projects/esight/prototype-to-product.webp',
+        alt: 'eSight project journey showing the smart cane demonstration and hands-on electronics prototyping.',
+        caption: 'Presenting the working smart cane after repeated prototyping and testing.',
+        credit: 'eSight Project / Facebook',
+        sourceHref: 'https://www.facebook.com/esightproject',
+        objectFit: 'contain',
+      },
+      {
+        src: '/images/projects/esight/iteration-and-award.webp',
+        alt: 'eSight development poster showing circuit prototyping and the project’s Third Prize recognition.',
+        caption: 'The award marked the beginning of the project’s next research cycle.',
+        credit: 'eSight Project / Facebook',
+        sourceHref: 'https://www.facebook.com/esightproject',
+        objectFit: 'contain',
+      },
+    ],
+  },
+  {
+    id: 'fast-maze-runner-third-prize',
+    year: 'STEM',
+    title: 'Third Prize · FAST Maze Runner',
+    context: 'Robotics Team Lead',
+    description: 'Led the team in a robotics challenge organised by FAST, University of Science and Technology – UD.',
+    priority: 'primary',
+    media: [{ alt: 'Reserved image for the FAST Maze Runner Third Prize.' }],
+  },
+  {
+    id: 'school-physics-honorable-mention',
+    year: '25–26',
+    title: 'Honorable Mention · School Physics Competition',
+    context: 'Physics · School level',
+    description: 'Received an Honorable Mention in the school-level Excellent Student Competition in Physics.',
+    priority: 'supporting',
+    media: [{
+      src: '/images/achievements/school-physics-honorable-mention.webp',
+      alt: 'Certificate awarding Nguyen Gia Bach an Honorable Mention in the school Physics Competition for 2025–2026.',
+      caption: 'Honorable Mention in Physics, academic year 2025–2026.',
+      credit: 'Le Quy Don High School for the Gifted',
+      objectFit: 'contain',
+    }],
+  },
+  {
+    id: 'excellent-student-2025-2026',
+    year: '25–26',
+    title: 'Excellent Student · 2025–2026',
+    context: 'Academic standing',
+    description: 'Recognised for excellent academic performance during the 2025–2026 school year.',
+    priority: 'supporting',
+    media: [{
+      src: '/images/achievements/excellent-student-2025-2026.webp',
+      alt: 'Certificate recognising Nguyen Gia Bach as an Excellent Student for the 2025–2026 academic year.',
+      caption: 'Excellent Student recognition for the 2025–2026 academic year.',
+      credit: 'Le Quy Don High School for the Gifted',
+      objectFit: 'contain',
+    }],
+  },
 ];
 
 const skillGroups: SkillGroupList = [
