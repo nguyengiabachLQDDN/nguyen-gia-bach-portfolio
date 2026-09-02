@@ -363,7 +363,13 @@ const achievements: Achievement[] = [
     context: 'Physics · City level',
     description: 'Recognised at city level in the Excellent Student Competition in Physics.',
     priority: 'primary',
-    media: [{ alt: 'Reserved image for the Da Nang City Physics Competition Second Prize.' }],
+    media: [{
+      src: '/images/achievements/da-nang-city-physics-second-prize.webp',
+      alt: 'Certificate awarding Nguyen Gia Bach Second Prize in Physics at the Da Nang city-level Grade 9 Excellent Student Competition for 2023–2024.',
+      caption: 'Second Prize in Physics at the Da Nang city-level Grade 9 Excellent Student Competition, academic year 2023–2024.',
+      credit: 'Da Nang Department of Education and Training',
+      objectFit: 'contain',
+    }],
   },
   {
     id: 'rmit-tech-camp-second-prize',
