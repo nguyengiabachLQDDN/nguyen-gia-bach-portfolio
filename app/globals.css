@@ -356,11 +356,12 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--cyan); outline-
 .community-empty { min-height: 112px; display: flex; align-items: center; padding: 24px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: linear-gradient(90deg,rgba(103,217,209,.025),transparent 70%); }
 .community-empty p { max-width: 700px; margin: 0; color: var(--muted); font-size: 16px; line-height: 1.6; }
 .community-list { padding: 0; margin: 0; list-style: none; border-top: 1px solid var(--line); }
-.community-list li { display: grid; grid-template-columns: 90px minmax(0,1fr) auto; gap: 20px; align-items: center; padding: 16px 0; border-bottom: 1px solid var(--line); }
+.community-list li { display: grid; grid-template-columns: 92px minmax(0,1fr) auto; gap: 20px; align-items: center; padding: 16px 0; border-bottom: 1px solid var(--line); }
 .community-list > li > span { color: var(--amber); font: 600 10px var(--font-mono); text-transform: uppercase; }
 .community-entry { min-width: 0; display: flex; align-items: center; gap: 14px; }
-.community-media { position: relative; flex: 0 0 72px; width: 72px; aspect-ratio: 4 / 3; overflow: hidden; border: 1px solid var(--line); border-radius: 3px; }
+.community-media { position: relative; flex: 0 0 112px; width: 112px; aspect-ratio: 16 / 10; overflow: hidden; border: 1px solid var(--line); border-radius: 3px; background: var(--bg-raised); }
 .community-media img { object-fit: cover; }
+.community-role { display: block; margin-bottom: 5px; color: var(--cyan); font: 600 8px/1.35 var(--font-mono); letter-spacing: .08em; text-transform: uppercase; }
 .community-list h3 { margin: 0; font-size: 17px; font-weight: 550; }
 .community-list p { margin: 5px 0 0; color: var(--muted); font-size: 13px; line-height: 1.5; }
 .community-list a { color: var(--cyan); font: 600 8px var(--font-mono); letter-spacing: .07em; text-transform: uppercase; }
@@ -524,8 +525,9 @@ a:focus-visible, button:focus-visible { outline: 2px solid var(--cyan); outline-
   .program-media { grid-column: 2; grid-row: 1 / 3; width: 92px; }
   .program-without-media .program-meta, .program-without-media .program-copy { grid-column: 1 / -1; }
   .program-copy p { display: -webkit-box; overflow: hidden; -webkit-box-orient: vertical; -webkit-line-clamp: 2; }
-  .community-list li { grid-template-columns: 1fr; gap: 8px; }
+  .community-list li { grid-template-columns: 1fr; gap: 9px; }
   .community-entry { align-items: flex-start; }
+  .community-media { flex-basis: 92px; width: 92px; }
   .community-list a { justify-self: start; }
 }
 

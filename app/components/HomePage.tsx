@@ -131,10 +131,20 @@ export default function HomePage() {
                 <div className="community-entry">
                   {item.image && (
                     <div className="community-media">
-                      <Image src={item.image.src} alt={item.image.alt} fill sizes="72px" />
+                      <Image
+                        src={item.image.src}
+                        alt={item.image.alt}
+                        fill
+                        sizes="(max-width: 600px) 92px, 112px"
+                        style={{ objectPosition: item.image.objectPosition ?? 'center' }}
+                      />
                     </div>
                   )}
-                  <div><h3>{item.title}</h3><p>{item.summary}</p></div>
+                  <div>
+                    <span className="community-role">{item.role}</span>
+                    <h3>{item.title}</h3>
+                    <p>{item.summary}</p>
+                  </div>
                 </div>
                 <a href={item.href} target="_blank" rel="noreferrer">{copy.viewPost}</a>
               </li>

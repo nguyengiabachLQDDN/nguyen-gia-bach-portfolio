@@ -42,11 +42,13 @@ export interface ProgramItem {
 export interface CommunityItem {
   date: string;
   title: string;
+  role: string;
   summary: string;
   href: string;
   image?: {
     src: string;
     alt: string;
+    objectPosition?: string;
   };
 }
 
@@ -99,10 +101,14 @@ export const homeCopy: HomeCopy = {
   educationLine: 'Le Quy Don High School for the Gifted · Da Nang, Vietnam',
   programItems: [
     {
-      date: '2026',
+      date: 'June 2026',
       title: 'Fulbright STEM Mentorship',
-      organization: 'STEM mentorship program',
-      summary: 'Participated in a mentorship program focused on STEM learning and academic development.',
+      organization: 'Fulbright Vietnam · U.S. Embassy Hanoi',
+      summary: 'Participated as a mentee in the Fulbright Vietnam 2026 STEM Mentorship Program.',
+      credential: {
+        src: '/images/programs/fulbright-stem-mentorship.webp',
+        alt: 'Certificate of Participation awarded to Nguyen Gia Bach as a mentee in the Fulbright Vietnam 2026 STEM Mentorship Program.',
+      },
     },
     {
       date: '2025',
@@ -149,7 +155,32 @@ export const homeCopy: HomeCopy = {
   communityIndex: '05 / Community',
   communityTitle: 'Community & volunteering.',
   communityEmpty: 'Selected community work and reflections will be added here with source links.',
-  communityItems: [],
+  communityItems: [
+    {
+      date: '04 Feb 2026',
+      title: 'Nguyet Du Charity Campaign',
+      role: 'Financial Manager',
+      summary: 'Managed the budget and transparent fund allocation for a class bake sale that raised VND 4.2 million and funded 42 care packages for revolutionary veterans in Da Nang.',
+      href: 'https://www.linkedin.com/feed/update/urn:li:activity:7453057296861102080/',
+      image: {
+        src: '/images/community/nguyet-du-charity-campaign.webp',
+        alt: 'Nguyen Gia Bach and classmates visiting the Center for Nurturing People with Meritorious Services to the Revolution in Da Nang.',
+        objectPosition: 'left center',
+      },
+    },
+    {
+      date: '16 Feb 2025',
+      title: 'Son Tra Voluntary Blood Donation Program',
+      role: 'Participant',
+      summary: 'Participated in a Son Tra District voluntary blood donation program and contributed to its on-site community effort.',
+      href: 'https://www.linkedin.com/feed/update/urn:li:activity:7405794459935895552/',
+      image: {
+        src: '/images/community/son-tra-blood-donation.webp',
+        alt: 'Volunteers supporting the Son Tra District voluntary blood donation program.',
+        objectPosition: 'center',
+      },
+    },
+  ],
   viewPost: 'View post ↗',
   backToTop: 'Back to top ↑',
   projectTechnologies: 'technologies',
