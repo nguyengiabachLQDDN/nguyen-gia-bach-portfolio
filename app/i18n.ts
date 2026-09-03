@@ -2,7 +2,8 @@ export const navigation = {
   work: 'Work',
   capabilities: 'Capabilities',
   achievements: 'Achievements',
-  about: 'About',
+  programs: 'Programs',
+  community: 'Community',
 } as const;
 
 // TODO(profile): Add the current grade / expected graduation year and a more
@@ -27,6 +28,28 @@ export const homeIntro = {
   socialLabel: 'Social profiles',
 } as const;
 
+export interface ProgramItem {
+  date: string;
+  title: string;
+  organization: string;
+  summary: string;
+  credential?: {
+    src: string;
+    alt: string;
+  };
+}
+
+export interface CommunityItem {
+  date: string;
+  title: string;
+  summary: string;
+  href: string;
+  image?: {
+    src: string;
+    alt: string;
+  };
+}
+
 interface HomeCopy {
   workIndex: string;
   workTitle: string;
@@ -40,22 +63,18 @@ interface HomeCopy {
   evidence: string;
   evidenceFor: string;
   recordedAchievement: string;
-  aboutIndex: string;
-  aboutTitle: string;
-  aboutBio: string;
-  aboutNote: string;
-  education: string;
-  school: string;
-  schoolLocation: string;
-  focus: string;
-  focusValue: string;
-  interests: string;
-  interestsValue: string;
-  leadershipIndex: string;
-  leadershipTitle: string;
-  leadership: Array<{ number: string; title: string; copy: string }>;
-  programs: string;
-  credentials: Array<[string, string]>;
+  programsIndex: string;
+  programsTitle: string;
+  programsDeck: string;
+  educationLabel: string;
+  educationLine: string;
+  programItems: ProgramItem[];
+  viewCredential: string;
+  communityIndex: string;
+  communityTitle: string;
+  communityEmpty: string;
+  communityItems: CommunityItem[];
+  viewPost: string;
   backToTop: string;
   projectTechnologies: string;
 }
@@ -73,26 +92,65 @@ export const homeCopy: HomeCopy = {
   evidence: 'Evidence ↗',
   evidenceFor: 'Evidence for',
   recordedAchievement: 'Recorded achievement',
-  aboutIndex: '04 / About',
-  aboutTitle: 'Curiosity is the starting point. Building is how I test it.',
-  aboutBio: 'I’m Nguyen Gia Bach, a student at Le Quy Don High School for the Gifted in Da Nang, Vietnam. Physics taught me to ask precise questions; programming gave me a way to turn those questions into tools; robotics made me test every assumption against the physical world. I enjoy building products that help people explore difficult ideas—from deep-space imagery and astronomy simulations to student-led prototypes. I’m now deepening my skills in scientific computing, product engineering, and embedded systems while looking for ambitious STEM teams and problems worth learning from.',
-  aboutNote: 'My favourite projects sit at the intersection: scientifically grounded, technically challenging, and clear enough for someone else to use.',
-  education: 'Education',
-  school: 'Le Quy Don High School for the Gifted',
-  schoolLocation: 'Da Nang, Vietnam',
-  focus: 'Focus',
-  focusValue: 'Physics · STEM',
-  interests: 'Interests',
-  interestsValue: 'Scientific software · Robotics',
-  leadershipIndex: '05 / Leadership',
-  leadershipTitle: 'Engineering is a team sport.',
-  leadership: [
-    { number: 'L01', title: 'eSight Project Lead', copy: 'Guiding a student engineering project from problem definition through prototyping, testing, and team integration.' },
-    { number: 'L02', title: 'PIRL Technical Committee', copy: 'Contributing technical work across three consecutive cohorts of the school physics club — Generations 4, 5, and 6.' },
-    { number: 'L03', title: 'Competition Team Lead', copy: 'Coordinating small teams under time pressure for NASA Space Apps, RMIT Tech Camp, and robotics challenges.' },
+  programsIndex: '04 / Programs',
+  programsTitle: 'Academic programs & credentials.',
+  programsDeck: 'Selected learning programs, technical communities, and academic contributions.',
+  educationLabel: 'Education',
+  educationLine: 'Le Quy Don High School for the Gifted · Da Nang, Vietnam',
+  programItems: [
+    {
+      date: '2026',
+      title: 'Fulbright STEM Mentorship',
+      organization: 'STEM mentorship program',
+      summary: 'Participated in a mentorship program focused on STEM learning and academic development.',
+    },
+    {
+      date: '2025',
+      title: 'Crack the Vibe Code',
+      organization: 'GDG DevFest Mien Trung',
+      summary: 'Completed a hands-on codelab session on AI-assisted application development.',
+      credential: {
+        src: '/images/programs/devfest-crack-the-vibe-code.webp',
+        alt: 'Certificate of Appreciation for completing the Crack the Vibe Code workshop at GDG DevFest Mien Trung 2025.',
+      },
+    },
+    {
+      date: '2025',
+      title: 'Google I/O Extended Codelab',
+      organization: 'GDG MienTrung',
+      summary: 'Completed a technical codelab during Google I/O Extended MienTrung 2025.',
+      credential: {
+        src: '/images/programs/google-io-extended-codelab.webp',
+        alt: 'Certificate of Appreciation for completing the Google I/O Extended MienTrung 2025 codelab.',
+      },
+    },
+    {
+      date: 'Generations 4–6',
+      title: 'PIRL Technical Committee',
+      organization: 'PIRL Physics Club',
+      summary: 'Contributed technical work across three consecutive cohorts of the school physics club.',
+      credential: {
+        src: '/images/programs/pirl-technical-committee.webp',
+        alt: 'Certificate of Contribution for serving on the PIRL Physics Club academic committee.',
+      },
+    },
+    {
+      date: 'Participation',
+      title: 'PIRL Glider Physics Tournament',
+      organization: 'PIRL Physics Club',
+      summary: 'Took part in a student physics tournament centred on glider design and experimentation.',
+      credential: {
+        src: '/images/programs/pirl-glider-tournament.webp',
+        alt: 'Certificate of Attendance for the PIRL Glider Physics Tournament.',
+      },
+    },
   ],
-  programs: 'Programs & credentials',
-  credentials: [['2026', 'Fulbright STEM Mentorship'], ['07.25', 'Google Developer Groups Codelab'], ['08.25', 'Google Developer Groups Vibecoding']],
+  viewCredential: 'View credential ↗',
+  communityIndex: '05 / Community',
+  communityTitle: 'Community & volunteering.',
+  communityEmpty: 'Selected community work and reflections will be added here with source links.',
+  communityItems: [],
+  viewPost: 'View post ↗',
   backToTop: 'Back to top ↑',
   projectTechnologies: 'technologies',
 };

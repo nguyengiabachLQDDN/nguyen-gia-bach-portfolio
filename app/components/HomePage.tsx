@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import AchievementCard from './AchievementCard';
 import MediaFrame from './MediaFrame';
 import ProjectRail from './ProjectRail';
@@ -78,33 +79,70 @@ export default function HomePage() {
         <Toolkit groups={skillGroups} learning={learningFocus} learningLabel={copy.currentlyLearning} />
       </section>
 
-      <section className="section-shell about" id="about" aria-labelledby="about-title" data-reveal>
-        <div className="about-main">
-          <p className="section-index">{copy.aboutIndex}</p>
-          <h2 id="about-title">{copy.aboutTitle}</h2>
-          <p className="about-bio">{copy.aboutBio}</p>
-          <p className="about-note">{copy.aboutNote}</p>
+      <section className="section-shell programs" id="programs" aria-labelledby="programs-title" data-reveal>
+        <header className="section-heading programs-heading">
+          <div><p className="section-index">{copy.programsIndex}</p><h2 id="programs-title">{copy.programsTitle}</h2></div>
+          <p>{copy.programsDeck}</p>
+        </header>
+
+        <div className="programs-education">
+          <span>{copy.educationLabel}</span>
+          <strong>{copy.educationLine}</strong>
         </div>
-        <aside className="education-card">
-          <p className="kicker">{copy.education}</p>
-          <span className="education-mark">LQD</span>
-          <h3>{copy.school}</h3>
-          <p>{copy.schoolLocation}</p>
-          <dl><div><dt>{copy.focus}</dt><dd>{copy.focusValue}</dd></div><div><dt>{copy.interests}</dt><dd>{copy.interestsValue}</dd></div></dl>
-        </aside>
+
+        <ol className="program-list">
+          {copy.programItems.map((program) => (
+            <li className={program.credential ? '' : 'program-without-media'} key={program.title} data-reveal>
+              <div className="program-meta">
+                <span>{program.date}</span>
+                <strong>{program.organization}</strong>
+              </div>
+              <div className="program-copy">
+                <h3>{program.title}</h3>
+                <p>{program.summary}</p>
+                {program.credential && (
+                  <a href={program.credential.src} target="_blank" rel="noreferrer">{copy.viewCredential}</a>
+                )}
+              </div>
+              {program.credential && (
+                <div className="program-media">
+                  <Image
+                    src={program.credential.src}
+                    alt={program.credential.alt}
+                    fill
+                    sizes="(max-width: 600px) 96px, 168px"
+                  />
+                </div>
+              )}
+            </li>
+          ))}
+        </ol>
       </section>
 
-      <section className="section-shell leadership" aria-labelledby="leadership-title" data-reveal>
+      <section className="section-shell community" id="community" aria-labelledby="community-title" data-reveal>
         <header className="section-heading compact">
-          <div><p className="section-index">{copy.leadershipIndex}</p><h2 id="leadership-title">{copy.leadershipTitle}</h2></div>
+          <div><p className="section-index">{copy.communityIndex}</p><h2 id="community-title">{copy.communityTitle}</h2></div>
         </header>
-        <div className="leadership-grid">
-          {copy.leadership.map((item) => <article key={item.number} data-reveal><span>{item.number}</span><h3>{item.title}</h3><p>{item.copy}</p></article>)}
-        </div>
-        <div className="credentials">
-          <p className="kicker">{copy.programs}</p>
-          <ul>{copy.credentials.map(([year, title]) => <li key={title}><span>{year}</span><strong>{title}</strong></li>)}</ul>
-        </div>
+        {copy.communityItems.length > 0 ? (
+          <ol className="community-list">
+            {copy.communityItems.slice(0, 3).map((item) => (
+              <li key={item.title}>
+                <span>{item.date}</span>
+                <div className="community-entry">
+                  {item.image && (
+                    <div className="community-media">
+                      <Image src={item.image.src} alt={item.image.alt} fill sizes="72px" />
+                    </div>
+                  )}
+                  <div><h3>{item.title}</h3><p>{item.summary}</p></div>
+                </div>
+                <a href={item.href} target="_blank" rel="noreferrer">{copy.viewPost}</a>
+              </li>
+            ))}
+          </ol>
+        ) : (
+          <div className="community-empty"><p>{copy.communityEmpty}</p></div>
+        )}
       </section>
 
       <footer className="site-footer">

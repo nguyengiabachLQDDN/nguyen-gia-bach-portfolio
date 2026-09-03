@@ -8,7 +8,8 @@ const navigation = [
   { id: 'work', label: navigationCopy.work },
   { id: 'achievements', label: navigationCopy.achievements },
   { id: 'capabilities', label: navigationCopy.capabilities },
-  { id: 'about', label: navigationCopy.about },
+  { id: 'programs', label: navigationCopy.programs },
+  { id: 'community', label: navigationCopy.community },
 ];
 
 export default function SiteHeader({ home = false }: { home?: boolean }) {
@@ -19,17 +20,35 @@ export default function SiteHeader({ home = false }: { home?: boolean }) {
     const sections = navigation
       .map((item) => document.getElementById(item.id))
       .filter((section): section is HTMLElement => Boolean(section));
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const visible = entries
-          .filter((entry) => entry.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (visible?.target.id) setActive(visible.target.id);
-      },
-      { rootMargin: '-18% 0px -64% 0px', threshold: [0, 0.2, 0.5] },
-    );
-    sections.forEach((section) => observer.observe(section));
-    return () => observer.disconnect();
+    let frame = 0;
+
+    const updateActive = () => {
+      frame = 0;
+      const readingLine = window.innerHeight * 0.3;
+      let current = sections[0]?.id ?? 'work';
+
+      sections.forEach((section) => {
+        if (section.getBoundingClientRect().top <= readingLine) current = section.id;
+      });
+      if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2) {
+        current = sections.at(-1)?.id ?? current;
+      }
+      setActive(current);
+    };
+
+    const queueUpdate = () => {
+      if (frame) return;
+      frame = window.requestAnimationFrame(updateActive);
+    };
+
+    queueUpdate();
+    window.addEventListener('scroll', queueUpdate, { passive: true });
+    window.addEventListener('resize', queueUpdate);
+    return () => {
+      window.removeEventListener('scroll', queueUpdate);
+      window.removeEventListener('resize', queueUpdate);
+      if (frame) window.cancelAnimationFrame(frame);
+    };
   }, [home]);
 
   return (
