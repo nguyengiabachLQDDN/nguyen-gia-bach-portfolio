@@ -9,7 +9,6 @@ const navigation = [
   { id: 'achievements', label: navigationCopy.achievements },
   { id: 'capabilities', label: navigationCopy.capabilities },
   { id: 'about', label: navigationCopy.about },
-  { id: 'contact', label: navigationCopy.contact },
 ];
 
 export default function SiteHeader({ home = false }: { home?: boolean }) {

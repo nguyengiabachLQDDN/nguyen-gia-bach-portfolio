@@ -3,11 +3,10 @@ export const navigation = {
   capabilities: 'Capabilities',
   achievements: 'Achievements',
   about: 'About',
-  contact: 'Contact',
 } as const;
 
-// TODO(profile): Add the current grade / expected graduation year, a professional
-// email, and a more specific intended field once confirmed.
+// TODO(profile): Add the current grade / expected graduation year and a more
+// specific intended field once confirmed.
 const heroImageSrc = '/images/profile/nguyen-gia-bach-formal.webp';
 
 export const homeIntro = {
@@ -57,10 +56,6 @@ interface HomeCopy {
   leadership: Array<{ number: string; title: string; copy: string }>;
   programs: string;
   credentials: Array<[string, string]>;
-  contactEyebrow: string;
-  contactTitle: string;
-  contactDeck: string;
-  footerTagline: string;
   backToTop: string;
   projectTechnologies: string;
 }
@@ -98,11 +93,7 @@ export const homeCopy: HomeCopy = {
   ],
   programs: 'Programs & credentials',
   credentials: [['2026', 'Fulbright STEM Mentorship'], ['07.25', 'Google Developer Groups Codelab'], ['08.25', 'Google Developer Groups Vibecoding']],
-  contactEyebrow: 'Open channel / 06',
-  contactTitle: 'Have a problem worth exploring?',
-  contactDeck: 'I’m open to student research, STEM programs, hackathons, and early technology opportunities.',
-  footerTagline: 'Built from first principles in Da Nang.',
-  backToTop: 'Back to orbit ↑',
+  backToTop: 'Back to top ↑',
   projectTechnologies: 'technologies',
 };
 

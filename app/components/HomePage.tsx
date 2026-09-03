@@ -107,20 +107,16 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="contact" id="contact" aria-labelledby="contact-title" data-reveal>
-        <div>
-          <p className="eyebrow">{copy.contactEyebrow}</p>
-          <h2 id="contact-title">{copy.contactTitle}</h2>
-          <p>{copy.contactDeck}</p>
-        </div>
-        <div className="contact-links">
-          <a className="contact-link" href="https://www.linkedin.com/in/nguyen-gia-bach-996333386" target="_blank" rel="noreferrer"><span>01</span><strong>LinkedIn</strong><i>↗</i></a>
-          <a className="contact-link" href="https://github.com/nguyengiabachLQDDN" target="_blank" rel="noreferrer"><span>02</span><strong>GitHub</strong><i>↗</i></a>
-        </div>
-      </section>
-
       <footer className="site-footer">
-        <span>Nguyen Gia Bach © 2026</span><span>{copy.footerTagline}</span><a href="#top">{copy.backToTop}</a>
+        <a className="footer-contact" href="mailto:gbachnguyen@gmail.com">
+          <span>Email</span>
+          <strong>gbachnguyen@gmail.com</strong>
+        </a>
+        <a className="footer-contact" href="tel:+84795551811">
+          <span>Phone</span>
+          <strong>0795 551 811</strong>
+        </a>
+        <a className="footer-back" href="#top">{copy.backToTop}</a>
       </footer>
     </main>
   );
