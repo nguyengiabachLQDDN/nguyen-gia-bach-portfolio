@@ -101,6 +101,16 @@ export const homeCopy: HomeCopy = {
   educationLine: 'Le Quy Don High School for the Gifted · Da Nang, Vietnam',
   programItems: [
     {
+      date: '16 Aug 2026',
+      title: 'Build with Google · AI Riser Vietnam',
+      organization: 'GDG Cloud Da Nang',
+      summary: 'Participated as an attendee in Build with Google – AI Riser Vietnam, a Google AI community program in Da Nang.',
+      credential: {
+        src: '/images/programs/build-with-google-ai-riser-vietnam.webp',
+        alt: 'Certificate of Appreciation awarded to Nguyen Gia Bach as an attendee at Build with Google – AI Riser Vietnam on 16 August 2026.',
+      },
+    },
+    {
       date: 'June 2026',
       title: 'Fulbright STEM Mentorship',
       organization: 'Fulbright Vietnam · U.S. Embassy Hanoi',

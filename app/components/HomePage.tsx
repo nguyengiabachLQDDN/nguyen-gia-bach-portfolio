@@ -37,7 +37,7 @@ export default function HomePage() {
             <Link className="button button-primary" href="#work">{intro.work} <span>↘</span></Link>
             <div className="hero-links" aria-label={intro.socialLabel}>
               <a href="https://github.com/nguyengiabachLQDDN" target="_blank" rel="noreferrer">GitHub <span>↗</span></a>
-              <a href="https://www.linkedin.com/in/nguyen-gia-bach-996333386" target="_blank" rel="noreferrer">LinkedIn <span>↗</span></a>
+              <a href="https://www.linkedin.com/in/nguyengiabach/" target="_blank" rel="noreferrer">LinkedIn <span>↗</span></a>
               <a href="https://www.facebook.com/gbachnguyen/" target="_blank" rel="noreferrer">Facebook <span>↗</span></a>
             </div>
           </div>

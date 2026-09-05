@@ -70,7 +70,7 @@ export function getPersonJsonLd() {
     affiliation: { '@type': 'EducationalOrganization', name: metadataCopy.school },
     sameAs: [
       'https://github.com/nguyengiabachLQDDN',
-      'https://www.linkedin.com/in/nguyen-gia-bach-996333386',
+      'https://www.linkedin.com/in/nguyengiabach/',
     ],
   };
 }
