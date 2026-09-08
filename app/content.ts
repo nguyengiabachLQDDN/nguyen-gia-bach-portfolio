@@ -664,6 +664,16 @@ const achievements: Achievement[] = [
   },
 ];
 
+const achievementTimelineOrder = [
+  'rmit-tech-camp-second-prize',
+  'school-science-engineering-third-prize',
+  'school-physics-honorable-mention',
+  'excellent-student-2025-2026',
+  'nasa-space-apps-global-nominee',
+  'fast-maze-runner-third-prize',
+  'da-nang-city-physics-second-prize',
+] as const;
+
 const skillGroups: SkillGroupList = [
   {
     title: 'Languages',
@@ -737,7 +747,11 @@ export function getProject(slug: string): Project | undefined {
 }
 
 export function getAchievements(): Achievement[] {
-  return achievements;
+  return achievementTimelineOrder.map((id) => {
+    const achievement = achievements.find((item) => item.id === id);
+    if (!achievement) throw new Error(`Missing achievement: ${id}`);
+    return achievement;
+  });
 }
 
 export function getSkillGroups(): SkillGroup[] {

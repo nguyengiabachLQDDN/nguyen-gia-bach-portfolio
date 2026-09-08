@@ -14,6 +14,7 @@ export const homeIntro = {
   eyebrow: 'Student profile',
   name: 'Nguyen Gia Bach',
   role: 'Engineering student, experienced in Physics and robotics',
+  introduction: 'I’m an engineering-oriented physics student interested in using engineering and computation to understand and build real-world systems. My work spans robotics, coding, and practical experiments, with a focus on solving real-life problems through a scientific mindset.',
   facts: [
     ['School', 'Le Quy Don High School for the Gifted'],
     ['Location', 'Da Nang, Vietnam'],

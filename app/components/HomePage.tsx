@@ -28,6 +28,7 @@ export default function HomePage() {
           <p className="eyebrow">{intro.eyebrow}</p>
           <h1 id="hero-title">{intro.name}</h1>
           <p className="hero-role">{intro.role}</p>
+          <p className="hero-introduction">{intro.introduction}</p>
           <dl className="hero-facts">
             {intro.facts.map(([label, value]) => (
               <div key={label}><dt>{label}</dt><dd>{value}</dd></div>
