@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import type { Project } from '../content';
-import SectionHeader from './SectionHeader';
 
 function ProjectImage({ project, sizes }: { project: Project; sizes: string }) {
   if (!project.cover.src) {
@@ -36,21 +35,28 @@ function ExternalLinks({ project }: { project: Project }) {
   );
 }
 
-function SupportingProject({ project }: { project: Project }) {
+function SupportingProjectCard({ project }: { project: Project }) {
   return (
-    <article className="supporting-project" data-reveal>
-      <ProjectImage project={project} sizes="(max-width: 760px) 100vw, 50vw" />
-      <div className="supporting-project-copy">
-        <div className="work-meta"><span>{project.status}</span><span>{project.role}</span></div>
-        <h3>{project.title}</h3>
-        <p>{project.summary}</p>
+    <article className="supporting-compact-card" data-reveal>
+      <div className="supporting-card-media">
+        <ProjectImage project={project} sizes="(max-width: 860px) 100vw, 50vw" />
+      </div>
+      <div className="supporting-card-content">
+        <div className="work-meta">
+          <span className="project-role-badge">{project.role}</span>
+          <span className="project-status-tag">{project.status}</span>
+        </div>
+        <h4 className="supporting-card-title">{project.title}</h4>
+        <p className="supporting-card-summary">{project.summary}</p>
         <div className="project-ownership-callout">
           <strong>My Ownership:</strong> <span>{project.formula.personalOwnership}</span>
         </div>
         <ul className="technical-tags" aria-label={`${project.title} technology`}>
           {project.stack.slice(0, 4).map((item) => <li key={item}>{item}</li>)}
         </ul>
-        <ExternalLinks project={project} />
+        <div className="supporting-card-footer">
+          <ExternalLinks project={project} />
+        </div>
       </div>
     </article>
   );
@@ -60,39 +66,59 @@ export default function SelectedEngineeringWork({ projects }: { projects: Projec
   const [jwst, ...supporting] = projects;
 
   return (
-    <section className="section selected-work" id="projects" aria-labelledby="selected-work-title" data-reveal>
-      <SectionHeader
-        index="02"
-        label="Selected engineering work"
-        title="Scientific tools, physics platforms, and autonomous robotics."
-        description="Core technical systems: Problem/Purpose — Product/Features — Application/Results — Direct Technical Ownership."
-      />
-
+    <section className="section selected-work-section" id="projects" aria-labelledby="selected-work-title" data-reveal>
       {jwst ? (
-        <article className="major-project">
-          <div className="major-project-media">
-            <ProjectImage project={jwst} sizes="(max-width: 900px) 100vw, 62vw" />
-          </div>
-          <div className="major-project-copy">
-            <p className="technical-label">{jwst.label}</p>
-            <h3 id="selected-work-title">{jwst.title}</h3>
-            <p>{jwst.summary}</p>
-            <dl>
-              <div><dt>Role & Ownership</dt><dd>{jwst.formula.personalOwnership}</dd></div>
-              <div><dt>Result & Impact</dt><dd>{jwst.formula.teamOutcome}</dd></div>
-            </dl>
-            <div className="data-pipeline" aria-label="JWST Space Explorer data workflow">
-              {['NASA MAST', 'FastAPI + FITS processing', 'Deep Zoom tiles', 'OpenSeadragon + Gemini'].map((step, index) => (
-                <div key={step}><span>{String(index + 1).padStart(2, '0')}</span><strong>{step}</strong></div>
-              ))}
+        <article className="jwst-compact-card" data-reveal>
+          <div className="jwst-compact-grid">
+            <div className="jwst-media-column">
+              <div className="jwst-badge-row">
+                <span className="flagship-primary-tag">Scientific Computing</span>
+                <span className="flagship-status-tag">{jwst.status} · Global Nominee</span>
+              </div>
+              <div className="jwst-image-frame">
+                <ProjectImage project={jwst} sizes="(max-width: 900px) 100vw, 50vw" />
+              </div>
+              <div className="jwst-actions">
+                <ExternalLinks project={jwst} />
+              </div>
             </div>
-            <ExternalLinks project={jwst} />
+
+            <div className="jwst-info-column">
+              <div className="jwst-header-block">
+                <p className="technical-label">{jwst.label}</p>
+                <h3 id="selected-work-title">{jwst.title}</h3>
+                <p className="jwst-summary">{jwst.summary}</p>
+              </div>
+
+              <dl className="jwst-dossier-compact">
+                <div>
+                  <dt>Role & Ownership</dt>
+                  <dd>{jwst.formula.personalOwnership}</dd>
+                </div>
+                <div>
+                  <dt>Result & Impact</dt>
+                  <dd>{jwst.formula.teamOutcome}</dd>
+                </div>
+              </dl>
+
+              <div className="jwst-pipeline-compact">
+                <p className="technical-label">Data & AI Pipeline</p>
+                <div className="jwst-pipeline-steps">
+                  {['NASA MAST', 'FastAPI + FITS', 'Deep Zoom tiles', 'OpenSeadragon + Gemini'].map((step, index) => (
+                    <div className="pipeline-step-pill" key={step}>
+                      <span>0{index + 1}</span>
+                      <strong>{step}</strong>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
         </article>
       ) : null}
 
-      <div className="supporting-project-grid">
-        {supporting.map((project) => <SupportingProject key={project.slug} project={project} />)}
+      <div className="supporting-compact-grid">
+        {supporting.map((project) => <SupportingProjectCard key={project.slug} project={project} />)}
       </div>
     </section>
   );

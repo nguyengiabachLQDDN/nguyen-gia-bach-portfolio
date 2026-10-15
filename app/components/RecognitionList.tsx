@@ -3,17 +3,17 @@ import SectionHeader from './SectionHeader';
 
 function RecognitionRow({ item }: { item: RecognitionItem }) {
   return (
-    <li>
-      <div className="recognition-meta">
-        <span className="recognition-year">{item.year}</span>
+    <li className="honors-row">
+      <div className="honors-meta">
+        <span className="honors-year">{item.year}</span>
         <span className="recognition-level-badge">{item.badge}</span>
       </div>
-      <div className="recognition-award">
-        <h3>{item.title}</h3>
+      <div className="honors-award">
+        <h4>{item.title}</h4>
         {item.context ? <p>{item.context}</p> : null}
-        {item.scope ? <small className="recognition-scope">{item.scope}</small> : null}
+        {item.scope ? <small className="honors-scope">{item.scope}</small> : null}
       </div>
-      <div className="recognition-result">
+      <div className="honors-result">
         <strong>{item.result}</strong>
         {item.evidenceHref ? (
           <a href={item.evidenceHref} target="_blank" rel="noreferrer">
@@ -33,7 +33,7 @@ export default function RecognitionList({
   additionalItems: RecognitionItem[];
 }) {
   return (
-    <section className="section recognition-section" id="honors" aria-labelledby="honors-title" data-reveal>
+    <section className="section honors-section" id="honors" aria-labelledby="honors-title" data-reveal>
       <SectionHeader
         index="01"
         label="Academic honors & awards"
@@ -41,21 +41,28 @@ export default function RecognitionList({
         description="A concise record of top competition finishes and academic honors, grouped by level: Competition — Level — Distinction — Period."
       />
       <h3 className="sr-only" id="honors-title">Academic honors and awards</h3>
-      <ol className="recognition-list">
-        {items.map((item) => (
-          <RecognitionRow item={item} key={`${item.year}-${item.title}`} />
-        ))}
-      </ol>
-      {additionalItems.length ? (
-        <details className="additional-recognition">
-          <summary>Additional academic distinctions <span>+</span></summary>
-          <ol>
-            {additionalItems.map((item) => (
-              <RecognitionRow item={item} key={`${item.year}-${item.title}`} />
-            ))}
-          </ol>
-        </details>
-      ) : null}
+
+      <div className="honors-compact-card">
+        <ol className="honors-compact-list">
+          {items.map((item) => (
+            <RecognitionRow item={item} key={`${item.year}-${item.title}`} />
+          ))}
+        </ol>
+
+        {additionalItems.length ? (
+          <details className="honors-additional-details">
+            <summary>
+              <span>Additional academic distinctions (+{additionalItems.length})</span>
+              <span className="toggle-symbol">+</span>
+            </summary>
+            <ol className="honors-compact-list">
+              {additionalItems.map((item) => (
+                <RecognitionRow item={item} key={`${item.year}-${item.title}`} />
+              ))}
+            </ol>
+          </details>
+        ) : null}
+      </div>
     </section>
   );
 }

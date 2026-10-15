@@ -3,11 +3,11 @@ import SectionHeader from './SectionHeader';
 
 function LeadershipCard({ item }: { item: LeadershipActivity }) {
   return (
-    <li>
-      <div className="leadership-heading">
-        <span>{item.year}</span>
-        <strong>{item.role}</strong>
-        <h3>{item.organization}</h3>
+    <li className="leadership-compact-item">
+      <div className="leadership-item-header">
+        <span className="leadership-year">{item.year}</span>
+        <strong className="leadership-role">{item.role}</strong>
+        <h4>{item.organization}</h4>
         <p className="leadership-scope">Scope: {item.scope}</p>
       </div>
       <p className="leadership-work">{item.coreWork}</p>
@@ -16,7 +16,7 @@ function LeadershipCard({ item }: { item: LeadershipActivity }) {
         <p><strong>{item.metrics}</strong></p>
       </div>
       {item.href ? (
-        <a href={item.href} target="_blank" rel="noreferrer" aria-label={`View evidence for ${item.organization}`}>
+        <a className="leadership-evidence-link" href={item.href} target="_blank" rel="noreferrer" aria-label={`View evidence for ${item.organization}`}>
           Evidence ↗
         </a>
       ) : null}
@@ -38,28 +38,34 @@ export default function LeadershipList({ items }: { items: LeadershipActivity[] 
       />
       <h3 className="sr-only" id="leadership-title">Leadership and extracurricular activities</h3>
 
-      <div className="leadership-group-wrapper">
-        <div className="leadership-group-header">
-          <p className="technical-label">Technical & Team Leadership</p>
-          <h4>Accountability in competitive engineering sprints & robotics challenges</h4>
+      <div className="leadership-cards-wrapper">
+        {/* Card 1: Technical & Team Leadership */}
+        <div className="leadership-compact-card">
+          <div className="leadership-compact-header">
+            <span className="technical-label">Group 01</span>
+            <h4>Technical & Team Leadership</h4>
+            <p>Accountability in competitive engineering sprints & robotics challenges</p>
+          </div>
+          <ol className="leadership-compact-grid">
+            {leadershipItems.map((item) => (
+              <LeadershipCard item={item} key={`${item.organization}-${item.role}`} />
+            ))}
+          </ol>
         </div>
-        <ol className="leadership-list">
-          {leadershipItems.map((item) => (
-            <LeadershipCard item={item} key={`${item.organization}-${item.role}`} />
-          ))}
-        </ol>
-      </div>
 
-      <div className="leadership-group-wrapper" style={{ marginTop: '48px' }}>
-        <div className="leadership-group-header">
-          <p className="technical-label">Community & Academic Service</p>
-          <h4>Social responsibility, student mentorship, and charitable stewardship</h4>
+        {/* Card 2: Community & Academic Service */}
+        <div className="leadership-compact-card">
+          <div className="leadership-compact-header">
+            <span className="technical-label">Group 02</span>
+            <h4>Community & Academic Service</h4>
+            <p>Social responsibility, student mentorship, and charitable stewardship</p>
+          </div>
+          <ol className="leadership-compact-grid">
+            {communityItems.map((item) => (
+              <LeadershipCard item={item} key={`${item.organization}-${item.role}`} />
+            ))}
+          </ol>
         </div>
-        <ol className="leadership-list">
-          {communityItems.map((item) => (
-            <LeadershipCard item={item} key={`${item.organization}-${item.role}`} />
-          ))}
-        </ol>
       </div>
     </section>
   );

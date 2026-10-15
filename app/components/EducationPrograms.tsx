@@ -3,11 +3,18 @@ import SectionHeader from './SectionHeader';
 
 function ProgramRow({ program }: { program: ProgramItem }) {
   return (
-    <li>
-      <span>{program.date}</span>
-      <div><h3>{program.title}</h3><p>{program.organization}</p></div>
-      <p>{program.summary}</p>
-      {program.credential ? <a href={program.credential.src} target="_blank" rel="noreferrer">Credential ↗</a> : null}
+    <li className="program-compact-row">
+      <span className="program-date">{program.date}</span>
+      <div className="program-main">
+        <h4>{program.title}</h4>
+        <p className="program-org">{program.organization}</p>
+        <p className="program-desc">{program.summary}</p>
+      </div>
+      {program.credential ? (
+        <a className="program-cred-link" href={program.credential.src} target="_blank" rel="noreferrer">
+          Credential ↗
+        </a>
+      ) : null}
     </li>
   );
 }
@@ -25,23 +32,63 @@ export default function EducationPrograms({
   return (
     <section className="section education-section" id="education" aria-labelledby="education-title" data-reveal>
       <SectionHeader
-        index="07"
+        index="06"
         label="Education & selected programs"
         title="Academic foundation and continued learning."
+        description="Core high school institution, specialized physics curriculum, and independent university-level coursework."
       />
-      <div className="education-line">
-        <span>Education</span>
-        <h3 id="education-title">{education}</h3>
-      </div>
-      <div className="programs-compact">
-        <p className="technical-label">Selected programs</p>
-        <ol>{selected.map((program) => <ProgramRow program={program} key={program.title} />)}</ol>
-        {additional.length ? (
-          <details>
-            <summary>Additional technical activities <span>+</span></summary>
-            <ol>{additional.map((program) => <ProgramRow program={program} key={program.title} />)}</ol>
-          </details>
-        ) : null}
+      <h3 className="sr-only" id="education-title">Education and training</h3>
+
+      <div className="education-compact-card">
+        <div className="education-compact-grid">
+          {/* Left Column: Academic Foundation */}
+          <div className="education-school-column">
+            <span className="technical-label">Academic Institution</span>
+            <h4 className="school-name">Le Quy Don High School for the Gifted</h4>
+            <p className="school-detail">{education}</p>
+            <div className="school-specs-box">
+              <div>
+                <dt>Curriculum</dt>
+                <dd>Specialized Physics Class (Lớp chuyên Vật lý)</dd>
+              </div>
+              <div>
+                <dt>Academic Standing</dt>
+                <dd>GPA 9.5 / 10.0 · Excellent Student</dd>
+              </div>
+              <div>
+                <dt>Focus Field</dt>
+                <dd>Aerospace & Electrical Engineering</dd>
+              </div>
+              <div>
+                <dt>Location</dt>
+                <dd>Da Nang, Vietnam</dd>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Column: Selected Programs */}
+          <div className="education-programs-column">
+            <span className="technical-label">Selected Coursework & Programs</span>
+            <ol className="programs-compact-list">
+              {selected.map((program) => (
+                <ProgramRow program={program} key={program.title} />
+              ))}
+            </ol>
+            {additional.length ? (
+              <details className="programs-additional-details">
+                <summary>
+                  <span>Additional technical coursework (+{additional.length})</span>
+                  <span className="toggle-symbol">+</span>
+                </summary>
+                <ol className="programs-compact-list">
+                  {additional.map((program) => (
+                    <ProgramRow program={program} key={program.title} />
+                  ))}
+                </ol>
+              </details>
+            ) : null}
+          </div>
+        </div>
       </div>
     </section>
   );
