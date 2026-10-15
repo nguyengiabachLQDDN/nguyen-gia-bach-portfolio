@@ -49,7 +49,7 @@ export default function EducationPrograms({
             <div className="school-specs-box">
               <div>
                 <dt>Curriculum</dt>
-                <dd>Specialized Physics Class (Lớp chuyên Vật lý)</dd>
+                <dd>Specialized Physics Class</dd>
               </div>
               <div>
                 <dt>Academic Standing</dt>

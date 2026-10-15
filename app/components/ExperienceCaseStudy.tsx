@@ -105,7 +105,7 @@ export default function ExperienceCaseStudy({ experience }: { experience: Engine
           </div>
 
           <div className="experience-content-block">
-            <h5>Key Responsibilities (Nhiệm vụ chính)</h5>
+            <h5>Key Responsibilities</h5>
             <ul className="experience-checklist">
               {experience.keyResponsibilities.map((item) => (
                 <li key={item}>{item}</li>
@@ -114,7 +114,7 @@ export default function ExperienceCaseStudy({ experience }: { experience: Engine
           </div>
 
           <div className="experience-content-block">
-            <h5>Competencies & Field Skills (Kỹ năng tiếp thu)</h5>
+            <h5>Competencies & Field Skills</h5>
             <ul className="experience-tags-list">
               {experience.skillsLearned.map((item) => (
                 <li key={item}>{item}</li>
@@ -123,7 +123,7 @@ export default function ExperienceCaseStudy({ experience }: { experience: Engine
           </div>
 
           <div className="experience-outcomes-compact">
-            <h5>Verified Outcomes (Kết quả thực tế)</h5>
+            <h5>Verified Outcomes</h5>
             <ul>
               {experience.concreteOutcomes.map((item) => (
                 <li key={item}>
