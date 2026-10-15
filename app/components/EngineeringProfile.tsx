@@ -12,21 +12,33 @@ export default function EngineeringProfile({ groups }: { groups: CapabilityGroup
         description="Tools are useful here because they make a system possible—not as isolated proficiency claims."
       />
       <h3 className="sr-only" id="profile-title">Engineering capabilities</h3>
-      <div className="capability-list">
-        {groups.map((group, index) => (
-          <article key={group.title}>
-            <div className="capability-copy">
-              <span>{String(index + 1).padStart(2, '0')}</span>
-              <h3>{group.title}</h3>
-              <p>{group.statement}</p>
-            </div>
-            <ul className="capability-skills">{group.skills.map((skill) => <li key={skill}>{skill}</li>)}</ul>
-            <div className="capability-evidence">
-              <small>Evidence</small>
-              {group.evidence.map((item) => <Link href={item.href} key={item.href}>{item.label} <span>↗</span></Link>)}
-            </div>
-          </article>
-        ))}
+      <div className="profile-compact-card">
+        <div className="capability-compact-grid">
+          {groups.map((group, index) => (
+            <article className="capability-mini-card" key={group.title}>
+              <div className="capability-mini-header">
+                <span className="capability-index">0{index + 1}</span>
+                <h4>{group.title}</h4>
+              </div>
+              <p className="capability-mini-statement">{group.statement}</p>
+              <ul className="capability-mini-tags">
+                {group.skills.map((skill) => (
+                  <li key={skill}>{skill}</li>
+                ))}
+              </ul>
+              <div className="capability-mini-evidence">
+                <small>Validated in:</small>
+                <div className="evidence-links-wrap">
+                  {group.evidence.map((item) => (
+                    <Link href={item.href} key={item.href}>
+                      {item.label} <span>↗</span>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
       </div>
     </section>
   );
