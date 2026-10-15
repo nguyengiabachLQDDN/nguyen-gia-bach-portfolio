@@ -11,8 +11,7 @@ export default function ExperienceCaseStudy({ experience }: { experience: Engine
       <SectionHeader
         index="04"
         label="Engineering experience"
-        title="Supervised industrial practice & urban infrastructure."
-        description="A 6-month placement focused on industrial telemetry, equipment calibration, blueprint verification, and operational acceptance."
+        title="Field Engineering Intern: IoT telemetry & municipal infrastructure."
       />
       <h3 className="sr-only" id="experience-title">Engineering experience — {experience.company}</h3>
 

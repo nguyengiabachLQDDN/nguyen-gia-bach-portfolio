@@ -893,11 +893,11 @@ const learningFocus = ['System design', 'Scientific ML', 'Sensor fusion', 'CI wo
 
 const engineeringExperience: EngineeringExperience = {
   company: 'D&D Investment & Technology Development JSC',
-  role: 'Engineering & Project Supervision Intern',
+  role: 'Field Engineering Intern',
   period: '15 Feb — 20 Aug 2026',
   project: 'ENSURE Da Nang',
   projectContext: 'Smart urban resilience infrastructure · Da Nang People’s Committee + KOICA',
-  summary: 'A 6-month supervised engineering placement focused on field deployment, equipment calibration, system integration, and data pipeline monitoring for Da Nang smart city infrastructure.',
+  summary: 'A 6-month engineering placement focused on field deployment, equipment calibration, system integration, and data pipeline monitoring for Da Nang smart city infrastructure.',
   workflow: ['Site assessment & survey', 'Sensor & equipment deployment', 'System integration & data transmission', 'Operational monitoring & acceptance'],
   exposure: [
     'Monitoring infrastructure at the Da Nang Intelligent Operations Center (IOC) and field measurement sites.',
