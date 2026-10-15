@@ -38,7 +38,6 @@ export default function RecognitionList({
         index="01"
         label="Academic honors & awards"
         title="Distinctions, competitions, and verified honors."
-        description="A concise record of top competition finishes and academic honors, grouped by level: Competition — Level — Distinction — Period."
       />
       <h3 className="sr-only" id="honors-title">Academic honors and awards</h3>
 
