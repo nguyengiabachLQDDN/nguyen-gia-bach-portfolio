@@ -1,88 +1,52 @@
 import Image from 'next/image';
 import type { EngineeringExperience } from '../content';
+import SectionHeader from './SectionHeader';
 
 export default function ExperienceCaseStudy({ experience }: { experience: EngineeringExperience }) {
+  const featuredPhotos = experience.media.slice(0, 2);
+  const remainingPhotos = experience.media.slice(2);
+
   return (
-    <section className="experience-section" id="experience" aria-labelledby="experience-title" data-reveal>
-      <div className="experience-shell">
-        <header className="experience-heading">
-          <p className="section-index">04 / Engineering experience</p>
-          <h2>Supervised industrial practice & smart city infrastructure.</h2>
-          <p>A 6-month placement focused on industrial telemetry, site assessment, equipment calibration, and operational acceptance.</p>
-        </header>
+    <section className="section experience-section" id="experience" aria-labelledby="experience-title" data-reveal>
+      <SectionHeader
+        index="04"
+        label="Engineering experience"
+        title="Supervised industrial practice & urban infrastructure."
+        description="A 6-month placement focused on industrial telemetry, equipment calibration, blueprint verification, and operational acceptance."
+      />
+      <h3 className="sr-only" id="experience-title">Engineering experience — {experience.company}</h3>
 
-        <div className="experience-case">
-          <header>
-            <p className="technical-label">{experience.project}</p>
-            <h3 id="experience-title">{experience.company}</h3>
-            <div className="experience-meta">
-              <span>{experience.role}</span>
-              <span>{experience.period}</span>
-            </div>
-            <p>{experience.summary}</p>
-          </header>
+      <div className="experience-compact-card">
+        {/* Left Column: Organization, Context & Visual Proof */}
+        <div className="experience-left-column">
+          <div className="experience-org-badge">
+            <span className="experience-period-badge">{experience.period}</span>
+            <span className="experience-type-badge">6-Month Placement</span>
+          </div>
 
-          <div className="experience-project-note">
-            <span>Project context</span>
+          <div className="experience-org-info">
+            <h4 className="experience-company-name">{experience.company}</h4>
+            <p className="experience-role-title">{experience.role}</p>
+          </div>
+
+          <div className="experience-project-box">
+            <span className="technical-label">Project Focus</span>
             <strong>{experience.project}</strong>
             <p>{experience.projectContext}</p>
           </div>
 
-          <div className="experience-workflow" aria-label="Engineering project workflow">
-            <p>Supervised engineering workflow</p>
-            <ol>
-              {experience.workflow.map((step, index) => (
-                <li key={step}>
-                  <span>{String(index + 1).padStart(2, '0')}</span>
-                  {step}
-                </li>
-              ))}
-            </ol>
-          </div>
-
-          <div className="experience-details">
-            <div className="experience-exposure">
-              <h4>Key Responsibilities (Nội dung công việc)</h4>
-              <ul>
-                {experience.keyResponsibilities.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            </div>
-            <div>
-              <h4>Skills & Competencies Acquired (Kỹ năng tiếp thu)</h4>
-              <ul>
-                {experience.skillsLearned.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-            </div>
-          </div>
-
-          <div className="experience-outcomes-block">
-            <h4>Concrete Outcomes & Impact (Kết quả đạt được)</h4>
-            <ul>
-              {experience.concreteOutcomes.map((item) => (
-                <li key={item}><strong>{item}</strong></li>
-              ))}
-            </ul>
-          </div>
-
-          {experience.media && experience.media.length > 0 ? (
-            <div className="experience-gallery-wrap">
-              <div className="experience-gallery-header">
-                <p className="technical-label">Field Documentation & Photographic Evidence</p>
-                <p>On-site equipment deployment, telemetry verification, and engineering supervision in Da Nang.</p>
-              </div>
-              <div className="experience-photo-grid">
-                {experience.media.map((photo, index) => (
-                  <figure className="experience-photo-item" key={photo.src}>
-                    <div className="experience-photo-frame">
+          {featuredPhotos.length > 0 ? (
+            <div className="experience-featured-photos">
+              <span className="technical-label">On-site Field Documentation</span>
+              <div className="experience-photo-pair">
+                {featuredPhotos.map((photo, index) => (
+                  <figure className="experience-compact-photo" key={photo.src}>
+                    <div className="experience-compact-frame">
                       <Image
                         src={photo.src}
                         alt={photo.alt}
                         fill
-                        sizes="(max-width: 760px) 100vw, 33vw"
+                        sizes="(max-width: 860px) 100vw, 240px"
                         style={{ objectFit: 'cover', objectPosition: 'center' }}
                       />
                     </div>
@@ -93,8 +57,81 @@ export default function ExperienceCaseStudy({ experience }: { experience: Engine
                   </figure>
                 ))}
               </div>
+
+              {remainingPhotos.length > 0 ? (
+                <details className="experience-more-photos">
+                  <summary>
+                    View additional site documentation (+{remainingPhotos.length}) <span>+</span>
+                  </summary>
+                  <div className="experience-photo-pair" style={{ marginTop: '12px' }}>
+                    {remainingPhotos.map((photo, index) => (
+                      <figure className="experience-compact-photo" key={photo.src}>
+                        <div className="experience-compact-frame">
+                          <Image
+                            src={photo.src}
+                            alt={photo.alt}
+                            fill
+                            sizes="(max-width: 860px) 100vw, 240px"
+                            style={{ objectFit: 'cover', objectPosition: 'center' }}
+                          />
+                        </div>
+                        <figcaption>
+                          <span>0{index + 3}</span>
+                          <p>{photo.caption}</p>
+                        </figcaption>
+                      </figure>
+                    ))}
+                  </div>
+                </details>
+              ) : null}
             </div>
           ) : null}
+        </div>
+
+        {/* Right Column: Work, Skills & Outcomes */}
+        <div className="experience-right-column">
+          <p className="experience-lead-summary">{experience.summary}</p>
+
+          <div className="experience-workflow-compact" aria-label="Supervised workflow">
+            <span className="technical-label">Observed Deployment Workflow</span>
+            <div className="workflow-steps-row">
+              {experience.workflow.map((step, index) => (
+                <div className="workflow-step-pill" key={step}>
+                  <span>0{index + 1}</span>
+                  <p>{step}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="experience-content-block">
+            <h5>Key Responsibilities (Nhiệm vụ chính)</h5>
+            <ul className="experience-checklist">
+              {experience.keyResponsibilities.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="experience-content-block">
+            <h5>Competencies & Field Skills (Kỹ năng tiếp thu)</h5>
+            <ul className="experience-tags-list">
+              {experience.skillsLearned.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="experience-outcomes-compact">
+            <h5>Verified Outcomes (Kết quả thực tế)</h5>
+            <ul>
+              {experience.concreteOutcomes.map((item) => (
+                <li key={item}>
+                  <strong>{item}</strong>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
     </section>
