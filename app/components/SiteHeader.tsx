@@ -2,18 +2,17 @@
 
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
-import { navigation as navigationCopy } from '../i18n';
 
 const navigation = [
-  { id: 'work', label: navigationCopy.work },
-  { id: 'achievements', label: navigationCopy.achievements },
-  { id: 'capabilities', label: navigationCopy.capabilities },
-  { id: 'programs', label: navigationCopy.programs },
-  { id: 'community', label: navigationCopy.community },
+  { id: 'honors', label: 'Honors' },
+  { id: 'work', label: 'Projects' },
+  { id: 'leadership', label: 'Leadership' },
+  { id: 'experience', label: 'Experience' },
+  { id: 'contact', label: 'Contact' },
 ];
 
 export default function SiteHeader({ home = false }: { home?: boolean }) {
-  const [active, setActive] = useState(home ? 'work' : '');
+  const [active, setActive] = useState(home ? 'honors' : '');
 
   useEffect(() => {
     if (!home) return;
@@ -25,7 +24,7 @@ export default function SiteHeader({ home = false }: { home?: boolean }) {
     const updateActive = () => {
       frame = 0;
       const readingLine = window.innerHeight * 0.3;
-      let current = sections[0]?.id ?? 'work';
+      let current = sections[0]?.id ?? 'honors';
 
       sections.forEach((section) => {
         if (section.getBoundingClientRect().top <= readingLine) current = section.id;
@@ -54,16 +53,21 @@ export default function SiteHeader({ home = false }: { home?: boolean }) {
   return (
     <header className="site-header">
       <nav aria-label="Primary navigation">
-        {navigation.map((item) => (
-          <Link
-            key={item.id}
-            href={`/#${item.id}`}
-            className={home && active === item.id ? 'active' : ''}
-            aria-current={home && active === item.id ? 'location' : undefined}
-          >
-            {item.label}
-          </Link>
-        ))}
+        <Link className="site-brand" href="/#top" aria-label="Nguyen Gia Bach — home">
+          Bach Nguyen
+        </Link>
+        <div className="site-nav-links">
+          {navigation.map((item) => (
+            <Link
+              key={item.id}
+              href={`/#${item.id}`}
+              className={home && active === item.id ? 'active' : ''}
+              aria-current={home && active === item.id ? 'true' : undefined}
+            >
+              {item.label}
+            </Link>
+          ))}
+        </div>
       </nav>
     </header>
   );

@@ -22,7 +22,7 @@ export function getRootMetadata(): Metadata {
     metadataBase: new URL(SITE_ORIGIN),
     title: { default: metadataCopy.title, template: '%s' },
     description: metadataCopy.description,
-    keywords: ['Nguyen Gia Bach', 'student engineer', 'physics', 'software', 'robotics', 'astronomy'],
+    keywords: ['Nguyen Gia Bach', 'engineering student', 'physics', 'robotics', 'scientific computing', 'assistive technology', 'astronomy'],
     authors: [{ name: 'Nguyen Gia Bach' }],
     creator: 'Nguyen Gia Bach',
     alternates: { canonical: '/' },

@@ -2,14 +2,15 @@
 
 ![Nguyen Gia Bach portfolio social preview](public/og.png)
 
-An English-language portfolio for Nguyen Gia Bach, a student engineer working at the intersection of physics, software, and robotics.
+An English-language engineering portfolio for Nguyen Gia Bach, focused on physics, sensing, robotics, scientific computing, and documented project work.
 
 **Live website:** [nguyen-gia-bach-portfolio.vercel.app](https://nguyen-gia-bach-portfolio.vercel.app)
 
 ## Highlights
 
-- English-only content with focused, direct navigation
-- Four detailed project case studies: JWST Space Explorer, AstroVerse, eSight Project, and Vibe Coding Platform
+- Technical-editorial homepage with eSight as the flagship independent engineering project
+- Selected engineering work, supervised engineering experience, recognition, capability evidence, leadership, and compact academic programs
+- Four detailed project case studies: eSight, JWST Space Explorer, AstroVerse, and Vibe Coding Platform
 - English metadata, canonical URLs, Open Graph content, JSON-LD, robots, and sitemap
 - Responsive, keyboard-accessible interface with reduced-motion support
 - Purposeful image placeholders that can be replaced without changing the layout
@@ -21,7 +22,8 @@ An English-language portfolio for Nguyen Gia Bach, a student engineer working at
 | `/` | Portfolio homepage |
 | `/projects/jwst-deep-space-explorer` | JWST Space Explorer case study |
 | `/projects/astroverse` | AstroVerse case study |
-| `/projects/esight-or-robotics` | eSight and robotics case study |
+| `/projects/esight` | eSight engineering design case study |
+| `/projects/esight-or-robotics` | Permanent redirect to the eSight case study |
 | `/projects/vibe-coding-platform` | Vibe Coding Platform case study |
 
 ## Technology

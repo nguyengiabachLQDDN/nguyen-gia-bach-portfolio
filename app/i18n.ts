@@ -1,9 +1,8 @@
 export const navigation = {
   work: 'Work',
-  capabilities: 'Capabilities',
-  achievements: 'Achievements',
-  programs: 'Programs',
-  community: 'Community',
+  experience: 'Experience',
+  profile: 'Profile',
+  contact: 'Contact',
 } as const;
 
 // TODO(profile): Add the current grade / expected graduation year and a more
@@ -231,18 +230,18 @@ export const caseCopy: CaseCopy = {
 export const mediaComingSoon = 'Image coming soon';
 
 export const notFoundCopy = {
-  eyebrow: 'Error / 404',
-  title: 'Signal lost.',
-  message: 'This coordinate does not exist in the current observation map.',
-  action: 'Return home',
+  eyebrow: '404 / Page not found',
+  title: 'Nothing at this address.',
+  message: 'The page may have moved, or the address may be incomplete.',
+  action: 'Return to portfolio',
 } as const;
 
 export const metadataCopy = {
-  title: 'Nguyen Gia Bach — Engineering Student',
-  description: 'Portfolio of Nguyen Gia Bach, an engineering student experienced in physics and robotics, with interests in aerospace and electrical engineering.',
-  shortDescription: 'Aerospace Engineering · Electrical Engineering',
-  imageAlt: 'Nguyen Gia Bach — Aerospace and Electrical Engineering',
-  personDescription: 'Engineering student experienced in physics and robotics, with interests in aerospace and electrical engineering.',
+  title: 'Nguyen Gia Bach — Engineering, Physics & Computing',
+  description: 'Engineering portfolio of Nguyen Gia Bach, featuring assistive robotics, scientific computing, astronomy software, and supervised engineering experience.',
+  shortDescription: 'Engineering · Physics · Computing',
+  imageAlt: 'Nguyen Gia Bach — Engineering, Physics and Computing portfolio',
+  personDescription: 'Engineering-oriented physics student building physical and computational systems through sensing, robotics, and scientific computing.',
   school: 'Le Quy Don High School for the Gifted, Da Nang',
 } as const;
 

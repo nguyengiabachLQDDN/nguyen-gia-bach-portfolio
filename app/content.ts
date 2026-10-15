@@ -18,6 +18,14 @@ export interface MediaAsset {
   sourceHref?: string;
 }
 
+export interface ProjectFormula {
+  problem: string;
+  product: string;
+  application: string;
+  teamOutcome: string;
+  personalOwnership: string;
+}
+
 export interface Project {
   number: string;
   slug: string;
@@ -39,6 +47,7 @@ export interface Project {
   variant: ProjectVariant;
   cover: MediaAsset;
   gallery: MediaAsset[];
+  formula: ProjectFormula;
 }
 
 export interface Achievement {
@@ -84,6 +93,66 @@ export interface SkillGroup {
   items: SkillItem[];
 }
 
+export interface ExperienceMediaAsset {
+  src: string;
+  alt: string;
+  caption: string;
+}
+
+export interface EngineeringExperience {
+  company: string;
+  role: string;
+  period: string;
+  project: string;
+  projectContext: string;
+  summary: string;
+  workflow: string[];
+  exposure: string[];
+  involvement: string[];
+  keyResponsibilities: string[];
+  skillsLearned: string[];
+  concreteOutcomes: string[];
+  media: ExperienceMediaAsset[];
+}
+
+export type RecognitionLevel = 'Global' | 'National' | 'City' | 'University' | 'School';
+
+export interface RecognitionItem {
+  year: string;
+  level: RecognitionLevel;
+  badge: string;
+  title: string;
+  result: string;
+  context: string;
+  scope?: string;
+  evidenceHref?: string;
+  evidenceLabel?: string;
+}
+
+export interface CapabilityEvidence {
+  label: string;
+  href: string;
+}
+
+export interface CapabilityGroup {
+  title: string;
+  statement: string;
+  skills: string[];
+  evidence: CapabilityEvidence[];
+}
+
+export interface LeadershipActivity {
+  year: string;
+  category: 'leadership' | 'extracurricular';
+  role: string;
+  scope: string;
+  organization: string;
+  coreWork: string;
+  metrics: string;
+  result: string;
+  href?: string;
+}
+
 interface ProjectBase {
   number: string;
   slug: string;
@@ -111,12 +180,13 @@ interface ProjectCopy {
   linkLabels: string[];
   cover: Omit<MediaAsset, 'src'>;
   gallery: Array<Omit<MediaAsset, 'src'>>;
+  formula: ProjectFormula;
 }
 
-type ProjectCopyList = [ProjectCopy, ProjectCopy, ProjectCopy, ProjectCopy];
+type ProjectCopyList = [ProjectCopy, ProjectCopy, ProjectCopy, ProjectCopy, ProjectCopy];
 type SkillGroupList = [SkillGroup, SkillGroup, SkillGroup, SkillGroup];
 
-const projectBases: [ProjectBase, ProjectBase, ProjectBase, ProjectBase] = [
+const projectBases: [ProjectBase, ProjectBase, ProjectBase, ProjectBase, ProjectBase] = [
   {
     number: '01',
     slug: 'jwst-deep-space-explorer',
@@ -146,7 +216,7 @@ const projectBases: [ProjectBase, ProjectBase, ProjectBase, ProjectBase] = [
   },
   {
     number: '03',
-    slug: 'esight-or-robotics',
+    slug: 'esight',
     variant: 'robotics',
     linkTargets: [{ href: 'https://www.facebook.com/esightproject', cardRole: 'primary' }],
     coverSrc: '/images/projects/esight/buzzer-alert-system.webp',
@@ -160,6 +230,25 @@ const projectBases: [ProjectBase, ProjectBase, ProjectBase, ProjectBase] = [
   },
   {
     number: '04',
+    slug: 'fast-maze-runner',
+    variant: 'robotics',
+    linkTargets: [
+      { href: '/images/achievements/fast-maze-runner/02-third-prize.webp', cardRole: 'primary' },
+      { href: '/images/achievements/fast-maze-runner/01-team-award.webp', cardRole: 'secondary' },
+    ],
+    coverSrc: '/images/achievements/fast-maze-runner/05-robot-prototype.webp',
+    gallerySrc: [
+      '/images/achievements/fast-maze-runner/01-team-award.webp',
+      '/images/achievements/fast-maze-runner/02-third-prize.webp',
+      '/images/achievements/fast-maze-runner/03-maze-preparation.webp',
+      '/images/achievements/fast-maze-runner/04-competition-maze.webp',
+      '/images/achievements/fast-maze-runner/06-power-system.webp',
+      '/images/achievements/fast-maze-runner/07-electronics-assembly.webp',
+      '/images/achievements/fast-maze-runner/08-sensor-system.webp',
+    ],
+  },
+  {
+    number: '05',
     slug: 'vibe-coding-platform',
     variant: 'vibe',
     linkTargets: [
@@ -175,10 +264,10 @@ const projectBases: [ProjectBase, ProjectBase, ProjectBase, ProjectBase] = [
 ];
 
 const featuredProjectSlugs = [
+  'esight',
   'jwst-deep-space-explorer',
   'astroverse',
-  'esight-or-robotics',
-  'vibe-coding-platform',
+  'fast-maze-runner',
 ] as const;
 
 const projectCopy: ProjectCopyList = [
@@ -224,6 +313,13 @@ const projectCopy: ProjectCopyList = [
       { alt: 'Reserved image for the JWST OpenSeadragon viewer and Gemini assistant.', caption: 'Deep Zoom exploration and AI-assisted inspection in the browser.' },
       { alt: 'Reserved image for the NASA MAST, FITS, and FastAPI processing workflow.', caption: 'The processing path from public observation to browser-ready tiles.' },
     ],
+    formula: {
+      problem: 'Public access to raw scientific JWST observations is obstructed by massive multi-gigabyte FITS file sizes and specialist desktop software requirements.',
+      product: 'Full-stack astronomical explorer with automated NASA MAST retrieval, FastAPI tile conversion pipeline (Astropy + pyvips), and an OpenSeadragon viewer with contextual Gemini AI.',
+      application: 'Enables high-resolution, interactive deep-space observation inspection in standard web browsers with instant AI-driven astronomical analysis.',
+      teamOutcome: 'Honored as a 2025 NASA Space Apps Global Nominee (Top 10% worldwide from 11,500+ entries) developed within a 48-hour competitive sprint.',
+      personalOwnership: 'Team Lead & Backend Architect: conceived system design, engineered the Python/FastAPI data ingestion and FITS-to-DeepZoom tiling pipeline, and wired the Gemini API context layer.',
+    },
   },
   {
     title: 'AstroVerse',
@@ -290,6 +386,13 @@ const projectCopy: ProjectCopyList = [
         objectPosition: 'center 45%',
       },
     ],
+    formula: {
+      problem: 'Science learners struggle to transition from passive reading to empirical inquiry due to fragmented tools lacking physical feedback or continuous review.',
+      product: 'Integrated digital observatory combining dynamic celestial mapping, verified NASA NEO live feeds, an interactive habitable exoplanet simulation lab, and a spaced-repetition notebook.',
+      application: 'Deployed production web application providing self-directed astrophysics exploration with local-first evidence tracking.',
+      teamOutcome: 'Fully functional, multi-module astronomy learning platform deployed publicly on Vercel with responsive physics simulations.',
+      personalOwnership: 'Solo Product Developer: engineered 100% of the TypeScript codebase, responsive interfaces, planetary atmospheric calculation models, and client-side data persistence.',
+    },
   },
   {
     title: 'eSight Project',
@@ -363,6 +466,69 @@ const projectCopy: ProjectCopyList = [
         objectFit: 'contain',
       },
     ],
+    formula: {
+      problem: 'Visually impaired pedestrians lack intuitive, non-startling early detection of overhead and ground obstacles during outdoor and indoor navigation.',
+      product: 'Physical smart cane prototype integrating ultrasonic rangefinders and computer vision, processed via Arduino to generate 3-stage graduated buzzer feedback (safe silence, progressive pulses, continuous alert).',
+      application: 'Tested across indoor corridor obstacle setups; demonstrated at the school Science & Engineering Fair.',
+      teamOutcome: 'Completed working hardware-software cane prototype and earned Third Prize at the school Science & Engineering Competition.',
+      personalOwnership: 'Project Lead & Embedded Developer: formulated the physical problem, built the Arduino circuitry, implemented the distance-to-frequency algorithm, and conducted hardware iteration tests.',
+    },
+  },
+  {
+    title: 'FAST Maze Runner',
+    label: 'Autonomous robotics · Third Prize',
+    status: 'Completed',
+    date: 'April 2025',
+    role: 'Robotics Team Lead · The Physicians',
+    summary: 'An autonomous maze-solving differential-drive robot utilizing ultrasonic sensor arrays, dedicated power regulation, and dynamic pathfinding algorithms to solve unmapped mazes.',
+    featuredHighlights: [
+      'Multi-directional ultrasonic distance sensing for continuous obstacle and corridor detection.',
+      'Custom power distribution protecting logic controller from DC motor stall-current voltage dips.',
+      'Dynamic decision-tree algorithm solving unmapped grid mazes in competitive trial runs.',
+    ],
+    challenge: 'Solving an unmapped physical labyrinth requires real-time sensing, precise turning actuation, and collision-free path decision logic under aggressive battery and timing constraints.',
+    approach: 'Our team built a differential-drive robot chassis with an Arduino controller, high-torque geared motors, and three ultrasonic sensors. The control software samples obstacle clearances, detects wall junctions, and executes a modified wall-following and junction-priority traversal algorithm.',
+    contributions: [
+      'Led Team “The Physicians” across hardware integration, electronic testing, and competition trials.',
+      'Designed the multi-sensor placement layout and motor driver wiring to eliminate electromagnetic noise.',
+      'Developed and calibrated the maze exploration and junction-selection state machine in C++.',
+      'Secured Third Prize at the FAST Robotics Maze Solver Challenge 2025 at Danang University of Technology.',
+    ],
+    decisions: [
+      { title: 'Separate motor and logic power', description: 'Used dual power lines and filtering capacitors to prevent MCU brownout resets when DC motors draw peak current during quick turns.' },
+      { title: 'Three-point sensor array', description: 'Positioned front, left, and right ultrasonic sensors at 45-degree angled axes to detect diagonal corridors before committing to turns.' },
+      { title: 'Dynamic speed throttling', description: 'Reduced forward drive speed when corridor margins narrowed below safe thresholds to maintain heading accuracy.' },
+    ],
+    outcomes: [
+      'Awarded Third Prize at FAST Robotics Maze Solver Challenge 2025.',
+      'Achieved zero collision faults across all official competition runs.',
+      'Validated end-to-end autonomous navigation combining physical assembly, sensing, and real-time control.',
+    ],
+    lessons: 'In competitive robotics, mechanical symmetry and clean power delivery matter just as much as pathfinding code. Clean sensor inputs made the software logic trivial to tune on competition day.',
+    stack: ['Arduino', 'C++', 'Ultrasonic Sensors', 'DC Motors', 'L298N Driver', 'Autonomous Navigation', 'Robotics'],
+    linkLabels: ['View certificate', 'Team award'],
+    cover: {
+      alt: 'FAST Maze Runner autonomous robot prototype with ultrasonic sensors and electronics assembly.',
+      caption: 'The completed maze-solving robot before official trial runs.',
+      objectPosition: 'center 50%',
+      objectFit: 'cover',
+    },
+    gallery: [
+      { alt: 'Team The Physicians receiving Third Prize at FAST Maze Runner 2025.', caption: 'Award ceremony — Third Prize recognition for Team The Physicians.', objectFit: 'cover', objectPosition: 'center 47%' },
+      { alt: 'Third Prize certificate presented by FAST, Danang University of Technology.', caption: 'Third Prize certificate of achievement.', objectFit: 'contain', objectPosition: 'center' },
+      { alt: 'Calibrating the robot prototype beside the competition maze course.', caption: 'Testing sensor thresholds beside the official modular maze.', objectFit: 'cover', objectPosition: 'center' },
+      { alt: 'The modular competition maze layout with intersections and turns.', caption: 'Official competition maze environment.', objectFit: 'cover', objectPosition: 'center' },
+      { alt: 'Close-up of battery pack, motor drivers, and chassis wiring.', caption: 'Drivetrain, power regulation, and chassis mechanics.', objectFit: 'cover', objectPosition: 'center' },
+      { alt: 'Top-down view of electronics layout and controller wiring.', caption: 'Controller wiring and board integration.', objectFit: 'cover', objectPosition: 'center' },
+      { alt: 'Front-facing view of the ultrasonic sensor array.', caption: 'Front and angled ultrasonic sensor mounts.', objectFit: 'cover', objectPosition: 'center' },
+    ],
+    formula: {
+      problem: 'Autonomous vehicle navigation and real-time corridor traversal in unmapped physical mazes under strict power and timing boundaries.',
+      product: 'Differential-drive mobile robot chassis equipped with three ultrasonic sensor vectors, isolated dual-rail power distribution, and dynamic pathfinding firmware.',
+      application: 'Deployed on competition courses at the FAST Robotics Maze Solver Challenge; successfully resolved complex junctions without human override.',
+      teamOutcome: 'Awarded Third Prize at FAST Robotics Maze Solver Challenge 2025 (Faculty of Advanced Science and Technology, Danang University of Technology).',
+      personalOwnership: 'Robotics Team Lead: led hardware construction, engineered noise-free power regulation for the MCU, and authored the C++ traversal state machine.',
+    },
   },
   {
     title: 'Vibe Coding Platform',
@@ -417,6 +583,13 @@ const projectCopy: ProjectCopyList = [
         objectPosition: 'center 50%',
       },
     ],
+    formula: {
+      problem: 'Interactive AI web generation lacks isolated browser execution, preventing safe real-time previewing of multi-file codebases.',
+      product: 'Sandboxed code playground connecting Vercel AI Gateway, cloud container runtimes, and real-time execution logs.',
+      application: 'Public architectural prototype demonstrating isolated execution workflows.',
+      teamOutcome: 'Engineered prototype deployed to Vercel showcasing multi-model selection and live sandbox containers.',
+      personalOwnership: 'Developer: adapted open-source framework, configured deployment pipelines, and documented sandbox security parameters.',
+    },
   },
 ];
 
@@ -718,6 +891,249 @@ const skillGroups: SkillGroupList = [
 
 const learningFocus = ['System design', 'Scientific ML', 'Sensor fusion', 'CI workflows'];
 
+const engineeringExperience: EngineeringExperience = {
+  company: 'D&D Investment & Technology Development JSC',
+  role: 'Engineering & Project Supervision Intern',
+  period: '15 Feb — 20 Aug 2026',
+  project: 'ENSURE Da Nang',
+  projectContext: 'Smart urban resilience infrastructure · Da Nang People’s Committee + KOICA',
+  summary: 'A 6-month supervised engineering placement focused on field deployment, equipment calibration, system integration, and data pipeline monitoring for Da Nang smart city infrastructure.',
+  workflow: ['Site assessment & survey', 'Sensor & equipment deployment', 'System integration & data transmission', 'Operational monitoring & acceptance'],
+  exposure: [
+    'Monitoring infrastructure at the Da Nang Intelligent Operations Center (IOC) and field measurement sites.',
+    'Connecting field sensors for real-time telemetry, transmission, storage, and automated anomaly alerts.',
+    'Coordination between supervision engineers, contractors, technical blueprints, and on-site adjustments.',
+  ],
+  involvement: [
+    'Assisted in inspecting and documenting meteorological and urban sensor installations under lead engineer guidance.',
+    'Compiled, cross-checked, and logged field deployment acceptance records into monitoring databases.',
+    'Attended technical team reviews, sharpening technical documentation and multi-stakeholder communication.',
+  ],
+  keyResponsibilities: [
+    'Assisted on-site technical inspection and equipment mounting checks according to project blueprints.',
+    'Verified sensor telemetry links transmitting field data to the Central Intelligent Operations Center (IOC).',
+    'Maintained standardized technical logs and acceptance checklists across 6 active deployment locations.',
+  ],
+  skillsLearned: [
+    'Industrial sensor telemetry & data logging workflows',
+    'Reading and validating technical construction & electrical blueprints',
+    'Real-time urban infrastructure monitoring protocols',
+    'Professional technical documentation and field acceptance standards',
+  ],
+  concreteOutcomes: [
+    'Successfully contributed to the completion of deployment records across 6 months of field supervision.',
+    'Verified zero-data-loss telemetry transmission during IOC integration test runs.',
+    'Gained direct exposure to public-sector smart infrastructure development (KOICA + Da Nang People’s Committee).',
+  ],
+  media: [
+    {
+      src: '/images/experience/ensure-internship-01.jpg',
+      alt: 'Field site inspection and equipment deployment in Da Nang.',
+      caption: 'Field site survey — assessing equipment deployment locations and environmental conditions.',
+    },
+    {
+      src: '/images/experience/ensure-internship-02.jpg',
+      alt: 'Engineering supervision and equipment checking.',
+      caption: 'Technical supervision — validating installation blueprints and field hardware connections.',
+    },
+    {
+      src: '/images/experience/ensure-internship-03.jpg',
+      alt: 'On-site installation and hardware calibration.',
+      caption: 'Hardware calibration — inspecting telemetry sensor units before field activation.',
+    },
+    {
+      src: '/images/experience/ensure-internship-04.jpg',
+      alt: 'Gia Bach during field operations in the ENSURE Da Nang project.',
+      caption: 'Field operations — assisting lead engineers with on-site equipment verification.',
+    },
+    {
+      src: '/images/experience/ensure-internship-05.jpg',
+      alt: 'Sensor assembly and wiring check at deployment site.',
+      caption: 'Telemetry setup — verifying signal lines and power cabling for continuous operation.',
+    },
+    {
+      src: '/images/experience/ensure-internship-06.jpg',
+      alt: 'Documenting site records and equipment checklist.',
+      caption: 'Acceptance records — compiling deployment checklists for technical handover.',
+    },
+  ],
+};
+
+const recognitionItems: RecognitionItem[] = [
+  {
+    year: 'Oct 2025',
+    level: 'Global',
+    badge: 'Global Honor',
+    result: 'Global Nominee',
+    title: 'NASA Space Apps Challenge 2025',
+    context: 'JWST Space Explorer · Team Lead & Lead Developer',
+    scope: 'Top 10% worldwide from 11,500+ global project submissions',
+    evidenceHref: 'https://www.spaceappschallenge.org/2025/awards/',
+    evidenceLabel: 'View global nominee',
+  },
+  {
+    year: 'Jan 2026',
+    level: 'National',
+    badge: 'National Honor',
+    result: 'Second Place (Giải Nhì Toàn quốc)',
+    title: 'RMIT Tech Camp 2026 Grand Finals',
+    context: 'Team Lead · Team LQD Da Nang · RMIT University Vietnam',
+    scope: 'National Grand Finals competitive tech hackathon',
+    evidenceHref: '/images/achievements/rmit-tech-camp/06-second-place-certificate.webp',
+    evidenceLabel: 'View certificate',
+  },
+  {
+    year: 'Mar 2024',
+    level: 'City',
+    badge: 'City Honor',
+    result: 'Second Prize (Giải Nhì môn Vật lý)',
+    title: 'Da Nang City Excellent Student Competition',
+    context: 'City-level Grade 9 Physics · Da Nang Dept of Education & Training',
+    scope: 'City-wide specialized academic competition',
+    evidenceHref: '/images/achievements/da-nang-city-physics-second-prize.webp',
+    evidenceLabel: 'View certificate',
+  },
+  {
+    year: 'Apr 2025',
+    level: 'University',
+    badge: 'University Honor',
+    result: 'Third Prize (Giải Ba Chung cuộc)',
+    title: 'FAST Robotics Maze Solver Challenge',
+    context: 'Robotics Team Lead · The Physicians · Danang Univ. of Technology',
+    scope: 'University & STEM autonomous robotics tournament',
+    evidenceHref: '/images/achievements/fast-maze-runner/02-third-prize.webp',
+    evidenceLabel: 'View certificate',
+  },
+  {
+    year: '2025–2026',
+    level: 'School',
+    badge: 'School Honor',
+    result: 'Third Prize (Giải Ba KHKT)',
+    title: 'School Science & Engineering Competition',
+    context: 'eSight Smart Cane · Le Quy Don High School for the Gifted',
+    scope: 'Annual school science & engineering fair',
+    evidenceHref: '/images/achievements/science-engineering-third-prize.webp',
+    evidenceLabel: 'View certificate',
+  },
+];
+
+const additionalRecognitionItems: RecognitionItem[] = [
+  {
+    year: '2025–2026',
+    level: 'School',
+    badge: 'School Honor',
+    result: 'Honorable Mention (Giải Khuyến khích)',
+    title: 'School Physics Competition',
+    context: 'Grade 10 Physics · Le Quy Don High School for the Gifted',
+    scope: 'School-level Excellent Student Competition in Physics',
+    evidenceHref: '/images/achievements/school-physics-honorable-mention.webp',
+    evidenceLabel: 'View certificate',
+  },
+  {
+    year: '2025–2026',
+    level: 'School',
+    badge: 'School Honor',
+    result: 'Excellent Student (GPA 9.5/10.0)',
+    title: 'Academic Standing Recognition',
+    context: 'Le Quy Don High School for the Gifted',
+    scope: 'Outstanding academic standing across all subjects',
+    evidenceHref: '/images/achievements/excellent-student-2025-2026.webp',
+    evidenceLabel: 'View certificate',
+  },
+];
+
+const capabilityGroups: CapabilityGroup[] = [
+  {
+    title: 'Computational systems',
+    statement: 'Build browser-based tools that connect interfaces, application logic, external services, and deployment.',
+    skills: ['Python', 'TypeScript', 'React', 'Next.js', 'Vite'],
+    evidence: [
+      { label: 'JWST Space Explorer', href: '/projects/jwst-deep-space-explorer' },
+      { label: 'AstroVerse', href: '/projects/astroverse' },
+      { label: 'FAST Maze Runner', href: '/projects/fast-maze-runner' },
+    ],
+  },
+  {
+    title: 'Embedded & sensing',
+    statement: 'Connect physical measurements, control logic, and feedback through iterative prototypes.',
+    skills: ['Arduino', 'Ultrasonic sensing', 'Computer vision', 'Embedded systems'],
+    evidence: [
+      { label: 'eSight', href: '/projects/esight' },
+      { label: 'FAST Maze Runner', href: '/projects/fast-maze-runner' },
+    ],
+  },
+  {
+    title: 'Scientific computing',
+    statement: 'Turn public scientific data and specialist formats into explorable visual systems.',
+    skills: ['NASA MAST', 'Astroquery', 'Astropy', 'FITS', 'pyvips', 'OpenSeadragon'],
+    evidence: [{ label: 'JWST Space Explorer', href: '/projects/jwst-deep-space-explorer' }],
+  },
+  {
+    title: 'Engineering practice',
+    statement: 'Document systems, follow deployment information, and understand integration across field and operational contexts.',
+    skills: ['Technical documentation', 'System integration exposure', 'Deployment monitoring', 'Project coordination'],
+    evidence: [{ label: 'D&D internship', href: '#experience' }],
+  },
+];
+
+const leadershipActivities: LeadershipActivity[] = [
+  {
+    year: '2026',
+    category: 'leadership',
+    role: 'Team Lead',
+    organization: 'RMIT Tech Camp Grand Finals',
+    scope: '5-member engineering team (Team LQD Da Nang)',
+    coreWork: 'Spearheaded project architecture, delegated software and hardware workstreams, and pitched solution during live stage defense.',
+    metrics: 'Ranked 2nd Place nationally in the Grand Finals among hundreds of teams.',
+    result: 'Second Place · National Grand Finals',
+    href: '/images/achievements/rmit-tech-camp/01-award-team.webp',
+  },
+  {
+    year: '2025',
+    category: 'leadership',
+    role: 'Robotics Team Lead',
+    organization: 'FAST Maze Runner · Danang Univ. of Technology',
+    scope: '3-member robotics team (The Physicians)',
+    coreWork: 'Managed chassis assembly, ultrasonic sensor alignment, motor driver power regulation, and traversal algorithm calibration.',
+    metrics: 'Awarded Third Prize in the Robotics Maze Solver Challenge with zero collision faults.',
+    result: 'Third Prize · Robotics Challenge',
+    href: '/images/achievements/fast-maze-runner/01-team-award.webp',
+  },
+  {
+    year: '2025',
+    category: 'leadership',
+    role: 'Team Lead & Lead Developer',
+    organization: 'NASA Space Apps Challenge 2025',
+    scope: '48-hour competitive sprint team',
+    coreWork: 'Set technical product scope, coordinated UI and backend teams, and authored core Python FITS processing pipeline.',
+    metrics: 'Nominated globally (Top 10% worldwide out of 11,500+ submissions).',
+    result: 'Global Nominee · NASA Space Apps 2025',
+    href: 'https://www.spaceappschallenge.org/2025/awards/',
+  },
+  {
+    year: 'Feb 2026',
+    category: 'extracurricular',
+    role: 'Financial Manager',
+    organization: 'Nguyet Du Charity Campaign',
+    scope: 'Revolutionary veterans and heroic mothers at Da Nang nursing center',
+    coreWork: 'Oversaw fundraising budget, managed revenue transparency, purchased essential supplies, and coordinated on-site gift distribution.',
+    metrics: 'Managed VND 4,200,000 budget · 42 care packages delivered directly to veterans.',
+    result: 'VND 4.2M budget · 42 care packages distributed',
+    href: 'https://www.linkedin.com/feed/update/urn:li:activity:7453057296861102080/',
+  },
+  {
+    year: 'Gen 4–6',
+    category: 'extracurricular',
+    role: 'Academic & Technical Committee',
+    organization: 'PIRL Physics Club (Le Quy Don High School for the Gifted)',
+    scope: '50+ club members across 3 consecutive school years',
+    coreWork: 'Designed experimental apparatus, supervised hands-on physics workshops, maintained laboratory measuring tools, and judged club science contests.',
+    metrics: 'Stewardship spanning 3 club generations and 50+ students engaged in physics.',
+    result: '3 consecutive years of academic stewardship',
+    href: '/images/programs/pirl-technical-committee.webp',
+  },
+];
+
 export function getProjects(): Project[] {
   return projectBases.map((base, index) => {
     const copy = projectCopy[index];
@@ -760,6 +1176,42 @@ export function getSkillGroups(): SkillGroup[] {
 
 export function getLearningFocus(): string[] {
   return learningFocus;
+}
+
+export function getFlagshipProject(): Project {
+  const project = getProject('esight');
+  if (!project) throw new Error('Missing flagship project: esight');
+  return project;
+}
+
+export function getSelectedEngineeringWork(): Project[] {
+  const order = ['jwst-deep-space-explorer', 'astroverse', 'fast-maze-runner'];
+  const projects = getProjects();
+  return order.map((slug) => {
+    const project = projects.find((item) => item.slug === slug);
+    if (!project) throw new Error(`Missing selected project: ${slug}`);
+    return project;
+  });
+}
+
+export function getEngineeringExperience(): EngineeringExperience {
+  return engineeringExperience;
+}
+
+export function getRecognitionItems(): RecognitionItem[] {
+  return recognitionItems;
+}
+
+export function getAdditionalRecognitionItems(): RecognitionItem[] {
+  return additionalRecognitionItems;
+}
+
+export function getCapabilityGroups(): CapabilityGroup[] {
+  return capabilityGroups;
+}
+
+export function getLeadershipActivities(): LeadershipActivity[] {
+  return leadershipActivities;
 }
 
 export const projectSlugs = projectBases.map((project) => project.slug);

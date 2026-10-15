@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+import ESightCaseStudy from '../../../components/ESightCaseStudy';
 import ProjectCaseStudy from '../../../components/ProjectCaseStudy';
 import { getProject, getProjects, projectSlugs } from '../../../content';
 import { getProjectMetadata } from '../../../metadata';
@@ -21,5 +22,6 @@ export default async function EnglishProjectPage({ params }: { params: Promise<{
   if (!project) notFound();
   const currentIndex = projects.findIndex((item) => item.slug === project.slug);
   const nextProject = projects[(currentIndex + 1) % projects.length];
+  if (project.slug === 'esight') return <ESightCaseStudy project={project} nextProject={nextProject} />;
   return <ProjectCaseStudy project={project} nextProject={nextProject} />;
 }

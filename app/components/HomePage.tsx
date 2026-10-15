@@ -1,21 +1,40 @@
-import Link from 'next/link';
 import Image from 'next/image';
-import AchievementCard from './AchievementCard';
-import MediaFrame from './MediaFrame';
-import ProjectRail from './ProjectRail';
-import RevealController from './RevealController';
-import SiteHeader from './SiteHeader';
-import Toolkit from './Toolkit';
-import { getAchievements, getFeaturedProjects, getLearningFocus, getSkillGroups } from '../content';
+import Link from 'next/link';
+import {
+  getAdditionalRecognitionItems,
+  getCapabilityGroups,
+  getEngineeringExperience,
+  getFlagshipProject,
+  getLeadershipActivities,
+  getRecognitionItems,
+  getSelectedEngineeringWork,
+} from '../content';
 import { homeCopy, homeIntro } from '../i18n';
+import EducationPrograms from './EducationPrograms';
+import EngineeringProfile from './EngineeringProfile';
+import ExperienceCaseStudy from './ExperienceCaseStudy';
+import FlagshipProject from './FlagshipProject';
+import LeadershipList from './LeadershipList';
+import RecognitionList from './RecognitionList';
+import RevealController from './RevealController';
+import SelectedEngineeringWork from './SelectedEngineeringWork';
+import SiteHeader from './SiteHeader';
+
+const proofPoints = [
+  { label: 'NASA Space Apps', value: 'Global Nominee (Top 10%)', href: '#honors' },
+  { label: 'RMIT Tech Camp', value: 'National Second Place', href: '#honors' },
+  { label: 'eSight Cane', value: 'Assistive hardware prototype', href: '#work' },
+  { label: 'Engineering internship', value: 'D&D · ENSURE Da Nang', href: '#experience' },
+] as const;
 
 export default function HomePage() {
-  const intro = homeIntro;
-  const copy = homeCopy;
-  const projects = getFeaturedProjects();
-  const achievements = getAchievements();
-  const skillGroups = getSkillGroups();
-  const learningFocus = getLearningFocus();
+  const flagship = getFlagshipProject();
+  const projects = getSelectedEngineeringWork();
+  const experience = getEngineeringExperience();
+  const recognition = getRecognitionItems();
+  const additionalRecognition = getAdditionalRecognitionItems();
+  const capabilities = getCapabilityGroups();
+  const leadership = getLeadershipActivities();
 
   return (
     <main id="top">
@@ -23,149 +42,65 @@ export default function HomePage() {
       <RevealController />
 
       <section className="hero" aria-labelledby="hero-title">
-        <div className="hero-grid" aria-hidden="true" />
         <div className="hero-copy hero-enter">
-          <p className="eyebrow">{intro.eyebrow}</p>
-          <h1 id="hero-title">{intro.name}</h1>
-          <p className="hero-role">{intro.role}</p>
-          <p className="hero-introduction">{intro.introduction}</p>
-          <dl className="hero-facts">
-            {intro.facts.map(([label, value]) => (
-              <div key={label}><dt>{label}</dt><dd>{value}</dd></div>
-            ))}
-          </dl>
+          <p className="eyebrow">Engineering portfolio · Da Nang, Vietnam</p>
+          <h1 id="hero-title">Nguyen Gia Bach</h1>
+          <p className="hero-discipline">Engineering <span>·</span> Physics <span>·</span> Computing</p>
+          <p className="hero-statement">Building physical and computational systems through sensing, robotics, and scientific computing.</p>
           <div className="hero-actions">
-            <Link className="button button-primary" href="#work">{intro.work} <span>↘</span></Link>
-            <div className="hero-links" aria-label={intro.socialLabel}>
-              <a href="https://github.com/nguyengiabachLQDDN" target="_blank" rel="noreferrer">GitHub <span>↗</span></a>
-              <a href="https://www.linkedin.com/in/nguyengiabach/" target="_blank" rel="noreferrer">LinkedIn <span>↗</span></a>
-              <a href="https://www.facebook.com/gbachnguyen/" target="_blank" rel="noreferrer">Facebook <span>↗</span></a>
-            </div>
+            <Link className="button button-primary" href="#honors">Academic Honors <span>↓</span></Link>
+            <Link className="button button-secondary" href="#work">Explore Projects <span>↓</span></Link>
+            <a className="text-link" href="https://github.com/nguyengiabachLQDDN" target="_blank" rel="noreferrer">GitHub <span>↗</span></a>
+            <a className="text-link" href="https://www.linkedin.com/in/nguyengiabach/" target="_blank" rel="noreferrer">LinkedIn <span>↗</span></a>
           </div>
         </div>
 
-        <div className="hero-portrait hero-orbit-enter">
-          <MediaFrame
-            asset={intro.image}
-            label={intro.imageLabel}
-            ratio="portrait"
-            eager
-          />
-        </div>
-      </section>
+        <aside className="hero-profile hero-orbit-enter" aria-label="Student profile">
+          <div className="hero-portrait">
+            <Image src={homeIntro.image.src} alt={homeIntro.image.alt} fill preload sizes="(max-width: 760px) 132px, 220px" />
+          </div>
+          <dl>
+            <div><dt>School</dt><dd>Le Quy Don High School for the Gifted</dd></div>
+            <div><dt>Direction</dt><dd>Aerospace & electrical engineering</dd></div>
+          </dl>
+        </aside>
 
-      <section className="section-shell" id="work" aria-labelledby="work-title" data-reveal>
-        <header className="section-heading">
-          <div><p className="section-index">{copy.workIndex}</p><h2 id="work-title">{copy.workTitle}</h2></div>
-          <p>{copy.workDeck}</p>
-        </header>
-
-        <ProjectRail projects={projects} />
-      </section>
-
-      <section className="section-shell" id="achievements" aria-labelledby="achievements-title" data-reveal>
-        <header className="section-heading">
-          <div><p className="section-index">{copy.achievementsIndex}</p><h2 id="achievements-title">{copy.achievementsTitle}</h2></div>
-          <p>{copy.achievementsDeck}</p>
-        </header>
-        <ol className="achievement-grid">
-          {achievements.map((achievement) => <AchievementCard achievement={achievement} key={achievement.id} />)}
-        </ol>
-      </section>
-
-      <section className="section-shell capabilities" id="capabilities" aria-labelledby="capabilities-title" data-reveal>
-        <header className="section-heading compact">
-          <div><p className="section-index">{copy.capabilitiesIndex}</p><h2 id="capabilities-title">{copy.capabilitiesTitle}</h2></div>
-        </header>
-        <Toolkit groups={skillGroups} learning={learningFocus} learningLabel={copy.currentlyLearning} />
-      </section>
-
-      <section className="section-shell programs" id="programs" aria-labelledby="programs-title" data-reveal>
-        <header className="section-heading programs-heading">
-          <div><p className="section-index">{copy.programsIndex}</p><h2 id="programs-title">{copy.programsTitle}</h2></div>
-          <p>{copy.programsDeck}</p>
-        </header>
-
-        <div className="programs-education">
-          <span>{copy.educationLabel}</span>
-          <strong>{copy.educationLine}</strong>
-        </div>
-
-        <ol className="program-list">
-          {copy.programItems.map((program) => (
-            <li className={program.credential ? '' : 'program-without-media'} key={program.title} data-reveal>
-              <div className="program-meta">
-                <span>{program.date}</span>
-                <strong>{program.organization}</strong>
-              </div>
-              <div className="program-copy">
-                <h3>{program.title}</h3>
-                <p>{program.summary}</p>
-                {program.credential && (
-                  <a href={program.credential.src} target="_blank" rel="noreferrer">{copy.viewCredential}</a>
-                )}
-              </div>
-              {program.credential && (
-                <div className="program-media">
-                  <Image
-                    src={program.credential.src}
-                    alt={program.credential.alt}
-                    fill
-                    sizes="(max-width: 600px) 96px, 168px"
-                  />
-                </div>
-              )}
-            </li>
+        <nav className="proof-strip" aria-label="Portfolio highlights">
+          {proofPoints.map((item, index) => (
+            <a href={item.href} key={item.label}>
+              <span>{String(index + 1).padStart(2, '0')}</span>
+              <strong>{item.label}</strong>
+              <small>{item.value}</small>
+            </a>
           ))}
-        </ol>
+        </nav>
       </section>
 
-      <section className="section-shell community" id="community" aria-labelledby="community-title" data-reveal>
-        <header className="section-heading compact">
-          <div><p className="section-index">{copy.communityIndex}</p><h2 id="community-title">{copy.communityTitle}</h2></div>
-        </header>
-        {copy.communityItems.length > 0 ? (
-          <ol className="community-list">
-            {copy.communityItems.slice(0, 3).map((item) => (
-              <li key={item.title}>
-                <span>{item.date}</span>
-                <div className="community-entry">
-                  {item.image && (
-                    <div className="community-media">
-                      <Image
-                        src={item.image.src}
-                        alt={item.image.alt}
-                        fill
-                        sizes="(max-width: 600px) 92px, 112px"
-                        style={{ objectPosition: item.image.objectPosition ?? 'center' }}
-                      />
-                    </div>
-                  )}
-                  <div>
-                    <span className="community-role">{item.role}</span>
-                    <h3>{item.title}</h3>
-                    <p>{item.summary}</p>
-                  </div>
-                </div>
-                <a href={item.href} target="_blank" rel="noreferrer">{copy.viewPost}</a>
-              </li>
-            ))}
-          </ol>
-        ) : (
-          <div className="community-empty"><p>{copy.communityEmpty}</p></div>
-        )}
-      </section>
+      {/* 01. Academic Honors & Awards */}
+      <RecognitionList items={recognition} additionalItems={additionalRecognition} />
 
-      <footer className="site-footer">
-        <a className="footer-contact" href="mailto:gbachnguyen@gmail.com">
-          <span>Email</span>
-          <strong>gbachnguyen@gmail.com</strong>
-        </a>
-        <a className="footer-contact" href="tel:+84795551811">
-          <span>Phone</span>
-          <strong>0795 551 811</strong>
-        </a>
-        <a className="footer-back" href="#top">{copy.backToTop}</a>
+      {/* 02. Featured Engineering Projects */}
+      <FlagshipProject project={flagship} />
+      <SelectedEngineeringWork projects={projects} />
+
+      {/* 03. Leadership & Extracurricular Activities */}
+      <LeadershipList items={leadership} />
+
+      {/* 04. Engineering Experience, Capabilities & Education */}
+      <ExperienceCaseStudy experience={experience} />
+      <EngineeringProfile groups={capabilities} />
+      <EducationPrograms education={homeCopy.educationLine} programs={homeCopy.programItems} />
+
+      <footer className="site-footer" id="contact">
+        <div className="footer-intro"><span>Contact</span><strong>Let’s discuss engineering, research, or a technical collaboration.</strong></div>
+        <a href="mailto:gbachnguyen@gmail.com"><span>Email</span><strong>gbachnguyen@gmail.com</strong></a>
+        <a href="tel:+84795551811"><span>Phone</span><strong>0795 551 811</strong></a>
+        <div className="footer-social">
+          <a href="https://github.com/nguyengiabachLQDDN" target="_blank" rel="noreferrer">GitHub ↗</a>
+          <a href="https://www.linkedin.com/in/nguyengiabach/" target="_blank" rel="noreferrer">LinkedIn ↗</a>
+          <a href="https://www.facebook.com/gbachnguyen/" target="_blank" rel="noreferrer">Facebook ↗</a>
+        </div>
+        <a className="footer-back" href="#top">Back to top ↑</a>
       </footer>
     </main>
   );
