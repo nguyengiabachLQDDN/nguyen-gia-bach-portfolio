@@ -885,6 +885,161 @@ img { display: block; }
 }
 .leadership-evidence-link:hover { color: var(--accent-dark); }
 
+/* Community Featured Card & Carousel */
+.community-featured-card {
+  background: rgba(0, 0, 0, 0.02);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: clamp(20px, 2.4vw, 28px);
+  margin-bottom: 8px;
+}
+
+.community-featured-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  gap: clamp(20px, 2.5vw, 32px);
+  align-items: stretch;
+}
+
+.community-carousel-column {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.carousel-column-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.carousel-photo-count {
+  font: 500 11.5px var(--font-mono);
+  color: var(--muted);
+}
+
+.community-carousel {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.community-carousel-viewport {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  background: #0d121a;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.community-carousel-image {
+  object-fit: cover;
+  transition: opacity 0.25s ease-in-out;
+}
+
+.carousel-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(13, 18, 26, 0.72);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.18s ease, transform 0.18s ease, border-color 0.18s ease;
+  z-index: 3;
+  backdrop-filter: blur(4px);
+}
+
+.carousel-nav-btn:hover {
+  background: rgba(13, 18, 26, 0.95);
+  border-color: rgba(255, 255, 255, 0.5);
+  transform: translateY(-50%) scale(1.08);
+}
+
+.carousel-nav-btn:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+.carousel-prev-btn {
+  left: 10px;
+}
+
+.carousel-next-btn {
+  right: 10px;
+}
+
+.carousel-counter-pill {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background: rgba(13, 18, 26, 0.75);
+  color: #ffffff;
+  font: 600 11.5px var(--font-mono);
+  padding: 3px 9px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(4px);
+  z-index: 3;
+  letter-spacing: 0.04em;
+}
+
+.carousel-counter-pill span {
+  color: var(--blue);
+}
+
+.carousel-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 4px 0 0;
+}
+
+.carousel-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(0, 0, 0, 0.18);
+  cursor: pointer;
+  padding: 0;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.carousel-dot:hover {
+  background: rgba(0, 0, 0, 0.45);
+  transform: scale(1.25);
+}
+
+.carousel-dot.active {
+  background: var(--accent-dark);
+  transform: scale(1.35);
+}
+
+.community-info-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 14px;
+}
+
+.community-info-column .leadership-item-header h4 {
+  font-size: clamp(17px, 1.4vw, 19px);
+}
+
+.community-info-column .leadership-work {
+  font-size: 14px;
+  line-height: 1.55;
+}
+
 /* Education compact card */
 .education-section { width: var(--page); margin: 0 auto; padding: clamp(64px, 6vw, 88px) 0; scroll-margin-top: calc(var(--header) + 18px); color: var(--ink); }
 .education-compact-card {
@@ -1248,6 +1403,8 @@ img { display: block; }
   .architecture-flow { grid-template-columns: repeat(2,1fr); }
   .architecture-flow li:nth-child(3) { border-left: 0; border-top: 1px solid var(--line); }
   .architecture-flow li:nth-child(4) { border-top: 1px solid var(--line); }
+  .leadership-compact-grid { grid-template-columns: 1fr; }
+  .community-featured-grid { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 620px) {
@@ -1266,7 +1423,7 @@ img { display: block; }
   .hero-profile-card { padding: 14px; }
   .hero-proof-strip { grid-template-columns: 1fr; }
 
-  .honors-compact-card, .flagship-compact-card, .jwst-compact-card, .supporting-compact-card, .experience-compact-card, .profile-compact-card, .leadership-compact-card, .education-compact-card, .contact-compact-card {
+  .honors-compact-card, .flagship-compact-card, .jwst-compact-card, .supporting-compact-card, .experience-compact-card, .profile-compact-card, .leadership-compact-card, .community-featured-card, .education-compact-card, .contact-compact-card {
     padding: 20px 16px;
   }
 

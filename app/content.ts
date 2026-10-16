@@ -151,6 +151,8 @@ export interface LeadershipActivity {
   metrics: string;
   result: string;
   href?: string;
+  featured?: boolean;
+  images?: { src: string; alt: string }[];
 }
 
 interface ProjectBase {
@@ -1111,6 +1113,37 @@ const leadershipActivities: LeadershipActivity[] = [
     href: 'https://www.spaceappschallenge.org/2025/awards/',
   },
   {
+    year: 'Gen 4–6',
+    category: 'leadership',
+    role: 'Academic & Technical Committee',
+    organization: 'PIRL Physics Club (Le Quy Don High School for the Gifted)',
+    scope: '50+ club members across 3 consecutive school years',
+    coreWork: 'Designed experimental apparatus, supervised hands-on physics workshops, maintained laboratory measuring tools, and judged club science contests.',
+    metrics: 'Stewardship spanning 3 club generations and 50+ students engaged in physics.',
+    result: '3 consecutive years of academic stewardship',
+    href: '/images/programs/pirl-technical-committee.webp',
+  },
+  {
+    year: 'Aug 2026',
+    category: 'extracurricular',
+    featured: true,
+    role: 'Volunteer & Author',
+    organization: 'Chạm Nụ Cười – Khe Chữ Campaign',
+    scope: '120 mountainous students · Remote highland community in Nam Tra My, Quang Nam',
+    coreWork: 'Helped organize a back-to-school charity event for 120 primary students at Khe Chữ School. Authored and self-published "A Journey Through the Universe" children’s astronomy book, donating 50 illustrated copies to spark scientific curiosity.',
+    metrics: '120 students supported · 50 copies of "A Journey Through the Universe" donated.',
+    result: '120 students supported · 50 astronomy books donated',
+    href: 'https://lnkd.in/p/gp4m6DbS',
+    images: [
+      { src: '/images/community/khe-chu/01.webp', alt: 'Chạm Nụ Cười Khe Chữ campaign photo 01' },
+      { src: '/images/community/khe-chu/02.webp', alt: 'Chạm Nụ Cười Khe Chữ campaign photo 02' },
+      { src: '/images/community/khe-chu/03.webp', alt: 'Chạm Nụ Cười Khe Chữ campaign photo 03' },
+      { src: '/images/community/khe-chu/04.webp', alt: 'Chạm Nụ Cười Khe Chữ campaign photo 04' },
+      { src: '/images/community/khe-chu/05.webp', alt: 'Chạm Nụ Cười Khe Chữ campaign photo 05' },
+      { src: '/images/community/khe-chu/06.webp', alt: 'Chạm Nụ Cười Khe Chữ campaign photo 06' },
+    ],
+  },
+  {
     year: 'Feb 2026',
     category: 'extracurricular',
     role: 'Financial Manager',
@@ -1120,17 +1153,6 @@ const leadershipActivities: LeadershipActivity[] = [
     metrics: 'Managed VND 4,200,000 budget · 42 care packages delivered directly to veterans.',
     result: 'VND 4.2M budget · 42 care packages distributed',
     href: 'https://www.linkedin.com/feed/update/urn:li:activity:7453057296861102080/',
-  },
-  {
-    year: 'Gen 4–6',
-    category: 'extracurricular',
-    role: 'Academic & Technical Committee',
-    organization: 'PIRL Physics Club (Le Quy Don High School for the Gifted)',
-    scope: '50+ club members across 3 consecutive school years',
-    coreWork: 'Designed experimental apparatus, supervised hands-on physics workshops, maintained laboratory measuring tools, and judged club science contests.',
-    metrics: 'Stewardship spanning 3 club generations and 50+ students engaged in physics.',
-    result: '3 consecutive years of academic stewardship',
-    href: '/images/programs/pirl-technical-committee.webp',
   },
 ];
 
